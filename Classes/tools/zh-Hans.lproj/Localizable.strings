@@ -1,0 +1,25 @@
+/* 
+  tools.strings
+  SpriteSheet
+
+  Created by JustinYang on 15/8/15.
+
+*/
+
+
+"rate tip"      = "赐给我们一个5星评价!我们会送您100个金币哦~\n（评论后不再弹出）";
+"rate hide"     = "游戏好玩吗？5星好评可能会有惊喜哦^.^（评论后不再弹出）";
+"i know"        = "残忍拒绝";
+"i rate"        = "我要评论";
+"award tip"     = "评论奖励";
+"award msg"     = "您收到了100个金币";
+"award ok"      = "好的";
+
+
+"version tip"   = "立刻升级";
+
+
+"share url"     = "http://a.app.qq.com/o/simple.jsp?pkgname=com.zongyi.cookie";
+"share image"   = "shareImage/shareImage.png"; //需要资源在resource中才有效
+"small image"   = "shareImage/smallImage.png"; //需要资源在resource中才有效
+"ok"            = "好的";
