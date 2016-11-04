@@ -1,0 +1,244 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="mainContainerStyle" parent="cornerRadiusStyle">
+                <Setter property="backgroundColor" value="{{color:text_color_white}}"/>
+            </Style>
+            
+            <Style name="titleLableStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            
+            <Style name="contentLableStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="typeStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+            </Style>
+            
+            <Style name="timeLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+            </Style>
+            
+            <Style name="errorMsgLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textColor" value="red" />
+            </Style>
+            
+            <Style name="moreButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="bottomButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:secondary_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:text_color_gray}}" />
+                <Setter property="titleColorForSelectedState" value="{{color:text_color_gray}}" />
+            </Style>
+            
+            <Style name="editeButtonStyle" parent="bottomButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:edit_icon}}" />
+                <Setter property="titleForNormalState" value="{{string:edit}}"/>
+            </Style>
+            <Style name="deleteButtonStyle" parent="bottomButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:delete_icon}}" />
+                <Setter property="titleForNormalState" value="{{string:delete}}"/>
+            </Style>
+            <Style name="resendButtonStyle" parent="bottomButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:send_icon}}" />
+                <Setter property="titleForNormalState" value="{{string:resend}}"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" style="mainContainerStyle">
+            <!-- 草稿 类型和时间 -->
+            <UIView id="topView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"  id="top"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}" id="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}" id="right"/>
+                </Constraints>
+                <UILabel id="drafTypeLabel" style="typeStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="topView" targetAttribute="top"/>
+                        <Constraint attribute="bottom" target="topView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="topView" targetAttribute="left"/>
+                    </Constraints>
+                </UILabel>
+                <UILabel id="timeLabel" style="timeLabelStyle" mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="right" target="topView" targetAttribute="right"/>
+                        <Constraint attribute="centerY" target="topView" targetAttribute="centerY"/>
+                    </Constraints>
+                </UILabel>
+            </UIView>
+            <!--隐藏和显示文字内容-->
+            <UIView id="contentEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="topView" targetAttribute="left" id="left"/>
+                    <Constraint attribute="top" target="topView" targetAttribute="bottom" id="top"/>
+                    <Constraint attribute="width" target="topView"  targetAttribute="width"  id="width"/>
+                    <Constraint attribute="bottom" target="expandButtonEmptyView" targetAttribute="bottom" priority="required" mdoutlet="YES" deactivate="YES" id="contentLableShowConstraint"/>
+                    <Constraint attribute="height" constant="0" priority="low" mdoutlet="YES" id="contentLableHiddenConstraint"/>
+                </Constraints>
+                
+                <UILabel id="titleLabel" mdoutlet="YES" numberOfLines="2" style="titleLableStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="contentEmptyView" priority="required" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="left" target="contentEmptyView"  targetAttribute="left" id="left"/>
+                        <Constraint attribute="width" target="contentEmptyView" targetAttribute="width" id="width"/>
+                     
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="contentLabel" mdoutlet="YES" numberOfLines="2" style="contentLableStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="titleLabel" priority="required" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="left" target="contentEmptyView"  targetAttribute="left" id="left"/>
+                        <Constraint attribute="width" target="contentEmptyView" targetAttribute="width" id="width"/>
+                    </Constraints>
+                </UILabel>
+                <!--隐藏和显示展开全部按钮-->
+                <UIView id="expandButtonEmptyView" style="clipsViewStyle">
+                    <Constraints>
+                        <Constraint attribute="left" target="contentLabel" targetAttribute="left" id="left"/>
+                        <Constraint attribute="top" target="contentLabel" targetAttribute="bottom" id="top"/>
+                        <Constraint attribute="width" target="contentLabel"  targetAttribute="width"  id="width"/>
+                        <Constraint attribute="bottom" target="expandButton" targetAttribute="bottom" priority="required"  mdoutlet="YES" deactivate="YES" id="expandButtonShowConstraint"/>
+                        <Constraint attribute="height" constant="0" priority="low" mdoutlet="YES" id="expandButtonHiddenConstraint"/>
+                    </Constraints>
+                    <UIButton id="expandButton" style="moreButtonStyle" clickAction="clickMoreContentButton:" titleForNormalState="{{string:expansion_centent}}"  >
+                        <Constraints>
+                            <Constraint attribute="top" target="expandButtonEmptyView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}" id="top"/>
+                            <Constraint attribute="left" target="expandButtonEmptyView" targetAttribute="left" id="left"/>
+                            <Constraint attribute="height" constant="12" id="height"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            </UIView>
+            
+            <!--隐藏和显示图片-->
+            <UIView id="imageGridEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="contentEmptyView" targetAttribute="left" id="left"/>
+                    <Constraint attribute="top" target="contentEmptyView" targetAttribute="bottom" id="top"/>
+                    <Constraint attribute="width" target="contentEmptyView"  targetAttribute="width"  id="width"/>
+                    <Constraint attribute="bottom" target="imageGridView" targetAttribute="bottom" priority="required" mdoutlet="YES" deactivate="YES"  id="imageGridShowConstraint"/>
+                    <Constraint attribute="height" constant="0"  priority="low" mdoutlet="YES" id="imageGridHiddenConstraint"/>
+                </Constraints>
+                <KTComponentImageGridView id="imageGridView" mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="top" target="imageGridEmptyView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}" id="top"/>
+                        <Constraint attribute="left" target="imageGridEmptyView" targetAttribute="left" id="left"/>
+                    </Constraints>
+                </KTComponentImageGridView>
+            </UIView>
+            
+            <!-- 视频view-->
+            <UIView id="videoView" mdoutlet="YES" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="imageGridEmptyView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="imageGridEmptyView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="imageGridEmptyView" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            
+            <!-- 原话题内容 -->
+            <UIView id="originalContentContainnerView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="videoView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="videoView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="videoView" targetAttribute="right"/>
+                </Constraints>
+                
+            </UIView>
+            
+            <!-- 错误信息 -->
+            <UIView id="errorMsgView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="originalContentContainnerView" targetAttribute="bottom" />
+                    <Constraint attribute="left" target="originalContentContainnerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="originalContentContainnerView" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            
+            <!--底部三个按钮-->
+            <UIView id="bottomBarView">
+                <Constraints>
+                    <Constraint attribute="top" target="errorMsgView"  targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="containerView"  targetAttribute="left" id="left"/>
+                    <Constraint attribute="width" target="containerView"  targetAttribute="width" id="width"/>
+                    <Constraint attribute="height" constant="{{dimen:topic_list_cell_bar_height}}" id="height"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" id="bottom"/>
+                </Constraints>
+                <UIView id="bottomBarSplitLine" style="splitLineStyle" >
+                    <Constraints>
+                        <Constraint attribute="top" target="bottomBarView" targetAttribute="top"  id="top"/>
+                        <Constraint attribute="left" target="bottomBarView" targetAttribute="left" id="left"/>
+                        <Constraint attribute="width" target="bottomBarView" targetAttribute="width" id="width"/>
+                        <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" id="height"/>
+                    </Constraints>
+                </UIView>
+                <!--编辑-->
+                <UIView id="editEmptyView">
+                    <Constraints>
+                        <Constraint attribute="top" target="bottomBarSplitLine"  targetAttribute="top" id="top"/>
+                        <Constraint attribute="left" target="bottomBarView"  targetAttribute="left" id="left"/>
+                        <Constraint attribute="width" target="bottomBarView"  targetAttribute="width" multipliedBy="1/3" id="width"/>
+                        <Constraint attribute="height" target="bottomBarView"  targetAttribute="height" id="height"/>
+                    </Constraints>
+                    <UIButton id="editButton" clickAction="clickEditButton:" style="editeButtonStyle">
+                        <Constraints>
+                            <Constraint attribute="center" target="editEmptyView" id="top"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+                <!--删除-->
+                <UIView id="deleteEmptyView">
+                    <Constraints>
+                        <Constraint attribute="top" target="bottomBarSplitLine"  targetAttribute="top" id="top"/>
+                        <Constraint attribute="left" target="editEmptyView"  targetAttribute="right" id="left"/>
+                        <Constraint attribute="width" target="bottomBarView"  targetAttribute="width" multipliedBy="1/3" id="width"/>
+                        <Constraint attribute="height" target="bottomBarView"  targetAttribute="height" id="height"/>
+                    </Constraints>
+                    <UIButton id="deleteButton" clickAction="clickDeleteButton:" style="deleteButtonStyle">
+                        <Constraints>
+                            <Constraint attribute="center" target="deleteEmptyView"  id="top"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+                <!--重发-->
+                <UIView id="resendEmptyView">
+                    <Constraints>
+                        <Constraint attribute="top" target="bottomBarSplitLine"  targetAttribute="top" id="top"/>
+                        <Constraint attribute="left" target="deleteEmptyView"  targetAttribute="right" id="left"/>
+                        <Constraint attribute="width" target="bottomBarView"  targetAttribute="width" multipliedBy="1/3" id="width"/>
+                        <Constraint attribute="height" target="bottomBarView"  targetAttribute="height" id="height"/>
+                    </Constraints>
+                    <UIButton id="resendButton" clickAction="clickResendButton:" style="resendButtonStyle">
+                        <Constraints>
+                            <Constraint attribute="center" target="resendEmptyView"  id="center"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

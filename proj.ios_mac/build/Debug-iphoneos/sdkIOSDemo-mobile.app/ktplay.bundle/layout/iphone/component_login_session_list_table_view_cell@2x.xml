@@ -1,0 +1,57 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="headViewStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_middle_corner_radius}}" />
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="image" value="{{image:head}}" />
+                <Setter property="bounds" value="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}" />
+            </Style>
+            <Style name="selectButtonStyle">
+                <Setter property="backgroundImageForNormalState" value="{{image:select_button_bg}}" />
+                <Setter property="backgroundImageForSelectedState" value="{{image:select_button_bg_selected}}" />
+            </Style>
+            <Style name="nameLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIButton id="selectButton" mdoutlet="YES" style="selectButtonStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}*2" id="left"/>
+                    <Constraint attribute="centerY" target="headImageView"  id="centerY"/>
+                </Constraints>
+            </UIButton>
+            <UIImageView id="headImageView" style="headViewStyle" mdoutlet="YES">
+                <Constraints>
+                   <Constraint attribute="top" target="containerView"  constant="{{dimen:base_content_element_middle_space}}" id="left"/>
+                   <Constraint attribute="bottom" target="containerView"  constant="-{{dimen:base_content_element_middle_space}}" id="left"/>
+                    <Constraint attribute="left" target="selectButton" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}" id="left"/>
+                    <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" id="width"/>
+                    <Constraint attribute="height" target="headImageView" targetAttribute="width"  id="height"/>
+                </Constraints>
+            </UIImageView>
+            <UILabel id="nameLabel" mdoutlet="YES" text="jayden" style="nameLabelStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="headImageView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"  id="left"/>
+                    <Constraint attribute="centerY" target="headImageView"  id="centerY"/>
+                    <Constraint attribute="width" target="containerView" multipliedBy="3/5" id="width"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="spliteLineView" style="splitLineStyle">
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="width" target="containerView" />
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" />
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

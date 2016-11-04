@@ -1,0 +1,66 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="textFieldContainerViewStyle" parent="clipsViewStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="{{color:split_line_color}}" />
+                <Setter property="layer.borderWidth" value="{{dimen:base_split_line_height}}" />
+            </Style>
+            <Style name="textFieldStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="backgroundColor" value="white" />
+            </Style>
+            
+            <Style name="descLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+                <Setter property="font" value="{{font:prompt_font}}"/>
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+            
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            
+            <Style name="phoneLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textColor" value="{{color:text_color_black}}"></Setter>
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="superView" backgroundColor="white">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="left" target="superView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="superView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="superView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="bottom" target="superView" />
+                </Constraints>
+                
+                <UIImageView id="showResetLogo" image="{{image:reset_lock}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentView"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UILabel id="error_info" mdoutlet="YES" style="phoneLabelStyle" numberOfLines="0">
+                    <Constraints>
+                        <Constraint attribute="top" target="showResetLogo" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="contentView"></Constraint>
+                        <Constraint attribute="right" target="contentView"></Constraint>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

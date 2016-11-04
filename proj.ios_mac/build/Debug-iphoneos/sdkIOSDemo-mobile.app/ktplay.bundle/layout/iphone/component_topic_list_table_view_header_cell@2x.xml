@@ -1,0 +1,60 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="mainContainerStyle" parent="cornerRadiusStyle">
+                <Setter property="backgroundColor" value="{{color:text_color_white}}"/>
+            </Style>
+            
+            <Style name="topLabelStyle" parent="cornerRadiusStyle">
+                <Setter property="backgroundColor" value="{{color:theme_main_color}}" />
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+            <Style name="headerContentLableStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_s_font}}" />
+            </Style>
+            <Style name="headerCountLableStyle">
+                <Setter property="backgroundColor" value="{{color:point_color}}" />
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="1"/>
+                <Setter property="layer.cornerRadius" value="{{dimen:topic_list_table_header_count_label_radius}}" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="headerContainer" style="mainContainerStyle">
+                <UILabel id="topLable" text="{{string:on_top}}" style="topLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="headerContainer" targetAttribute="centerY"  id="centerY"/>
+                        <Constraint attribute="width" constant="{{dimen:topic_on_top_width}}"/>
+                        <Constraint attribute="left" target="headerContainer" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"  id="left"/>
+                    </Constraints>
+                </UILabel>
+                <UILabel id="headerContentLable" style="headerContentLableStyle"  mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="topLable" targetAttribute="centerY"  id="centerY"/>
+                        <Constraint attribute="left" target="topLable" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}" />
+                        <Constraint attribute="right" target="headerCountLable" targetAttribute="left" constant="-{{dimen:base_content_element_middle_space}}" />
+<!--                         <Constraint attribute="width" target="headerContainer" targetAttribute="width" relation="@le" constant="0.5"  id="width"/>-->
+                    </Constraints>
+                </UILabel>
+                <UILabel id="headerCountLable" style="headerCountLableStyle"  mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="topLable" targetAttribute="centerY"  id="centerY"/>
+                        <Constraint attribute="right" target="headerContainer" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"  id="right"/>
+                        <Constraint attribute="width" target="headerCountLable" targetAttribute="height" id="width"/>
+                        <Constraint attribute="height" constant="{{dimen:topic_list_table_header_count_label_height}}" id="height"/>
+                    </Constraints>
+                </UILabel>
+        </UIView>
+    </Layout>
+</Page>

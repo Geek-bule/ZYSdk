@@ -1,0 +1,66 @@
+<Page>
+    <Resources>
+      <StyleSheet>
+          <Style name="nickNameLabelStyle">
+              <Setter property="textColor" value="{{color:text_color_white}}" />
+              <Setter property="font" value="{{font:prompt_font}}" />
+              <Setter property="textAlignment" value="0" />
+          </Style>
+          <Style name="contentLabelStyle">
+              <Setter property="textColor" value="{{color:text_color_black}}" />
+              <Setter property="font" value="{{font:prompt_font}}" />
+              <Setter property="textAlignment" value="0" />
+          </Style>
+      </StyleSheet>
+    </Resources>
+   <Layout>
+       
+       <UIView id="containerView">
+          
+          <UIImageView id="signTailImageView" mdoutlet="YES">
+              <Constraints>
+                  <Constraint attribute="left" target="headImageView" targetAttribute="centerX"/>
+                  <Constraint attribute="centerY" target="headImageView" targetAttribute="centerY"/>
+                  <Constraint attribute="right" target="containerView" targetAttribute="right" />
+              </Constraints>
+          </UIImageView>
+          
+          <UIImageView id="headImageView" mdoutlet="YES">
+              <Constraints>
+                  <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                  <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+              </Constraints>
+          </UIImageView>
+          
+          <UIImageView id="borderImageView" mdoutlet="YES">
+              <Constraints>
+                  <Constraint attribute="edges" target="headImageView" />
+              </Constraints>
+          </UIImageView>
+          
+          <UILabel id="nickNameLabel" mdoutlet="YES" style="nickNameLabelStyle">
+              <Constraints>
+                  <Constraint attribute="left" target="headImageView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                  <Constraint attribute="centerY" target="headImageView" targetAttribute="centerY"/>
+              </Constraints>
+          </UILabel>
+          
+          <UIImageView id="bubbleImageView" mdoutlet="YES">
+              <Constraints>
+                  <Constraint attribute="top" target="containerView" targetAttribute="top" />
+                  <Constraint attribute="bottom" target="borderImageView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"/>
+                  <Constraint attribute="left" target="borderImageView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+              </Constraints>
+              <UILabel id="contentLabel" mdoutlet="YES" style="contentLabelStyle" >
+                  <Constraints>
+                      <Constraint attribute="centerX" target="bubbleImageView" targetAttribute="centerX" constant="-{{dimen:base_content_element_middle_space}}"/>
+                      <Constraint attribute="centerY" target="bubbleImageView" targetAttribute="centerY" constant="-{{dimen:base_content_element_middle_space}}" />
+<!--                      <Constraint attribute="width" target="bubbleImageView" targetAttribute="width" multipliedBy="1/3" />-->
+                  </Constraints>
+              </UILabel>
+        </UIImageView>
+              
+       </UIView>
+   </Layout>
+</Page>
+    

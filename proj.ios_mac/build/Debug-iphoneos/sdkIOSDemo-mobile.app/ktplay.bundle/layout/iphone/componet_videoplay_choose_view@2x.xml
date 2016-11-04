@@ -1,0 +1,24 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" backgroundColor="{{color:background_color_clear_black}}">
+            
+            <UIButton clickAction="buttonClicked:">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView"/>
+                </Constraints>
+            </UIButton>
+            <UIView id="videoScourceView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="centerX" target="containerView" targetAttribute="centerX"/>
+                    <Constraint attribute="centerY" target="containerView" targetAttribute="centerY"/>
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

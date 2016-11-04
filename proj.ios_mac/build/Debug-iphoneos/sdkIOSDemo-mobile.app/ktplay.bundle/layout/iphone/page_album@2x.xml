@@ -1,0 +1,13 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" backgroundColor="black">
+            
+        </UIView>
+    </Layout>
+</Page>
+

@@ -1,0 +1,93 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="containerStyle">
+                <Setter property="backgroundColor" value="white"/>
+            </Style>
+            <Style name="titleLableStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+                <Setter property="font" value="{{font:primary_font}}"/>
+                <Setter property="numberOfLines" value="0"/>
+            </Style>
+            <Style name="contentLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}"/>
+                <Setter property="font" value="{{font:secondary_font}}"/>
+                <Setter property="numberOfLines" value="0"/>
+            </Style>
+            <Style name="timeLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}"/>
+                <Setter property="font" value="{{font:prompt_font}}"/>
+            </Style>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" style="containerStyle">
+            <UIView id="contentEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}" id="top"/>
+                    <Constraint attribute="left" target="containerView"  id="left"/>
+                    <Constraint attribute="width" constant="0" id="iconImageViewHiddenConstraint" priority="medium" mdoutlet="YES"/>
+                </Constraints>
+                <KTResizeableImageView id = "iconImageView" mdoutlet="YES"  bounds="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}" >
+                    <Constraints>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}" id="height"/>
+                        <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" id="width" />
+                        <Constraint attribute="top" target="contentEmptyView"  id="top"/>
+                        <Constraint attribute="bottom" target="contentEmptyView"  id="bottom"/>
+                        <Constraint attribute="left" target="contentEmptyView" constant="{{dimen:base_content_element_large_space}}" id="left"/>
+                        <Constraint attribute="right" target="contentEmptyView"  deactivate="YES" id="iconImageViewShowConstraint" mdoutlet="YES"/>
+                    </Constraints>
+                </KTResizeableImageView>
+            </UIView>
+            
+            <UILabel id="titleLabel"  mdoutlet="YES" style="titleLableStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="contentEmptyView" id="top"/>
+                    <Constraint attribute="left" target="contentEmptyView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}" id="left"/>
+                    <Constraint attribute="right" target="buttonEmptyView" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}" id="right"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="buttonEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" id="top"/>
+                    <Constraint attribute="bottom" target="containerView" id="bottom"/>
+                    <Constraint attribute="width"   targetAttribute="width" constant="{{dimen:inbox_button_width}}" deactivate="YES" id="actionButtonShownConstraint" mdoutlet="YES"/>
+                    <Constraint attribute="width"  constant="0" priority="900" id="actionButtonHiddenConstraint" mdoutlet="YES" />
+                    <Constraint attribute="right" target="containerView"  id="right"/>
+                </Constraints>
+                <UIButton id="actionButton" mdoutlet="YES" clickAction="actionButton_clicked:"  style="confirmButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="buttonEmptyView" />
+                        <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}"/>
+                        <Constraint attribute="left"  target="buttonEmptyView" />
+                        <Constraint attribute="right" target="buttonEmptyView" constant="-{{dimen:base_content_element_large_space}}" priority="850"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+            <UILabel id="contentLabel" mdoutlet="YES"  style="contentLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="titleLabel" targetAttribute="bottom"  constant="{{dimen:base_content_element_large_space}}" id="top"/>
+                    <Constraint attribute="left" target="titleLabel" id="left"/>
+                    <Constraint attribute="right" target="titleLabel" id="right"/>
+                    <Constraint attribute="bottom" target="timeLabel" targetAttribute="top" constant="-{{dimen:base_content_element_large_space}}" id="bottom"/>
+                </Constraints>
+            </UILabel>
+            <UILabel id="timeLabel" mdoutlet="YES" style="timeLabelStyle">
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView" constant="-{{dimen:base_content_element_large_space}}" id="bottom"/>
+                    <Constraint attribute="left" target="titleLabel"  id="left"/>
+                    <Constraint attribute="right" target="titleLabel"  id="right"/>
+                </Constraints>
+            </UILabel>
+        </UIView>
+    </Layout>
+</Page>

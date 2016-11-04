@@ -1,0 +1,140 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="headButtonStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_middle_corner_radius}}" />
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="image" value="{{image:head}}" />
+<!--                <Setter property="bounds" value="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}" />-->
+            </Style>
+            
+            <Style name="labelStyle">
+                <Setter property="numberOfLines" value="1" />
+
+                <Setter property="textAlignment" value="0"/>
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            <Style name="msgStyle">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:mini_font}}" />
+                <Setter property="textAlignment" value="1"/>
+
+                <Setter property="layer.cornerRadius" value="{{dimen:base_dot_size_corner_radius}}" />
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="backgroundColor" value="{{color:point_color}}" />
+            </Style>
+            <Style name="detailsStyle">
+                <Setter property="numberOfLines" value="1" />
+
+                <Setter property="textAlignment" value="0"/>
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:small_font}}" />
+            </Style>
+            
+            <Style name="messageFailStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+
+                <Setter property="image" value="{{image:chat_failed_btn}}" />
+            </Style>
+            
+            
+            <Style name="buttonEmptyViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+                
+            </Style>
+        </StyleSheet>
+    </Resources>
+
+    <Layout>
+        <UIView id="containerView">
+            <UIImageView id="cellImageView" mdoutlet="YES"  style="headButtonStyle" bounds="{{dimen:thumb_size_small}},{{dimen:thumb_size_small}}">
+                <Constraints>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}"/>
+                    <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+
+                </Constraints>
+            </UIImageView>
+            
+            <UILabel id="dotLabel" mdoutlet="YES" hidden="YES" style="msgStyle">
+                <Constraints>
+                    <Constraint attribute="right" target="cellImageView"/>
+                    <Constraint attribute="bottom" target="cellImageView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_dot_size}}"/>
+                    
+                    <Constraint attribute="width" relation="@ge" constant="{{dimen:base_dot_size}}"/>
+
+                </Constraints>
+            </UILabel>
+            
+            
+            <UILabel id="cellTextLabel" style="labelStyle" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="cellImageView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+
+                     <Constraint attribute="top" target="cellImageView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}"/>
+                     
+                  <Constraint attribute="right" target="containerView" relation="@le" constant="-{{dimen:user_head_large_size}}"/>
+
+                </Constraints>
+            </UILabel>
+            
+          
+            
+            <UIView id="tipView"  style="buttonEmptyViewStyle">
+                <Constraints>
+
+                <Constraint attribute="left" target="cellTextLabel"/>
+                <Constraint attribute="top" target="cellTextLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                <Constraint attribute="width" constant="0"  priority="600" mdoutlet="YES" deactivate="YES" id="noHasCellMessageFailViewConstraint"/>
+                <Constraint attribute="height" constant="{{dimen:base_dot_size}}"/>
+                <Constraint attribute="width" constant="{{dimen:base_content_element_large_space}}"  mdoutlet="YES"  id="hasCellMessageFailViewConstraint"/>
+                </Constraints>
+
+                <UIImageView id="cellMessageFailView" mdoutlet="YES"  style="messageFailStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="tipView"/>
+                        <Constraint attribute="left" target="tipView"/>
+                        <Constraint attribute="height" constant="{{dimen:base_dot_size}}"/>
+                        <Constraint attribute="width" constant="{{dimen:base_dot_size}}"/>
+                    </Constraints>
+                </UIImageView>
+            
+            </UIView>
+            
+            <UILabel id="cellDetailsTextLabel" mdoutlet="YES"  style="detailsStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="tipView" targetAttribute="right" />
+                    <Constraint attribute="top" target="cellTextLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="rightLabel"/>
+
+
+                </Constraints>
+            </UILabel>
+            
+            
+            <UILabel id="rightLabel" mdoutlet="YES"  style="detailsStyle">
+                <Constraints>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="cellTextLabel"/>
+                </Constraints>
+            </UILabel>
+            
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

@@ -11,11 +11,17 @@
 #include "ZYParamOnline.h"
 #include "ZYAdGameShow.h"
 #include "platform/ios/CCEAGLView-ios.h"
-#include "ZYVideoManager.h"
-#include "ZYAdview.h"
 #include "ZYIosRateApp.h"
+#include "ZYAwardInfo.h"
 #include "HelloWorldScene.h"
+#include "WeChatApi.h"
 #include "uMeng.h"
+#ifdef ZYTOOLS_ADVIEW
+#include "ZYAdview.h"
+#endif
+#ifdef ZYTOOLS_VIDEO
+#include "ZYVideoManager.h"
+#endif
 
 
 void ZYTools::init()
@@ -32,6 +38,22 @@ void ZYTools::init()
     //初始化互推游戏
     [[ZYGameServer shareServer] loadGameServer];
     
+    //游戏互推奖励
+    [[ZYGameServer shareServer] setAward:nil andGive:^(NSArray *awardDic) {
+        //TODO:在这里给玩家奖励
+        if (awardDic.count > 0) {
+            for (ZYAwardInfo *info in awardDic) {
+                
+            }
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
+                                                         message:@"领取互推奖励成功"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+            [av release];
+        }
+    }];
     //umeng的初始化
     uMeng::initUmeng();
     
@@ -59,12 +81,21 @@ void ZYTools::initAdSdk()
 #endif
 }
 
+
+std::string ZYTools::getParamOf(std::string key)
+{
+    NSString* paramKey = [NSString stringWithUTF8String:key.c_str()];
+    NSString* paramValue = [[ZYParamOnline shareParam] getParamOf:paramKey];
+    return [paramValue UTF8String];
+}
+
+
 void ZYTools::showLog()
 {
     //需要显示的日志打开即可
     [[ZYParamOnline shareParam] showLog];
     [[ZYGameServer shareServer] showLog];
-    [[ZYIosRateApp shareRate] showLog];
+//    [[ZYIosRateApp shareRate] showLog];
 //    [[ZYAdview shareAdview] showBannerLog];
 //    [[ZYAdview shareAdview] showInterlLog];
     [[ZYVideoManager sharedManager] showLog];
@@ -117,6 +148,11 @@ void ZYTools::setAdGamePos()
     [[ZYAdGameShow shareShow] setAdPot:CGPointMake(0.5, 0.2) Scale:1.0];
 }
 
+void ZYTools::registerTest()
+{
+    [[ZYGameServer shareServer] registerTest];
+}
+
 void ZYTools::reviewPort()
 {
     //审核接口（每次根据策划指定的位置调用函数，同以前的umengbug函数一样）
@@ -131,6 +167,25 @@ bool ZYTools::isReviewStatus()
 }
 
 
+void ZYTools::startWxPay()
+{
+    [[WXApiManager sharedManager] sendWxPay:@"天天爱消除-游戏充值" price:1 back:^(PayResp* resp){
+        switch (resp.errCode) {
+            case WXSuccess:
+                //支付成功，给玩家物品
+                NSLog(@"微信支付：支付成功－PaySuccess，retcode = %d", resp.errCode);
+                break;
+                
+            default:
+                NSLog(@"微信支付：支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                break;
+        }
+    }];
+}
+void ZYTools::queryWxpay()
+{
+//    [[WXApiManager sharedManager] sendQueryPay:@"20161102174100097363708"];
+}
 
 
     //==========ZYAdview sdk接入==========
@@ -186,6 +241,9 @@ void ZYTools::showSplash()
 
     //==========ZYVideo sdk接入==========
 #ifdef ZYTOOLS_VIDEO
+bool ZYTools::_isHasVideoNow = false;
+ccVideoCallback ZYTools::_videoPlayFinish;
+std::vector<ccStatusCallback> ZYTools::_videoStatusVec;
 //init video
 void ZYTools::initVideoSdk()
 {
@@ -194,16 +252,28 @@ void ZYTools::initVideoSdk()
     [manager isHasVideo:^(BOOL isHas) {
         //根据视频是否存在来设定视频按钮显示与隐藏
         //TODO:
-        HelloWorld::getInstance()->videoBtnVisible(isHas);
+        _isHasVideoNow = isHas;
+        for (auto iter : _videoStatusVec) {
+            ccStatusCallback &isHasVide = iter;
+            if (isHasVide) {
+                isHasVide(isHas);
+            }
+        }
      }];
 }
+
+void ZYTools::setVideoStatus(const ccStatusCallback &isHasVide)
+{
+    if (isHasVide) {
+        _videoStatusVec.push_back(isHasVide);
+    }
+}
+
 //show video
-void ZYTools::showVideo()
+void ZYTools::showVideo(const ccVideoCallback &videoPlayFinish)
 {
     UIViewController *result = nil;
-    
     UIWindow *topWindow = [[UIApplication sharedApplication] keyWindow];
-    
     if (topWindow.windowLevel != UIWindowLevelNormal){
         NSArray *windows = [[UIApplication sharedApplication] windows];
         for(topWindow in windows){
@@ -212,25 +282,25 @@ void ZYTools::showVideo()
             }
         }
     }
-    
     UIView *rootView = [[topWindow subviews] objectAtIndex:0];
     id nextResponder = [rootView nextResponder];
     if ([nextResponder isKindOfClass:[UIViewController class]]){
-        
         result = nextResponder;
-        
     }else if ([topWindow respondsToSelector:@selector(rootViewController)] && topWindow.rootViewController != nil){
-        
         result = topWindow.rootViewController;
-        
     }
+    _videoPlayFinish = videoPlayFinish;
     
     [[ZYVideoManager sharedManager] showVideo:result begin:^{
-     //暂停音乐 TODO:
+        //暂停音乐 TODO:
      } pause:^{
-     //开启音乐 TODO:
+         //开启音乐 TODO:
      } finish:^{
-     //开启音乐 TODO:
+         //开启音乐 TODO:
+         //视频播放成功之后给玩家奖励
+         if (_videoPlayFinish) {
+             _videoPlayFinish();
+         }
      }];
 }
 #endif

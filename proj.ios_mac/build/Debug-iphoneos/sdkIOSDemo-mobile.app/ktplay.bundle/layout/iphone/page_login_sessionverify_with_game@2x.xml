@@ -1,0 +1,47 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="tipLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="numberOfLines" value="0" />
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView" backgroundColor="white">
+            <UILabel id="tipLabel" text="{{string:security_verification_prompt}}" style="tipLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="gameContainerView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="tipLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="height" target="gameContainerView" targetAttribute="width" multipliedBy="7/15"/>
+                    <Constraint attribute="width" target="contentView"  multipliedBy="2/3"/>
+                    <Constraint attribute="centerX" target="contentView"/>
+                </Constraints>
+            </UIView>
+            <UIButton id="confirmButton" titleForNormalState="{{string:confirm}}" enabled="NO" mdoutlet="YES" clickAction="confirmButtonClick:" style="confirmButtonStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="gameContainerView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="tipLabel" />
+                    <Constraint attribute="right" target="tipLabel" />
+                    <Constraint attribute="height"  constant="{{dimen:base_confirm_button_height}}"/>
+                </Constraints>
+            </UIButton>
+        </UIView>
+    </Layout>
+</Page>
+

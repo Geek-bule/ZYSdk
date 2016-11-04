@@ -1,0 +1,52 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="voteMsgLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="voteView">
+            <Constraints>
+                <Constraint attribute="top" target="topicDetailCellContentContainer" targetAttribute="top"/>
+                <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left"/>
+                <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right"/>
+            </Constraints>
+            
+            <UIImageView id="voteImageView" image="{{image:vote}}" backgroundColor="{{color:theme_main_color}}">
+                <Constraints>
+                    <Constraint attribute="top" target="voteView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="bottom" target="voteView" targetAttribute="bottom" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="voteView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="leftView">
+                <Constraints>
+                    <Constraint attribute="left" target="voteImageView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="voteView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}" relation="@le"/>
+                    <Constraint attribute="centerY" target="voteView" targetAttribute="centerY"/>
+                </Constraints>
+                <UILabel id="stateLabel" mdoutlet="YES" style="voteMsgLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="leftView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="leftView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="leftView" targetAttribute="right"/>
+                    </Constraints>
+                </UILabel>
+                <UILabel id="timeLabel" mdoutlet="YES" style="voteMsgLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="stateLabel" targetAttribute="bottom"/>
+                        <Constraint attribute="bottom" target="leftView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="leftView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="leftView" targetAttribute="right"/>
+                    </Constraints>
+                </UILabel>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

@@ -1,0 +1,56 @@
+<Page>
+  <Resources>
+    <Stylesheet>
+        <Style  name="selectImageStyle">
+            <Setter property="layer.masksToBounds" value="YES" />
+            <Setter property="image" value="{{image:like_normal}}" />
+        </Style>
+    </Stylesheet>
+  </Resources>
+  <Layout>
+     <UIView id="contentView">
+         <UILabel id="tipLabel" mdoutlet="YES">
+             <Constraints>
+                 <Constraint attribute="centerX" target="contentView" />
+                 <Constraint attribute="centerY" target="contentView" />
+             </Constraints>
+         </UILabel>
+         <UIView id="signatureView" mdoutlet="YES">
+             <Constraints>
+                 <Constraint attribute="left" target="contentView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}" />
+                 <Constraint attribute="top" target="contentView" targetAttribute="top" />
+                 <Constraint attribute="bottom" target="contentView" targetAttribute="bottom" />
+                 <Constraint attribute="right" target="contentView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+             </Constraints>
+             <UIImageView id="signatureImageView" mdoutlet="YES">
+                 <Constraints>
+                     <Constraint attribute="left" target="headImageView" targetAttribute="centerX" />
+                     <Constraint attribute="centerY" target="signatureView" targetAttribute="centerY" />
+                     <Constraint attribute="height" target="headImageView" targetAttribute="width"/>
+                     <Constraint attribute="right" target="signatureView" targetAttribute="right" />
+                 </Constraints>
+             </UIImageView>
+             <UIImageView id="headImageView" mdoutlet="YES">
+                 <Constraints>
+                     <Constraint attribute="left" target="signatureView" targetAttribute="left" />
+                     <Constraint attribute="centerY" target="signatureView" targetAttribute="centerY" />
+                     <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" />
+                     <Constraint attribute="height" target="headImageView" targetAttribute="width"/>
+                 </Constraints>
+             </UIImageView>
+             <UIImageView id="borderImageView" mdoutlet="YES">
+                 <Constraints>
+                     <Constraint attribute="edges" target="headImageView" />
+                 </Constraints>
+             </UIImageView>
+         </UIView>
+         <UIImageView id="selectImageView" mdoutlet="YES" >
+             <Constraints>
+                 <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}"/>
+                 <Constraint attribute="right" target="contentView" targetAttribute="right" constant="-{{dimen:base_content_element_small_space}}"/>
+             </Constraints>
+         </UIImageView>
+       
+     </UIView>
+  </Layout>
+</Page>

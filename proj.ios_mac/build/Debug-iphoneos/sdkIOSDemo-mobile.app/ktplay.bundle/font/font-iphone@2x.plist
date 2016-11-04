@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>title_font</key>
+	<string>20 b</string>
+	<key>primary_font</key>
+	<string>16 b</string>
+	<key>sub_title_font</key>
+	<string>14 b</string>
+	<key>secondary_font</key>
+	<string>14</string>
+	<key>primary_s_font</key>
+	<string>16</string>
+	<key>prompt_font</key>
+	<string>12</string>
+	<key>prompt_b_font</key>
+	<string>12 b</string>
+	<key>small_font</key>
+	<string>10</string>
+	<key>mini_font</key>
+	<string>7 b</string>
+	<key>topic_title_font</key>
+	<string>17 b</string>
+</dict>
+</plist>

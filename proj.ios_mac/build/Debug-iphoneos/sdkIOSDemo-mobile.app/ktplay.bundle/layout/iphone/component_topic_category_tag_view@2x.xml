@@ -1,0 +1,29 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    <Layout>
+        <UIView id="containerView" backgroundColor="{{color:background_color_gray}}">
+            <UILabel id="titleLabel" style="titleLabelStyle" text="{{string:select_topic_category}}">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_small_space}}"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="collectionContainerView" mdoutlet="YES" >
+                <Constraints>
+                    <Constraint attribute="top" target="titleLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" constant="-{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_small_space}}"/>
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

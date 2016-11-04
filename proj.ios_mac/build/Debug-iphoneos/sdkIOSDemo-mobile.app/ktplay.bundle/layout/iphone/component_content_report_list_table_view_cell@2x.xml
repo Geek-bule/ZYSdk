@@ -1,0 +1,42 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="selectButtonStyle">
+                <Setter property="backgroundImageForNormalState" value="{{image:select_button_bg}}" />
+                <Setter property="backgroundImageForSelectedState" value="{{image:select_button_bg_selected}}" />
+            </Style>
+            <Style name="nameLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIButton id="selectButton" mdoutlet="YES" style="selectButtonStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}*2" id="left"/>
+                    <Constraint attribute="centerY" target="containerView"  id="centerY"/>
+                </Constraints>
+            </UIButton>
+            <UILabel id="nameLabel" mdoutlet="YES" text="jayden" style="nameLabelStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="selectButton" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"  id="left"/>
+                    <Constraint attribute="centerY" target="selectButton"  id="centerY"/>
+                    <Constraint attribute="width" target="containerView" multipliedBy="3/5"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="spliteLineView" style="splitLineStyle">
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="width" target="containerView" />
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" />
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

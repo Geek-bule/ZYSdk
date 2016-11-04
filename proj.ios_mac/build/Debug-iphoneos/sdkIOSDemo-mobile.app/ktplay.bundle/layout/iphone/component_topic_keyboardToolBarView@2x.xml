@@ -1,0 +1,90 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="contentTextCountTipsLabelStyle">
+                <Setter property="textAlignment" value="2"/>
+                <Setter property="font" value="{{font:prompt_font}}"/>
+                <Setter property="textColor" value="{{color:text_color_gray}}"/>
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIView id="topSplitLine" style="splitLineStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+            
+            <UIView id="menuView">
+                <Constraints>
+                    <Constraint attribute="top" target="topSplitLine" targetAttribute="bottom"/>
+                    <Constraint attribute="bottom" target="bottomSplitLine" targetAttribute="top"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="width" target="containerView" targetAttribute="width" multipliedBy="3/5"/>
+                </Constraints>
+                
+                <UIScrollView id="menuScrollView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="menuView" targetAttribute="top"/>
+                        <Constraint attribute="bottom" target="menuView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="menuView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="menuView" targetAttribute="right"/>
+                    </Constraints>
+                </UIScrollView>
+            </UIView>
+            
+            <UIView id="rightView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+                
+                <UILabel id="contentTextCountTipsLabel" mdoutlet="YES" text="1000" style="contentTextCountTipsLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="left" target="rightView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="buttonView" targetAttribute="left"/>
+                        <Constraint attribute="centerY" target="rightView" targetAttribute="centerY"/>
+                    </Constraints>
+                </UILabel>
+                
+                <UIView id="buttonView" clipsToBounds="YES">
+                    <Constraints>
+                        <Constraint attribute="right" target="rightView" targetAttribute="right"/>
+                        <Constraint attribute="centerY" target="rightView" targetAttribute="centerY"/>
+                        <Constraint attribute="width" constant="0" priority="required" id="hiddenSendBtnConstraint" mdoutlet="YES"/>
+                    </Constraints>
+                    <UIButton id="sendBtn" mdoutlet="YES" enlargeEdge="15" hidden="YES" clickAction="sendBtnClick:">
+                        <Constraints>
+                            <Constraint attribute="top" target="buttonView" targetAttribute="top"/>
+                            <Constraint attribute="bottom" target="buttonView" targetAttribute="bottom"/>
+                            <Constraint attribute="right" target="buttonView" targetAttribute="right" priority="medium"/>
+                            <Constraint attribute="left" target="buttonView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}} * 2" priority="medium"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            </UIView>
+
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

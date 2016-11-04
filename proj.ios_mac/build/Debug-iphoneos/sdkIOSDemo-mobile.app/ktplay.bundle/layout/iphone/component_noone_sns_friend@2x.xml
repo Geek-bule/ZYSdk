@@ -1,0 +1,29 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="iconBtnCornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_mini_corner_radius}}" />
+            </Style>
+
+        </StyleSheet>
+    </Resources>
+
+    <Layout>
+        <UIView id="containerView">
+                <UILabel id="tipNoFriendLabel" mdoutlet="YES">
+                    <Constraints>
+                    </Constraints>
+                </UILabel>
+                <UIButton id="inviteBtn" mdoutlet="YES" style="iconBtnCornerRadiusStyle" clickAction="inviteAction">
+                    <Constraints>
+                    </Constraints>
+                </UIButton>
+                    <UILabel id="tipFriendLimitLabel" mdoutlet="YES">
+                        <Constraints>
+                        </Constraints>
+                    </UILabel>
+            </UIView>
+    </Layout>
+</Page>
+

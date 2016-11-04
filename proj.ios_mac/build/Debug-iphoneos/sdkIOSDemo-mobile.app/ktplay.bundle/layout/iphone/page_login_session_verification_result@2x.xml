@@ -1,0 +1,70 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="tipLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="numberOfLines" value="0" />
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            <Style name="linkButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView" backgroundColor="white">
+            <UILabel id="tipLabel" text="{{string:warning_security_verification_times}}" style="tipLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="contentContainerView" backgroundColor="white">
+                <Constraints>
+                    <Constraint attribute="top" target="tipLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}" priority="low" mdoutlet="YES" id="showTipConstraint"/>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}" priority="required" deactivate="YES" mdoutlet="YES" id="hiddenTipConstraint"/>
+                    <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+                <UIImageView id="resultImageView" image="{{image:icon_alert_done}}" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="contentContainerView" constant="{{dimen:base_content_element_large_space}}" />
+                        <Constraint attribute="centerX" target="contentContainerView" />
+                    </Constraints>
+                </UIImageView>
+                <UILabel id="resulttTipLabel" text="{{string:security_verification_pass}}" mdoutlet="YES" style="tipLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="resultImageView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="centerX" target="resultImageView" />
+                    </Constraints>
+                </UILabel>
+                <UIButton id="confirmButton" titleForNormalState="{{string:enter}}"  mdoutlet="YES" clickAction="confirmButtonClick:" style="confirmButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="resulttTipLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="left" target="contentContainerView" />
+                        <Constraint attribute="right" target="contentContainerView" />
+                        <Constraint attribute="height"  constant="{{dimen:base_confirm_button_height}}"/>
+                    </Constraints>
+                </UIButton>
+                <UIButton id="giveUpButton" titleForNormalState="{{string:skip_security_verification}}" mdoutlet="YES" hidden="YES" clickAction="giveUpButtonClick:" style="linkButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="confirmButton" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="centerX" target="contentContainerView" />
+                        <Constraint attribute="bottom" target="contentContainerView" />
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

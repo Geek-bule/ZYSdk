@@ -1,0 +1,19 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+             
+        </StyleSheet>
+    </Resources>
+    <Layout>
+        <UIView id="containerView" backgroundColor="{{color:background_color_gray}}">
+            <UIView id="collectionContainerView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" constant="-{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_small_space}}"/>
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

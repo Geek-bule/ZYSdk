@@ -1,0 +1,19 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UITextView id="textView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView" constant="{{dimen:base_content_element_middle_space}},{{dimen:base_content_element_middle_space}},{{dimen:base_content_element_middle_space}},{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+            </UITextView>
+
+        </UIView>
+    </Layout>
+</Page>

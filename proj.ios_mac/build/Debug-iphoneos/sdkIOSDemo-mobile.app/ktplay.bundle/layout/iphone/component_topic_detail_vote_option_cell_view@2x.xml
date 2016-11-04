@@ -1,0 +1,111 @@
+<Page>
+    <Resources>
+        <StyleSheet> 
+            <Style name="selectButtonStyle">
+                <Setter property="backgroundImageForNormalState" value="{{image:select_button_bg}}" />
+                <Setter property="backgroundImageForSelectedState" value="{{image:select_button_bg_selected}}" />
+            </Style>
+            
+            <Style name="imageButtonStyle">
+                <Setter property="bounds" value="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}" />
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}"  />
+            </Style>
+            
+            <Style name="descLabelStyle">
+                <Setter property="layer.masksToBounds" value="YES"/>
+                <Setter property="font" value="{{font:secondary_font}}"  />
+                <Setter property="numberOfLines" value="3" />
+                <Setter property="textColor" value="{{color:text_color_black}}"  />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView" backgroundColor="{{color:background_color_gray}}">
+            <UIButton id="selectButton" mdoutlet="YES" style="selectButtonStyle" clickAction="selectClick:">
+                <Constraints>
+                    <Constraint attribute="left" target="contentView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}" />
+                    <Constraint attribute="centerY" target="contentView" targetAttribute="centerY" />
+                    <Constraint attribute="width" target="imageView" targetAttribute="width" multipliedBy="1/3"/>
+                    <Constraint attribute="height" target="selectButton" targetAttribute="width" />
+                </Constraints>
+            </UIButton>
+            
+            <UILabel id="descLabel" mdoutlet="YES" style="descLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="contentView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint id="leftWithImageViewRight" mdoutlet="YES" attribute="left" target="imageView" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint id="leftWithSelectButtonRight" mdoutlet="YES" attribute="left" target="selectButton" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"  deactivate="YES"/>
+                    <Constraint attribute="right" target="contentView" targetAttribute="right" relation="@le" constant="-{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIButton id="backgroundButton" mdoutlet="YES" clickAction="selectClick:">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top"/>
+                    <Constraint attribute="bottom" target="contentView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="contentView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="contentView" targetAttribute="right"/>
+                </Constraints>
+            </UIButton>
+            
+            <KTResizeableImageView id="imageView" style="imageButtonStyle" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}" relation="@ge"/>
+                    <Constraint attribute="left" target="selectButton" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="centerY" target="contentView" targetAttribute="centerY" />
+                    <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" />
+                    <Constraint attribute="height" target="imageView" targetAttribute="width"/>
+                </Constraints>
+            </KTResizeableImageView>
+            <!-- 视频投票选项显示区-->
+            <UIView id="videoContentView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}" relation="@ge"/>
+                    <Constraint attribute="left" target="selectButton" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="centerY" target="contentView" targetAttribute="centerY" />
+                    <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" />
+                    <Constraint attribute="height" target="imageView" targetAttribute="width"/>
+                </Constraints>
+                <UIImageView id="videoImageView" mdoutlet="YES" bounds="{{dimen:thumb_size_large}},{{dimen:thumb_size_large}}">
+                    <Constraints>
+                        <Constraint attribute="edges" target="videoContentView"/>
+                    </Constraints>
+                </UIImageView>
+                <UIImageView image="{{image:video_play}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="videoContentView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="bottom" target="videoContentView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="left" target="videoContentView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="right" target="videoContentView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    </Constraints>
+                </UIImageView>
+                <UIView id="videoMaskView" mdoutlet="YES" backgroundColor="{{color:vote_video_det_background_color_clear_black}}">
+                    <Constraints>
+                        <Constraint attribute="edges" target="videoContentView"/>
+                    </Constraints>
+                </UIView>
+                <UIButton id="playVideoButton" mdoutlet="YES" clickAction="videoPlayClick:">
+                    <Constraints>
+                        <Constraint attribute="edges" target="videoContentView"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+            
+            <UIView id="spliteLineView" style="splitLineStyle">
+                <Constraints>
+                    <Constraint attribute="bottom" target="contentView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="contentView" targetAttribute="left"/>
+                    <Constraint attribute="width" target="contentView" targetAttribute="width"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" />
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

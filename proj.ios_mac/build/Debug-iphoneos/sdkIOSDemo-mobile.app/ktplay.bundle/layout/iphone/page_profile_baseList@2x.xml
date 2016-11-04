@@ -1,0 +1,31 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="tableViewStyle">
+                 <Setter property="backgroundColor" value="clear" />
+                 <Setter property="separatorStyle" value="0"/>
+            </Style>
+            
+            <Style name="labelStyle">
+                <Setter property="textAlignment" value="1" />
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" backgroundColor="white">
+            
+            <UITableView id="listTableView" style="tableViewStyle" mdoutlet="YES" bounds="320,320">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView"/>
+                </Constraints>
+            </UITableView>
+            
+            <UILabel id="noContentLabel" style="labelStyle" mdoutlet="YES">
+            </UILabel>
+        </UIView>
+    </Layout>
+</Page>

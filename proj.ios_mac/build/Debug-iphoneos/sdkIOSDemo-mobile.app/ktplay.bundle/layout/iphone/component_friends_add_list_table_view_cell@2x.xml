@@ -1,0 +1,105 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:title_font}}" />
+            </Style>
+            
+            <Style name="iconImageCornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_middle_corner_radius}}" />                
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIView id="oneView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView"/>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView"/>
+                    <Constraint attribute="right" target="twoView" targetAttribute="left"/>
+                    <Constraint attribute="width" target="twoView" targetAttribute="width" relation="="/>
+                </Constraints>
+                
+                <UIButton id="snsButton" imageForNormalState="{{image:friends_sns}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="oneView" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="centerX" target="oneView"/>
+                    </Constraints>
+                </UIButton>
+                <UILabel text="{{string:sns}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="snsButton" targetAttribute="bottom"/>
+                        <Constraint attribute="bottom" target="oneView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="centerX" target="oneView"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+            
+            <UIView id="twoView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView"/>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="oneView" targetAttribute="right"/>
+                    <Constraint attribute="width" target="thirdView" targetAttribute="width" relation="="/>
+                </Constraints>
+                
+                <UIButton id="localButton" imageForNormalState="{{image:friends_lbs}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="twoView" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="centerX" target="twoView"/>
+                    </Constraints>
+                </UIButton>
+                <UILabel text="{{string:nearby}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="localButton" targetAttribute="bottom"/>
+                        <Constraint attribute="bottom" target="twoView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="centerX" target="twoView"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+            
+            <UIView id="thirdView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView"/>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="twoView" targetAttribute="right"/>
+                    <Constraint attribute="right" target="containerView"/>
+                </Constraints>
+                
+                <UIButton id="addressBookButton" imageForNormalState="{{image:friends_addressbook}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="thirdView" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="centerX" target="thirdView"/>
+                    </Constraints>
+                </UIButton>
+                <UILabel text="{{string:contacts}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="addressBookButton" targetAttribute="bottom"/>
+                        <Constraint attribute="bottom" target="thirdView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="centerX" target="thirdView"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

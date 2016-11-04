@@ -1,0 +1,49 @@
+<Page>
+    <Resources>
+        <StyleSheet>   
+            <Style name="imageViewStyle">
+                <Setter property="bounds" value="{{dimen:user_head_small_size}},{{dimen:user_head_small_size}}"/>
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_small_corner_radius}}"/>
+            </Style>
+            <Style name="textLabelStyle">
+                <Setter property="layer.masksToBounds" value="YES"/>
+                <Setter property="font" value="{{font:prompt_font}}"/>
+                <Setter property="textColor" value="{{color:text_color_gray}}"/>
+                <Setter property="numberOfLines" value="2"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView">
+            <UIImageView id="imageView" mdoutlet="YES" style="imageViewStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}" relation="@ge"/>
+                    <Constraint attribute="left" target="contentView" targetAttribute="left" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="centerY" target="contentView" targetAttribute="centerY" />
+                    <Constraint attribute="width" constant="{{dimen:user_head_small_size}}" />
+                    <Constraint attribute="height" target="imageView" targetAttribute="width"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="infoView">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="bottom" target="contentView" targetAttribute="bottom" constant="-{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="imageView" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="contentView" targetAttribute="right" constant="-{{dimen:base_content_element_small_space}}"/>
+                </Constraints>
+                
+                <UILabel id="replyInfoLabel" mdoutlet="YES" style="textLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="edges" target="infoView"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

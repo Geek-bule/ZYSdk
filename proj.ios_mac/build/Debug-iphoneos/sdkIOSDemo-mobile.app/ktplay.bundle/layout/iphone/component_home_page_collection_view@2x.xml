@@ -1,0 +1,83 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nameLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="0"/>
+            </Style>
+            
+            <Style name="moreCollectionBtnStyle">
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="titleLabel.font" value="{{font:secondary_font}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIView id="collectionView" backgroundColor="white">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" />
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView" />
+                </Constraints>
+
+                <UIImageView id="collectionIcon" image="{{image:home_collection}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="collectionView" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="left" target="collectionView" constant="{{dimen:base_content_element_middle_space}}-2" />
+                        <Constraint attribute="width" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UILabel id="collectionLabel" style="nameLabelStyle" text="{{string:top_collections}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="collectionView" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="collectionIcon" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="right" target="collectionView"/>
+                        <Constraint attribute="height" constant="14"/>
+                    </Constraints>
+                </UILabel>
+                
+                <KTCollectionScrollView id="collectionScrollView" mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="top" target="collectionLabel" targetAttribute="bottom"></Constraint>
+                        <Constraint attribute="left" target="collectionView"></Constraint>
+                        <Constraint attribute="right" target="collectionView"></Constraint>
+                        <Constraint attribute="bottom" target="collectionScrollView"></Constraint>
+                    </Constraints>
+                </KTCollectionScrollView>
+                
+                <UIView id="moreCollectionView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="collectionScrollView" targetAttribute="bottom" constant="2"></Constraint>
+                        <Constraint attribute="left" target="collectionView"></Constraint>
+                        <Constraint attribute="right" target="collectionView"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}+10" mdoutlet="YES" id="btnHeightConstraint"></Constraint>
+                        <Constraint attribute="bottom" target="collectionView"></Constraint>
+                    </Constraints>
+                    <UIView id="splitLine1" backgroundColor="{{color:split_line_color}}">
+                        <Constraints>
+                            <Constraint attribute="top" target="moreCollectionView"></Constraint>
+                            <Constraint attribute="left" target="moreCollectionView"></Constraint>
+                            <Constraint attribute="right" target="moreCollectionView"></Constraint>
+                            <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" mdoutlet="YES" id="splitLine1HeightConstraint"></Constraint>
+                        </Constraints>
+                    </UIView>
+                    <UIButton id="moreCollectionBtn" style="moreCollectionBtnStyle" clickAction="moreCollectionClicked:" titleForNormalState="{{string:more_collections}}">
+                        <Constraints>
+                            <Constraint attribute="top" target="splitLine1" targetAttribute="bottom"></Constraint>
+                            <Constraint attribute="left" target="moreCollectionView"></Constraint>
+                            <Constraint attribute="right" target="moreCollectionView"></Constraint>
+                            <Constraint attribute="bottom" target="moreCollectionView"></Constraint>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

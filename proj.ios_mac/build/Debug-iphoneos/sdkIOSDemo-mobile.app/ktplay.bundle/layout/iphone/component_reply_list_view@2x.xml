@@ -1,0 +1,17 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="replyView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView"/>
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

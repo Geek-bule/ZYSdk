@@ -1,0 +1,44 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+            <Style name="channelLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIView id="oneView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView"/>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView"/>
+                    <Constraint attribute="right" target="containerView"/>
+                </Constraints>
+                
+                <UIButton id="imageButton" mdoutlet="YES" clickAction="imageButtonClicked:">
+                    <Constraints>
+                        <Constraint attribute="top" target="oneView" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="centerX" target="oneView"/>
+                    </Constraints>
+                </UIButton>
+                <UILabel id="channelLabel" mdoutlet="YES" style="channelLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="imageButton" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="bottom" target="oneView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="centerX" target="oneView"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

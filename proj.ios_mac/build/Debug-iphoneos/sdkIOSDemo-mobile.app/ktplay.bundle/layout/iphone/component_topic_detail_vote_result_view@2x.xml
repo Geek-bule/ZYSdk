@@ -1,0 +1,41 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="voteMsgLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="voteResultView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UIView>
+            <UILabel id="voteMsgLabel" mdoutlet="YES" style="voteMsgLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="voteResultView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="voteResultView" targetAttribute="left" />
+                    <Constraint attribute="right" target="voteResultView" targetAttribute="right"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIView id="resultView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="voteMsgLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="voteResultView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="voteResultView" targetAttribute="right"/>
+                    <Constraint attribute="bottom" target="voteResultView" targetAttribute="bottom"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

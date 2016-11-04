@@ -1,0 +1,75 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="headButtonStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_small_corner_radius}}" />
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="imageForNormalState" value="{{image:head}}" />
+                <Setter property="bounds" value="{{dimen:user_head_small_size}},{{dimen:user_head_small_size}}" />
+            </Style>
+            
+            <Style name="operationButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:more_operate}}" />
+                <Setter property="EnlargeEdge" value="20" />
+
+            </Style>
+            
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_dark_gray}}" />
+                <Setter property="font" value="{{font:sub_title_font}}" />
+            </Style>
+            <Style name="adminLabelStyle">
+                <Setter property="backgroundColor" value="{{color:theme_main_color}}" />
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="textAlignment" value="1"/>
+                <Setter property="clipsToBounds" value="YES" />
+            </Style>
+            <Style name="timeLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    <Layout>
+        <UIView id="containerView">
+            <Constraints>
+                <Constraint attribute="bottom" target="timeLabel" targetAttribute="bottom" id="bottom"/>
+            </Constraints>
+            <UIButton id="userHeadButton" mdoutlet="YES" clickAction="clickUserHeadButton:" style="headButtonStyle">
+                <Constraints>
+                    <Constraint attribute="centerY" target="containerView" targetAttribute="centerY"  id="centerY"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" id="left"/>
+                    <Constraint attribute="size" constant="{{dimen:user_head_small_size}},{{dimen:user_head_small_size}}" id="size"/>
+                </Constraints>
+            </UIButton>
+            <UILabel id="nickNameLabel" mdoutlet="YES" style="nickNameLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" id="top"/>
+                    <Constraint attribute="left" target="userHeadButton" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}" id="left"/>
+                     <Constraint attribute="width" target="containerView" targetAttribute="width" relation="@le" multipliedBy="0.5" id="width"/>
+                </Constraints>
+            </UILabel>
+            <UILabel id="adminLabel" mdoutlet="YES" text="{{string:admin}}  " style="adminLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="nickNameLabel" targetAttribute="top" id="top"/>
+                    <Constraint attribute="left" target="nickNameLabel" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}" id="3"/>
+                </Constraints>
+            </UILabel>
+            <UILabel id="timeLabel" mdoutlet="YES" style="timeLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="nickNameLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}" id="top"/>
+                    <Constraint attribute="left" target="nickNameLabel"  targetAttribute="left"  id="left"/>
+                </Constraints>
+            </UILabel>
+            <UIButton id="operationButton"  mdoutlet="YES" clickAction="clickMoreOperationButton:" style="operationButtonStyle">
+
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" id="top"/>
+                    <Constraint attribute="right" target="containerView" id="right"/>
+                </Constraints>
+            </UIButton>
+        </UIView>
+    </Layout>
+</Page>

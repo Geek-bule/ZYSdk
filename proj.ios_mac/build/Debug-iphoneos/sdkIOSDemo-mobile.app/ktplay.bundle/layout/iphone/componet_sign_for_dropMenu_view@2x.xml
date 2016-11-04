@@ -1,0 +1,67 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+            <Style name="signLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textAlignment" value="1" />
+            </Style>
+
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIView id="signView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_small_space}}"/>
+                </Constraints>
+                <UIImageView id="signatureImageView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="boardImageView" targetAttribute="top"/>
+                        <Constraint attribute="bottom" target="boardImageView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="boardImageView" targetAttribute="centerX"/>
+                        <Constraint attribute="right" target="signView" targetAttribute="right"/>
+                        <Constraint attribute="width" constant="150"/>
+                    </Constraints>
+                </UIImageView>
+                
+                <UIButton id="headButton" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="signView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="signView" targetAttribute="left"/>
+                        <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" />
+                        <Constraint attribute="height" target="headButton" targetAttribute="width"/>
+                    </Constraints>
+                </UIButton>
+                
+                <UIImageView id="boardImageView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="signView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="signView" targetAttribute="left"/>
+                        <Constraint attribute="width" target="headButton" targetAttribute="width"/>
+                        <Constraint attribute="height" target="headButton" targetAttribute="height"/>
+                    </Constraints>
+                </UIImageView>
+                
+            
+                
+                <UILabel style="signLabelStyle" text="{{string:create_signature}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="boardImageView" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="bottom" target="signView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="left" target="signView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="signView" targetAttribute="right"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

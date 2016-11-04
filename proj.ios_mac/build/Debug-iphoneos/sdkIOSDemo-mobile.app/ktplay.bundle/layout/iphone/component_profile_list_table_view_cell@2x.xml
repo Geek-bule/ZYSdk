@@ -1,0 +1,53 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="labelStyle">
+                <Setter property="textAlignment" value="0"/>
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_s_font}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIImageView id="cellImageView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UILabel id="cellTextLabel" style="labelStyle" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="cellImageView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIImageView id="redHotImageView" mdoutlet="YES" hidden="YES" image="{{image:new_msg}}">
+                <Constraints>
+                    <Constraint attribute="right" targetAttribute="containerView" constant="-{{dimen:base_content_element_large_space}}"></Constraint>
+<!--                    <Constraint attribute="left" target="cellTextLabel" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>-->
+                    <Constraint attribute="centerY" target="containerView" targetAttribute="centerY"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

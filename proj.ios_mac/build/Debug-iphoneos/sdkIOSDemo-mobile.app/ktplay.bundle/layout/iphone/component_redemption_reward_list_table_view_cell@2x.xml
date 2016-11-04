@@ -1,0 +1,58 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="iconImageViewStyle">
+                <Setter property="image" value="{{image:head}}" />
+                <Setter property="bounds" value="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}" />
+            </Style>
+            <Style name="titleLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="maskView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView"/>
+                </Constraints>
+            </UIView>
+            <UIImageView id="iconImageView" style="iconImageViewStyle" bounds="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView"  constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="containerView"  constant="-{{dimen:base_content_element_middle_space}}" id="left"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" />
+                    <Constraint attribute="height" target="iconImageView" targetAttribute="width"  />
+                </Constraints>
+            </UIImageView>
+            <UILabel id="titleLabel" mdoutlet="YES" style="titleLabelStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="iconImageView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="iconImageView"  id="centerY"/>
+                    <Constraint attribute="width" target="containerView" relation="@le" multipliedBy="3/5"/>
+                </Constraints>
+            </UILabel>
+            <UILabel id="countLabel" mdoutlet="YES" style="titleLabelStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="titleLabel" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="iconImageView"  id="centerY"/>
+                    <Constraint attribute="width" target="containerView" multipliedBy="2/5"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="spliteLineView" style="splitLineStyle">
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="width" target="containerView" />
+                    <Constraint attribute="centerX" target="containerView" />
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" />
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

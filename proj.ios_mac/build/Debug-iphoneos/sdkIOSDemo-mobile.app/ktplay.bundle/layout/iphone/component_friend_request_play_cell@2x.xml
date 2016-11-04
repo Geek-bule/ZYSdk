@@ -1,0 +1,28 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.borderColor" value="{{color:text_color_white}}" />
+                <Setter property="layer.borderWidth" value="1.5" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_middle_corner_radius}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" >
+            <UIButton id="iconButton" style="cornerRadiusStyle" mdoutlet="YES" bounds="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" />
+                    <Constraint attribute="bottom" target="containerView" />
+                    <Constraint attribute="left" target="containerView"/>
+                    <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}"/>
+                    <Constraint attribute="height" target="iconButton" targetAttribute="width"/>
+                </Constraints>
+            </UIButton>
+            
+        </UIView>
+    </Layout>
+</Page>

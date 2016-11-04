@@ -1,0 +1,65 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="resultLabelStyle">
+                <Setter property="font" value="{{font:primary_font}}" />
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+            </Style>
+            <Style name="tipLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="numberOfLines" value="0" />
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView" backgroundColor="white">
+            
+            <UIView id="contentContainerView">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    
+                </Constraints>
+                <UIImageView id="resultImageView" image="{{image:icon_alert_done}}" >
+                    <Constraints>
+                        <Constraint attribute="top" target="contentContainerView" constant="{{dimen:base_content_element_large_space}}" />
+                        <Constraint attribute="centerX" target="contentContainerView" />
+                    </Constraints>
+                </UIImageView>
+                <UILabel id="resultLabel" text="{{string:report_success}}" style="resultLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="resultImageView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="centerX" target="resultImageView" />
+                    </Constraints>
+                </UILabel>
+                <UILabel id="resulttTipLabel" text="{{string:report_submitted_description}}"  style="tipLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="resultLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="left" target="contentContainerView" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="right" target="contentContainerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UILabel>
+                <UIButton id="confirmButton" titleForNormalState="{{string:confirm}}"  clickAction="confirmButtonClick:" style="confirmButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="resulttTipLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}*2"/>
+                        <Constraint attribute="left" target="contentContainerView" />
+                        <Constraint attribute="right" target="contentContainerView" />
+                        <Constraint attribute="height"  constant="{{dimen:base_confirm_button_height}}"/>
+                        <Constraint attribute="bottom" target="contentContainerView"   constant="-{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

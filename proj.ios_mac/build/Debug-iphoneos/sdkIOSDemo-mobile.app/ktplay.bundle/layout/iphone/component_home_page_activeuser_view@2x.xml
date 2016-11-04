@@ -1,0 +1,60 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nameLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="0"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="usersView" backgroundColor="white">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" />
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="bottom" target="containerView"/>
+                </Constraints>
+                
+                <UIView id="splittopline" backgroundColor="{{color:split_line_color}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="usersView" ></Constraint>
+                        <Constraint attribute="left" target="usersView" />
+                        <Constraint attribute="right" target="usersView" />
+                        <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"></Constraint>
+                    </Constraints>
+                </UIView>
+                
+                <UIImageView id="activeUsersIcon" image="{{image:home_recent}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="usersView" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="left" target="usersView" constant="{{dimen:base_content_element_middle_space}}-2"/>
+                        <Constraint attribute="width" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UILabel id="nameLabel" text="{{string:active_players}}" style="nameLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="usersView" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="activeUsersIcon" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="right" target="usersView"/>
+                        <Constraint attribute="height" constant="14" />
+                    </Constraints>
+                </UILabel>
+                
+                <KTPlayerScrollView id="activeUserScrollview" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="nameLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="left" target="usersView" constant="{{dimen:base_content_element_middle_space}}" />
+                        <Constraint attribute="right" target="usersView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}" />
+                        <Constraint attribute="bottom" target="usersView" constant="-{{dimen:base_content_element_middle_space}}"></Constraint>
+                    </Constraints>
+                </KTPlayerScrollView>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

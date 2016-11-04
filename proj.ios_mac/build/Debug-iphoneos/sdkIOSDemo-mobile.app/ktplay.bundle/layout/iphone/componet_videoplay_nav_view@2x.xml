@@ -1,0 +1,97 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="navBarView" >
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}" />
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+<!--                    <Constraint attribute="bottom" target="signatureView" targetAttribute="bottom"/>-->
+                </Constraints>
+                
+                <UIView id="leftView">
+                    <Constraints>
+                        <Constraint attribute="top" target="navBarView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="navBarView" targetAttribute="left"/>
+                        <Constraint attribute="bottom" target="navBarView" targetAttribute="bottom"/>
+                    </Constraints>
+                    
+                    <UIButton id="backButton" mdoutlet="YES" clickAction="backButtonClicked:">
+                        <Constraints>
+                            <Constraint attribute="top" target="leftView" targetAttribute="top"/>
+                            <Constraint attribute="bottom" target="leftView" targetAttribute="bottom"/>
+                            <Constraint attribute="left" target="leftView" targetAttribute="left"/>
+                            <Constraint attribute="right" target="leftView" targetAttribute="right"/>
+                        </Constraints>
+                    </UIButton>
+                    
+                </UIView>
+                <UIView id="topicView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="navBarView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="leftView" targetAttribute="right"/>
+                        <Constraint attribute="right" target="navBarView" targetAttribute="right"/>
+                        <Constraint attribute="bottom" target="navBarView" targetAttribute="bottom"/>
+                    </Constraints>
+                    
+                    <UIButton id="commentButton" mdoutlet="YES" clickAction="commentButtonClicked:">
+                        <Constraints>
+                            <Constraint attribute="top" target="topicView" targetAttribute="top"/>
+                            <Constraint attribute="bottom" target="topicView" targetAttribute="bottom"/>
+                            <Constraint attribute="left" target="likeButton" targetAttribute="right"/>
+                            <Constraint attribute="right" target="topicView" targetAttribute="right"/>
+                        </Constraints>
+                    </UIButton>
+                    
+                    <UIButton id="likeButton" mdoutlet="YES" clickAction="likeButtonClicked:">
+                        <Constraints>
+                            <Constraint attribute="top" target="topicView" targetAttribute="top"/>
+                            <Constraint attribute="bottom" target="topicView" targetAttribute="bottom"/>
+                            <Constraint attribute="left" target="collectButton" targetAttribute="right"/>
+                            <Constraint attribute="right" target="commentButton" targetAttribute="left"/>
+                        </Constraints>
+                    </UIButton>
+                    
+                    <UIButton id="collectButton" mdoutlet="YES" clickAction="collectButtonClicked:">
+                        <Constraints>
+                            <Constraint attribute="top" target="topicView" targetAttribute="top"/>
+                            <Constraint attribute="bottom" target="topicView" targetAttribute="bottom"/>
+                            <Constraint attribute="right" target="likeButton" targetAttribute="left"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+                <UIView id="rightView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="navBarView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="leftView" targetAttribute="right"/>
+                        <Constraint attribute="right" target="navBarView" targetAttribute="right"/>
+                        <Constraint attribute="bottom" target="navBarView" targetAttribute="bottom"/>
+                    </Constraints>
+                    <UIButton id="makeSureButton" mdoutlet="YES" clickAction="makeSureButtonClicked:">
+                        <Constraints>
+                            <Constraint attribute="top" target="rightView" targetAttribute="top"/>
+                            <Constraint attribute="bottom" target="rightView" targetAttribute="bottom"/>
+                            <Constraint attribute="right" target="rightView" targetAttribute="right"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            
+            </UIView>
+            <UIView id="signatureView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="navBarView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+<!--                    <Constraint attribute="height" constant="100" />-->
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

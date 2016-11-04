@@ -1,0 +1,37 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+            <Style name="labelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="numberOfLines" value="0" />
+                <Setter property="textAlignment" value="1" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    <Layout>
+         <UIView id="contentView">
+             <UIView id="labelsView">
+                 <Constraints>
+                     <Constraint attribute="left" target="contentView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="right" target="contentView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                     <Constraint attribute="centerY" target="contentView" targetAttribute="centerY"/>
+                 </Constraints>
+                 
+                 <UILabel id="centerLabel" mdoutlet="YES" style="labelStyle">
+                     <Constraints>
+                         <Constraint attribute="top" target="labelsView" targetAttribute="top"/>
+                         <Constraint attribute="bottom" target="labelsView" targetAttribute="bottom"/>
+                         <Constraint attribute="left" target="labelsView" targetAttribute="left"/>
+                         <Constraint attribute="right" target="labelsView" targetAttribute="right"/>
+                     </Constraints>
+                 </UILabel>
+                 
+             </UIView>
+         </UIView>
+  </Layout>
+</Page>
+                      

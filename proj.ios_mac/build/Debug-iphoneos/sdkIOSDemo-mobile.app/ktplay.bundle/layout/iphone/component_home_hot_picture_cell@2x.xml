@@ -1,0 +1,75 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+
+            <Style name="transportBackViewStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_clear_black}}" />
+            </Style>
+            
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_small_corner_radius}}" />
+                <Setter property="layer.borderColor" value="{{color:text_color_white}}" />
+                <Setter property="layer.borderWidth" value="1" />
+            </Style>
+            
+            <Style name="contentLableStyle">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="numberOfLines" value="2"/>
+            </Style>
+            
+            <Style name="emptyViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIImageView id="hotPicImageView" mdoutlet="YES" bounds="{{dimen:thumb_size_middle}},{{dimen:thumb_size_middle}}">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView"/>
+                    <Constraint attribute="width" constant="{{dimen:home_hot_width}}"></Constraint>
+                    <Constraint attribute="height" constant="{{dimen:home_hot_height}}"></Constraint>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="bottomWrapperView">
+                <Constraints>
+                    <Constraint attribute="height" constant="{{dimen:topic_list_cell_bar_height}}"/>
+                    <Constraint attribute="bottom" target="hotPicImageView"  targetAttribute="bottom" />
+                    <Constraint attribute="left" target="hotPicImageView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="hotPicImageView" targetAttribute="right"/>
+                </Constraints>
+                
+                <UIView id="transportBackView" mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="edges" target="bottomWrapperView"/>
+                    </Constraints>
+                    
+                    <UIButton id="iconButton" mdoutlet="YES" style="cornerRadiusStyle" clickAction="playerHeadViewClicked:" bounds="{{dimen:thumb_size_middle}},{{dimen:thumb_size_middle}}">
+                        <Constraints>
+                            <Constraint attribute="centerY" target="transportBackView"/>
+<!--                            <Constraint attribute="top" target="transportBackView"/>-->
+                            <Constraint attribute="width" constant="{{dimen:user_head_small_size}}"/>
+                            <Constraint attribute="height" target="iconButton" targetAttribute="width"/>
+                            <Constraint attribute="left" target="transportBackView" targetAttribute="left" constant="{{dimen:base_content_element_small_space}}"/>
+                        </Constraints>
+                    </UIButton>
+                    
+                    <UILabel id="contentLabel" mdoutlet="YES" style="contentLableStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="transportBackView"  targetAttribute="top" />
+                            <Constraint attribute="bottom" target="transportBackView"  targetAttribute="bottom" />
+                            <Constraint attribute="left" target="iconButton" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                            <Constraint attribute="right" target="transportBackView" targetAttribute="right"/>
+                        </Constraints>
+                    </UILabel>
+                </UIView>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

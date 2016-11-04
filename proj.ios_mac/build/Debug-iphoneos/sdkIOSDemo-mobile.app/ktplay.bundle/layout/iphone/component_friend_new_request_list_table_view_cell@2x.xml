@@ -1,0 +1,55 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIImageView id="headerImageView" image="{{image:new_friend_icon}}">
+                <Constraints>
+                    
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UILabel id="nickNameLabel" text="{{string:friend_requests}}" style="nickNameLabelStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="headerImageView" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}" relation="@le"/>
+                    <Constraint attribute="centerY" target="headerImageView" targetAttribute="centerY"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIImageView id="arrowImageView" image="{{image:right_arrow}}">
+                <Constraints>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView" targetAttribute="centerY"/>
+                    <Constraint attribute="height" target="arrowImageView" targetAttribute="width" multipliedBy="1.5"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

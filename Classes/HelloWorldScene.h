@@ -51,6 +51,8 @@ public:
     void videoBtnVisible(bool isVisible);
     
     void iapLoadSuccess();
+    
+    void videoPlayFinish();
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);

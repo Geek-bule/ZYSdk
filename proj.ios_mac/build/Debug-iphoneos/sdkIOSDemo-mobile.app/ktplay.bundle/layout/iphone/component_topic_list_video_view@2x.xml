@@ -1,0 +1,89 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="labelStyle">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    <Layout>
+        <UIView id="containerView">
+            <KTComponentVideoImageView id="videoImageView" mdoutlet="YES" image="{{image:default_video_image}}" bounds="{{dimen:thumb_size_large}},{{dimen:thumb_size_large}}">
+                 <Constraints>
+                     <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                     <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"></Constraint>
+                     <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                     <Constraint attribute="right"  target="containerView" targetAttribute="right" constant="-{{dimen:topic_cell_offset}}"/>
+                   
+                     <Constraint attribute="height" target="videoImageView" targetAttribute="width" multipliedBy="0.7"/>
+                 </Constraints>
+             </KTComponentVideoImageView>
+             
+             <UIView id="videoTimeView">
+                 <Constraints>
+                     <Constraint attribute="bottom" target="videoImageView" targetAttribute="bottom" constant="-{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="left" target="videoImageView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                 </Constraints>
+                 
+                 <UIImageView id="timeImageView" image="{{image:video_icon_normal}}">
+                     <Constraints>
+                         <Constraint attribute="top" target="videoTimeView" targetAttribute="top"/>
+                         <Constraint attribute="bottom" target="videoTimeView" targetAttribute="bottom"/>
+                         <Constraint attribute="left" target="videoTimeView" targetAttribute="left"/>
+                         <Constraint attribute="centerY" target="videoTimeView" targetAttribute="centerY" />
+                     </Constraints>
+                 </UIImageView>
+                 
+                 <UILabel id="timeLabel" mdoutlet="YES" style="labelStyle">
+                     <Constraints>
+                         <Constraint attribute="left" target="timeImageView" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                         <Constraint attribute="right" target="videoTimeView" targetAttribute="right"/>
+                         <Constraint attribute="centerY" target="timeImageView" targetAttribute="centerY"/>
+                     </Constraints>
+                 </UILabel>
+
+             </UIView>
+             
+             <UIView id="playCountView" mdoutlet="YES">
+                 <Constraints>
+                     <Constraint attribute="bottom" target="videoImageView" targetAttribute="bottom" constant="-{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="right" target="videoImageView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                 </Constraints>
+                 
+                 <UIImageView id="playCountImageView" image="{{image:list_details_play_icon}}">
+                     <Constraints>
+                         <Constraint attribute="top" target="playCountView" targetAttribute="top"/>
+                         <Constraint attribute="bottom" target="playCountView" targetAttribute="bottom"/>
+                         <Constraint attribute="left" target="playCountView" targetAttribute="left"/>
+                         <Constraint attribute="centerY" target="playCountView" targetAttribute="centerY" />
+                     </Constraints>
+                 </UIImageView>
+                 
+                 <UILabel id="playCountLabel" mdoutlet="YES" style="labelStyle">
+                     <Constraints>
+                         <Constraint attribute="left" target="playCountImageView" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                         <Constraint attribute="right" target="playCountView" targetAttribute="right"/>
+                         <Constraint attribute="centerY" target="playCountImageView" targetAttribute="centerY"/>
+                     </Constraints>
+                 </UILabel>
+
+             </UIView>
+             
+             <UIImageView id="playView" image="{{image:video_play}}">
+                 <Constraints>
+                     <Constraint attribute="centerY" target="videoImageView" targetAttribute="centerY"/>
+                     <Constraint attribute="centerX" target="videoImageView" targetAttribute="centerX"/>
+                 </Constraints>
+             </UIImageView>
+             
+             <UIButton clickAction="videoButtonClicked:">
+                 <Constraints>
+                     <Constraint attribute="edges" target="videoImageView"/>
+                 </Constraints>
+             </UIButton>
+             
+             
+        </UIView>
+    </Layout>
+</Page>

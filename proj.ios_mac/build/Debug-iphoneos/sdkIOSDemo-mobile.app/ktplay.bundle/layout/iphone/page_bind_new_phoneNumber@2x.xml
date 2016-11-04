@@ -1,0 +1,129 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="textFieldContainerViewStyle" parent="clipsViewStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="{{color:split_line_color}}" />
+                <Setter property="layer.borderWidth" value="{{dimen:base_split_line_height}}" />
+            </Style>
+            <Style name="textFieldStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="backgroundColor" value="white" />
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            <Style name="linkButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+            </Style>
+            <Style name="regionButtonStyle" parent="linkButtonStyle">
+                <Setter property="backgroundColorForNormalState" value="white" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            <Style name="noticeLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+            <Style name="phoneLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textColor" value="{{color:theme_main_color}}"></Setter>
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    
+    <Layout>
+        <UIView id="superView" backgroundColor="white">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="left" target="superView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="superView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="superView" constant="{{dimen:base_content_element_large_space}}*2"/>
+                    <Constraint attribute="bottom" target="superView" />
+                </Constraints>
+                <UIView id="phoneNumberContentView" backgroundColor="white">
+                    <Constraints>
+                        <Constraint attribute="left" target="contentView" />
+                        <Constraint attribute="right" target="contentView" />
+                        <Constraint attribute="top" target="contentView" />
+                        <Constraint attribute="bottom" target="phoneNextButton" />
+                    </Constraints>
+                    
+                    <UIImageView id="phoneLogo" image="{{image:register_phone}}">
+                        <Constraints>
+                            <Constraint attribute="top" target="phoneNumberContentView"></Constraint>
+                            <Constraint attribute="centerX" target="phoneNumberContentView"></Constraint>
+                        </Constraints>
+                    </UIImageView>
+                    
+                    <UILabel id="phoneLabel" mdoutlet="YES" style="phoneLabelStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="phoneLogo" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                            <Constraint attribute="left" target="phoneNumberContentView"></Constraint>
+                            <Constraint attribute="right" target="phoneNumberContentView"></Constraint>
+                        </Constraints>
+                    </UILabel>
+                    
+                    <UILabel id="noticeLabel" numberOfLines="0" mdoutlet="YES" style="noticeLabelStyle" text="{{string:binding_number_to}}">
+                        <Constraints>
+                            <Constraint attribute="top" target="phoneLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                            <Constraint attribute="left" target="phoneNumberContentView"></Constraint>
+                            <Constraint attribute="right" target="phoneNumberContentView"></Constraint>
+                        </Constraints>
+                    </UILabel>
+                    
+                    <UIView id="phoneNumberAndAreaCodeContainerView" style="textFieldContainerViewStyle">
+                        <Constraints>
+                            <Constraint attribute="height" constant="{{dimen:base_textfield_height}}" />
+                            <Constraint attribute="left" target="phoneNumberContentView" />
+                            <Constraint attribute="right" target="phoneNumberContentView" />
+                            <Constraint attribute="top" target="noticeLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}" />
+                        </Constraints>
+                        <UIButton id="regionCodeButton" mdoutlet="YES" titleForNormalState="+86" clickAction="changeRegionCode:" style="regionButtonStyle">
+                            <Constraints>
+                                <Constraint attribute="left" target="phoneNumberAndAreaCodeContainerView"/>
+                                <Constraint attribute="top" target="phoneNumberAndAreaCodeContainerView"/>
+                                <Constraint attribute="bottom" target="phoneNumberAndAreaCodeContainerView"/>
+                                <Constraint attribute="width" relation="@le" constant="40" />
+                            </Constraints>
+                        </UIButton>
+                        <UIView id="spliteView" style="splitLineStyle">
+                            <Constraints>
+                                <Constraint attribute="left" target="regionCodeButton" targetAttribute="right"/>
+                                <Constraint attribute="top" target="phoneNumberAndAreaCodeContainerView"/>
+                                <Constraint attribute="bottom" target="phoneNumberAndAreaCodeContainerView"/>
+                                <Constraint attribute="width" constant="{{dimen:base_split_line_height}}" />
+                            </Constraints>
+                        </UIView>
+                        <UITextField id="phoneNumberTextField" placeholder="{{string:phone_number}}" mdoutlet="YES" style="textFieldStyle">
+                            <Constraints>
+                                <Constraint attribute="left" target="spliteView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                                <Constraint attribute="top" target="phoneNumberAndAreaCodeContainerView"/>
+                                <Constraint attribute="bottom" target="phoneNumberAndAreaCodeContainerView"/>
+                                <Constraint attribute="right" target="phoneNumberAndAreaCodeContainerView"/>
+                            </Constraints>
+                        </UITextField>
+                    </UIView>
+                    <UIButton id="phoneNextButton" titleForNormalState="{{string:done}}" clickAction="nextButtonClicked:" enabled="NO" mdoutlet="YES" style="confirmButtonStyle">
+                        <Constraints>
+                            <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                            <Constraint attribute="left" target="phoneNumberContentView" />
+                            <Constraint attribute="right" target="phoneNumberContentView" />
+                            <Constraint attribute="top" target="phoneNumberAndAreaCodeContainerView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

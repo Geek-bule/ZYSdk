@@ -1,0 +1,27 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+             
+            <Style name="nameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" backgroundColor="clear">
+            <UILabel id="nameLabel" mdoutlet="YES" style="nameLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" constant="-{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" relation="@le" constant="-{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="width" constant="100" relation="@le"/>
+                </Constraints>
+            </UILabel>
+        </UIView>
+    </Layout>
+</Page>

@@ -1,0 +1,27 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" backgroundColor="clear">
+            <UIImageView id="photoImageView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIButton imageForNormalState="{{image:del_icon}}" clickAction="deleteBtnClicked:">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                </Constraints>
+            </UIButton>
+        </UIView>
+    </Layout>
+</Page>

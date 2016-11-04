@@ -1,0 +1,144 @@
+<Page>
+    <Resources>
+        <StyleSheet ref="{{style:component_topic_cell_top_view_style}}"/>
+        <StyleSheet>
+            <Style name="topicCellBottomButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:secondary_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:text_color_gray}}" />
+                <Setter property="titleColorForSelectedState" value="{{color:text_color_gray}}" />
+            </Style>
+            <Style name="topicCellLikeButtonStyle" parent="topicCellBottomButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:like_normal}}" />
+                <Setter property="imageForSelectedState" value="{{image:like_selected}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_big_corner_radius}}" />
+                <Setter property="layer.borderColor" value="{{color:vote_background_color_selected}}" />
+                <Setter property="layer.borderWidth" value="1" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="topicCellReplyButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:reply}}" />
+            </Style>
+            <Style name="pageStyle">
+                <Setter property="backgroundColor" value="white"/>
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+            <Style name="essenceLabelStyle">
+                <Setter property="textColor" value="red" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="red" />
+                <Setter property="layer.borderWidth" value="1" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="essenceTitleLabelStyle">
+                <Setter property="textColor" value="red" />
+                <Setter property="font" value="{{font:topic_title_font}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="red" />
+                <Setter property="layer.borderWidth" value="1" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="likeNumLabelStyle">
+                <Setter property="textColor" value="gray" />
+                <Setter property="font" value="{{font:primary_s_font}}" />
+                <Setter property="textAlignment" value="1"/>
+<!--                <Setter property="text" value="123123" />-->
+<!--                <Setter property="backgroundColor" value="red"/>-->
+            </Style>
+            
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="topicCellMoreButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="EnlargeEdge" value="20" />
+                
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="topicDetailCellContentContainer" style="pageStyle">
+            <!--分享奖励-->
+            <UIView id="snsShareView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="topicDetailCellContentContainer" targetAttribute="top"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            <!--视频-->
+            <UIView id="videoView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="snsShareView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            <!--投票-->
+            <UIView id="voteView" mdoutlet="YES" backgroundColor="{{color:background_color_clear_black}}">
+                <Constraints>
+                    <Constraint attribute="top" target="videoView" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            <Import id="topicCellTopContentContainer" ref="{{layout:component_topic_cell_top_view}}">
+                <Constraints>
+                    <Constraint attribute="top" target="voteView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left" />
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right" />
+                </Constraints>
+            </Import>
+            <!--投票选项-->
+            <UIView id="voteOptionView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="topicCellTopContentContainer" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            <UIView id="bottomView">
+                <Constraints>
+                    <Constraint attribute="top" target="voteOptionView"  targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer"  targetAttribute="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer"  targetAttribute="right"/>
+                    <Constraint attribute="height" constant="{{dimen:user_head_big_size}}*2"/>
+                    <Constraint attribute="bottom" target="topicDetailCellContentContainer"  targetAttribute="bottom"/>
+                </Constraints>
+                <UIButton id="likeButton" clickAction="clickLikeButton:" mdoutlet="YES" style="topicCellLikeButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="bottomView"  id="centerY" constant="-{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="centerX" target="bottomView" constant="centerX"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_big_size}}" />
+                        <Constraint attribute="width" constant="{{dimen:user_head_big_size}}"/>
+                    </Constraints>
+                </UIButton>
+                <UILabel id="likeNumLabel" mdoutlet="YES" style="likeNumLabelStyle" >
+                    <Constraints>
+                        <Constraint attribute="top" target="likeButton" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}" />
+                        <Constraint attribute="width" constant="{{dimen:user_head_big_size}}" />
+                        <Constraint attribute="centerX" target="bottomView" targetAttribute="centerX" />
+                    </Constraints>
+                </UILabel>
+            </UIView>
+            
+            <UIView id="splitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left" />
+                    <Constraint attribute="width" target="topicDetailCellContentContainer" targetAttribute="width" />
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                    <Constraint attribute="bottom" target="topicDetailCellContentContainer"  targetAttribute="bottom"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

@@ -1,0 +1,19 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UITableView id="settingTableView" mdoutlet="YES" bounds="320,320">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView"/>
+                </Constraints>
+            </UITableView>
+
+        </UIView>
+    </Layout>
+</Page>

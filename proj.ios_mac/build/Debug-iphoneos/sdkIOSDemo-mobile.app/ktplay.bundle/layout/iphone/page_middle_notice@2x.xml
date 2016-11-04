@@ -1,0 +1,94 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="white" />
+            </Style>
+            <Style name="contentLabelStyle">
+                <Setter property="textColor" value="white" />
+                <Setter property="numberOfLines" value="2" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    
+    <Layout>
+        <UIView id="superView">
+            <UIView id="emptyImageView"  mdoutlet="YES" >
+                <Constraints>
+                    <Constraint attribute="top" target="superView" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="superView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="superView" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="width" target="emptyImageView" targetAttribute="height"/>
+                </Constraints>
+                <UIImageView id="imageView" mdoutlet="YES" bounds="{{dimen:thumb_size_middle}},{{dimen:thumb_size_middle}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="emptyImageView" targetAttribute="top"/>
+                        <Constraint attribute="bottom" target="emptyImageView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="emptyImageView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="emptyImageView" targetAttribute="right"/>
+                    </Constraints>
+                </UIImageView>
+            </UIView>
+            
+            <UIView id="emptyView">
+                <Constraints>
+                    <Constraint attribute="top" target="superView" />
+                    <Constraint attribute="bottom" target="superView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="superView" targetAttribute="left" id="leftConstraint" mdoutlet="YES" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="right" target="superView"/>
+                </Constraints>
+                
+                <UIButton id="closeButton" imageForNormalState="{{image:btn_close_for_notice}}" clickAction="close_button_clicked:">
+                    <Constraints>
+                        <Constraint attribute="top" target="emptyView" targetAttribute="top"/>
+                        <Constraint attribute="right" target="emptyView" targetAttribute="right"/>
+                        <Constraint attribute="width" constant="40"/>
+                        <Constraint attribute="height" target="closeButton" targetAttribute="width"/>
+                    </Constraints>
+                </UIButton>
+                
+                <UILabel id="titleLabel" style="titleLabelStyle"  mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="left" target="emptyView" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="top" target="emptyView" constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="bottom" target="closeButton" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="right" target="closeButton" targetAttribute="left"/>
+                    </Constraints>
+                </UILabel>
+                <UIView id="contentView">
+                    <Constraints>
+                        <Constraint attribute="top" target="titleLabel" targetAttribute="bottom"/>
+                        <Constraint attribute="bottom" target="detailTipLabel" targetAttribute="top"/>
+                        <Constraint attribute="left" target="titleLabel"/>
+                        <Constraint attribute="right" target="emptyView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    </Constraints>
+                    <UILabel id="contentLabel" style="contentLabelStyle" mdoutlet="YES">
+                        <Constraints>
+                            <Constraint attribute="top" target="contentView" targetAttribute="top"></Constraint>
+                            <Constraint attribute="bottom" target="contentView" targetAttribute="bottom"></Constraint>
+                            <Constraint attribute="left" target="contentView" targetAttribute="left"/>
+                            <Constraint attribute="right" target="contentView" targetAttribute="right"/>
+                            <Constraint attribute="centerY" target="contentView" targetAttribute="centerY"/>
+                        </Constraints>
+                    </UILabel>
+                </UIView>
+                <UILabel id="detailTipLabel" style="contentLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="right" target="emptyView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="bottom" target="emptyView" />
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>
+
+
+
+
+
+

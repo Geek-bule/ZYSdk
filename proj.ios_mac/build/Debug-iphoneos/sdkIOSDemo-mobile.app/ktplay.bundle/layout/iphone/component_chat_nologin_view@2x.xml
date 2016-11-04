@@ -1,0 +1,30 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="tipTitleStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    
+    <Layout>
+        <UIView id="superView" backgroundColor="white">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="edges" target="superView"
+                    constant="0,{{dimen:base_content_element_large_space}},0,{{dimen:base_content_element_large_space}}"
+                    />
+                </Constraints>
+                <UILabel id="tipLabel" style="tipTitleStyle" text="{{string:tip_chat_service_issue}}">
+                    <Constraints>
+                        <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                        <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}*2"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

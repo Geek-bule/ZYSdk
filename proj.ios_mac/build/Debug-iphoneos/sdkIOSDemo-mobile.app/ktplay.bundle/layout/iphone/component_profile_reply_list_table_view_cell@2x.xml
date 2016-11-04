@@ -1,0 +1,162 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="StatusLabelStyle">
+                <Setter property="textColor" value="{{color:theme_main_color}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            
+            <Style name="timelabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textAlignment" value="2" />
+            </Style>
+            
+            <Style name="contentlabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="iconBtnCornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_middle_corner_radius}}" />
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+            <Style name="OriContentViewStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}" />
+            </Style>
+            
+            <Style name="OriContentLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIButton id="iconButton" style="iconBtnCornerRadiusStyle" mdoutlet="YES" clickAction="playerHeadViewClicked:" bounds="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                    <Constraint attribute="width" target="iconButton" targetAttribute="height" />
+                </Constraints>
+            </UIButton>
+            
+            <UIView id="centerView">
+                <Constraints>
+                    <Constraint attribute="top" target="iconButton"></Constraint>
+                    <Constraint attribute="left" target="iconButton" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="bottom" target="iconButton" targetAttribute="bottom"></Constraint>
+                </Constraints>
+                
+                <UILabel id="nickNameLabel" mdoutlet="YES" style="nickNameLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="centerView"/>
+                        <Constraint attribute="left" target="centerView"/>
+                        
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="timeLabel" mdoutlet="YES" style="timelabelStyle">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="nickNameLabel"/>
+                        <Constraint attribute="left" target="nickNameLabel" targetAttribute="right"/>
+                        <Constraint attribute="right" target="centerView"/>
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="StatusLabel" mdoutlet="YES" style="StatusLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="bottom" target="centerView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="centerView"/>
+                    </Constraints>
+                </UILabel>
+            </UIView>
+            
+            <UILabel id="contentLabel" mdoutlet="YES" numberOfLines="0" style="contentlabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="iconButton" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                    <Constraint attribute="left" target="centerView"/>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:reply_list_table_content_large_space}}" />
+                    <Constraint attribute="height" constant="0" mdoutlet="YES" deactivate="YES" id="contentHiddenConstraint" />
+                </Constraints>
+            </UILabel>
+            
+            <!--隐藏和显示图片-->
+            <UIView id="imageGridEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="centerView" />
+                    <Constraint attribute="right" target="containerView" />
+                    <Constraint attribute="top" target="contentLabel" targetAttribute="bottom" />
+                    <Constraint attribute="bottom" target="imageGridView" targetAttribute="bottom" priority="required" mdoutlet="YES" deactivate="YES"  id="imageGridShowConstraint"/>
+                    <Constraint attribute="height" constant="0"  priority="low" mdoutlet="YES" id="imageGridHiddenConstraint"/>
+                </Constraints>
+                <KTComponentImageGridView id="imageGridView" mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="top" target="imageGridEmptyView" constant="{{dimen:base_content_element_large_space}}" />
+                        <Constraint attribute="left" target="imageGridEmptyView" />
+                    </Constraints>
+                </KTComponentImageGridView>
+            </UIView>
+            
+            <UIView id="OriContentView" style="OriContentViewStyle" >
+                <Constraints>
+                    <Constraint attribute="top" target="imageGridEmptyView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}" />
+                    <Constraint attribute="left" target="contentLabel" />
+                    <Constraint attribute="right" target="contentLabel" />
+                    <Constraint attribute="bottom" target="containerView" constant="-{{dimen:base_content_element_large_space}}" />
+                </Constraints>
+                
+                <UILabel id="OriContentLabel" mdoutlet="YES" style="OriContentLabelStyle" numberOfLines="2">
+                    <Constraints>
+                        <Constraint attribute="top" target="OriContentView" constant="{{dimen:base_content_element_large_space}}" />
+                        <Constraint attribute="left" target="OriContentView" constant="{{dimen:base_content_element_large_space}}" />
+                        <Constraint attribute="right" target="OriContentView" constant="-{{dimen:base_content_element_large_space}}" />
+                        <Constraint attribute="bottom" target="OriContentView" constant="-{{dimen:base_content_element_large_space}}" />
+                    </Constraints>
+                </UILabel>
+                
+                <UIButton id="OriContentBtn" mdoutlet="YES" clickAction="OriContentBtnClicked:">
+                    <Constraints>
+                        <Constraint attribute="top" target="OriContentView" />
+                        <Constraint attribute="left" target="OriContentView" />
+                        <Constraint attribute="right" target="OriContentView" />
+                        <Constraint attribute="bottom" target="OriContentView" />
+                    </Constraints>
+                </UIButton>
+            </UIView>
+            
+<!--            <UIImageView id="arrowImageView" image="{{image:right_arrow}}">-->
+<!--                <Constraints>-->
+<!--                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>-->
+<!--                    <Constraint attribute="centerY" target="containerView"/>-->
+<!--                    <Constraint attribute="height" target="arrowImageView" targetAttribute="width" multipliedBy="1.5"/>-->
+<!--                </Constraints>-->
+<!--            </UIImageView>-->
+
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

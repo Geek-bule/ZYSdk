@@ -1,0 +1,52 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="superView" backgroundColor="white">
+            <UITableView id="tableView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="superView" />
+                    <Constraint attribute="right" target="superView" />
+                    <Constraint attribute="top" target="superView"/>
+                    <Constraint attribute="bottom" target="bottomView" targetAttribute="top"/>
+                </Constraints>
+            </UITableView>
+            <UIView id="bottomView">
+                <Constraints>
+                    <Constraint attribute="left" target="superView" />
+                    <Constraint attribute="right" target="superView" />
+                    <Constraint attribute="bottom" target="superView"/>
+                </Constraints>
+                <UIView id="splitLine" style="splitLineStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="bottomView"/>
+                        <Constraint attribute="width" target="bottomView" />
+                        <Constraint attribute="centerX" target="bottomView" />
+                        <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" />
+                    </Constraints>
+                </UIView>
+                <UIButton id="confirmButton" mdoutlet="YES" titleForNormalState="{{string:confirm}}" clickAction="confirmButton_clicked:" style="confirmButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                        <Constraint attribute="edges" target="bottomView" constant="{{dimen:base_content_element_large_space}},{{dimen:base_content_element_large_space}},{{dimen:base_content_element_large_space}},{{dimen:base_content_element_large_space}}" />
+                        
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

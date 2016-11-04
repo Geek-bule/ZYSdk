@@ -1,0 +1,184 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="superviewStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}"></Setter>
+            </Style>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="headButtonStyle" parent="clipsViewStyle">
+                <Setter property="imageForNormalState" value="{{image:register_icon}}"/>
+            </Style>
+            <Style name="textFieldContainerViewStyle" parent="clipsViewStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="{{color:split_line_color}}" />
+                <Setter property="layer.borderWidth" value="{{dimen:base_split_line_height}}" />
+            </Style>
+            <Style name="textFieldStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="backgroundColor" value="white" />
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            <Style name="usernameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="textAlignment" value="1" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            <Style name="noticeLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="textAlignment" value="1" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            <Style name="inputStyle">
+                <Setter property="backgroundColor" value="white"></Setter>
+                <Setter property="layer.borderWidth" value="{{dimen:base_split_line_height}}"></Setter>
+                <Setter property="layer.borderColor" value="{{color:theme_main_color}}"></Setter>
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            <Style name="dateOKBtnStyle">
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}"></Setter>
+                <Setter property="backgroundColorForNormalState" value="{{color:background_color_gray}}" />
+            </Style>
+            <Style name="dateCancelBtnStyle">
+                <Setter property="titleColorForNormalState" value="{{color:text_color_gray}}"></Setter>
+                <Setter property="backgroundColorForNormalState" value="{{color:background_color_gray}}" />
+            </Style>
+            <Style name="chooseDateViewStyle">
+                <Setter property="layer.borderWidth" value="{{dimen:base_split_line_height}}"></Setter>
+                <Setter property="layer.borderColor" value="{{color:theme_main_color}}"></Setter>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="superView" style="superviewStyle">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="left" target="superView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="superView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="superView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="bottom" target="superView" />
+                </Constraints>
+                <UIButton id="headButton" clickAction="headButton_clicked:"  mdoutlet="YES"  style="headButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="contentView"  />
+                        <Constraint attribute="centerX" target="contentView" />
+                        <Constraint attribute="size" constant="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}"/>
+                    </Constraints>
+                </UIButton>
+                
+                <UILabel id="usernameLabel" style="usernameLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="headButton" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentView"></Constraint>
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="noticeLabel" numberOfLines="0" style="noticeLabelStyle" text="{{string:complete_profile}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="usernameLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"/>
+<!--                        <Constraint attribute="centerX" target="contentView"></Constraint>-->
+                    </Constraints>
+                </UILabel>
+                
+                <UIView id="inputContentView" >
+                    <Constraints>
+                        <Constraint attribute="left" target="contentView" />
+                        <Constraint attribute="right" target="contentView" />
+                        <Constraint attribute="top" target="noticeLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}*2" />
+                        <Constraint attribute="bottom" target="contentView" />
+                    </Constraints>
+                    <UIView id="nickNameTextContainerView" style="inputStyle">
+                        <Constraints>
+                            <Constraint attribute="height" constant="{{dimen:base_textfield_height}}" />
+                            <Constraint attribute="left" target="inputContentView" />
+                            <Constraint attribute="right" target="inputContentView" />
+                            <Constraint attribute="top" target="inputContentView" />
+                        </Constraints>
+                        <UITextField id="nickNameTextField"  placeholder="{{string:input_nickname}}" mdoutlet="YES" style="inputStyle">
+                            <Constraints>
+                                <Constraint attribute="edges" target="nickNameTextContainerView" />
+                            </Constraints>
+                        </UITextField>
+                    </UIView>
+                    <UIView id="genderTextContainerView" mdoutlet="YES" style="inputStyle">
+                        <Constraints>
+                            <Constraint attribute="height" constant="{{dimen:base_textfield_height}}" />
+                            <Constraint attribute="left" target="inputContentView" />
+                            <Constraint attribute="right" target="inputContentView" />
+                            <Constraint attribute="top" target="nickNameTextContainerView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        </Constraints>
+                        <UITextField id="genderTextField"  placeholder="{{string:gender}}" mdoutlet="YES" style="inputStyle">
+                            <Constraints>
+                                <Constraint attribute="edges" target="genderTextContainerView" />
+                            </Constraints>
+                        </UITextField>
+                    </UIView>
+<!--                    <UIView id="birthTextContainerView" style="inputStyle" mdoutlet="YES">-->
+<!--                        <Constraints>-->
+<!--                            <Constraint attribute="height" constant="{{dimen:base_textfield_height}}" />-->
+<!--                            <Constraint attribute="left" target="inputContentView" />-->
+<!--                            <Constraint attribute="right" target="inputContentView" />-->
+<!--                            <Constraint attribute="top" target="genderTextContainerView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>-->
+<!--                        </Constraints>-->
+<!--                        <UITextField id="birthTextField"  placeholder="{{string:birthday}}" mdoutlet="YES" style="inputStyle">-->
+<!--                            <Constraints>-->
+<!--                                <Constraint attribute="edges" target="birthTextContainerView" />-->
+<!--                            </Constraints>-->
+<!--                        </UITextField>-->
+<!--                    </UIView>-->
+                    <UIButton id="saveButton" mdoutlet="YES" titleForNormalState="{{string:done}}" clickAction="saveButton_clicked:" enabled="NO" style="confirmButtonStyle">
+                        <Constraints>
+                            <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                            <Constraint attribute="left" target="inputContentView" />
+                            <Constraint attribute="right" target="inputContentView" />
+                            <Constraint attribute="top" target="genderTextContainerView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+<!--                            <Constraint attribute="top" target="birthTextContainerView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>-->
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+                
+                <UIView id="chooseDateView" style="chooseDateViewStyle" mdoutlet="YES" backgroundColor="white" hidden="YES">
+                    <Constraints>
+                        <Constraint attribute="width" constant="{{dimen:register_view_width}}"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:register_view_width}}*.85"></Constraint>
+                        <Constraint attribute="centerY" target="contentView"></Constraint>
+                        <Constraint attribute="centerX" target="contentView"></Constraint>
+                    </Constraints>
+                    <UIDatePicker id="datePicker" mdoutlet="YES" >
+                        <Constraints>
+                            <Constraint attribute="top" target="chooseDateView"></Constraint>
+                            <Constraint attribute="left" target="chooseDateView"></Constraint>
+                            <Constraint attribute="right" target="chooseDateView"></Constraint>
+                        </Constraints>
+                    </UIDatePicker>
+                    <UIButton id="dateCancelBtn" mdoutlet="YES" clickAction="dateCancelButton_clicked:" titleForNormalState="{{string:cancel}}" style="dateCancelBtnStyle">
+                        <Constraints>
+                            <Constraint attribute="bottom" target="chooseDateView"></Constraint>
+                            <Constraint attribute="left" target="chooseDateView"></Constraint>
+                            <Constraint attribute="width" target="chooseDateView" multipliedBy=".5"></Constraint>
+                            <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}"></Constraint>
+                        </Constraints>
+                    </UIButton>
+                    <UIButton id="dateOKBtn" mdoutlet="YES" clickAction="dateOKButton_clicked:" titleForNormalState="{{string:confirm}}" style="dateOKBtnStyle">
+                        <Constraints>
+                            <Constraint attribute="bottom" target="chooseDateView"></Constraint>
+                            <Constraint attribute="left" target="dateCancelBtn" targetAttribute="right"></Constraint>
+                            <Constraint attribute="right" target="chooseDateView"></Constraint>
+                            <Constraint attribute="width" target="chooseDateView" multipliedBy=".5"></Constraint>
+                            <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}"></Constraint>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>
+

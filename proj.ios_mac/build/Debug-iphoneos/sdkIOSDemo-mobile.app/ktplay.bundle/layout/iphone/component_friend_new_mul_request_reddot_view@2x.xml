@@ -1,0 +1,83 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+            <Style name="countLableStyle">
+                <Setter property="backgroundColor" value="{{color:point_color}}" />
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="1"/>
+                <Setter property="layer.cornerRadius" value="{{dimen:topic_list_table_header_count_label_radius}}" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="multiRequestView" backgroundColor="yellow">
+            <UILabel id="titleLabel" text="{{string:friend_requests}}" style="titleLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="multiRequestView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="multiRequestView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="right" target="multiRequestView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIView id="requestView">
+                <Constraints>
+                    <Constraint attribute="top" target="titleLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="multiRequestView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="titleLabel" targetAttribute="left"/>
+                    <Constraint attribute="right" target="countLable" targetAttribute="left" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    
+                </Constraints>
+                
+                <KTPlayerScrollView id="playerScrollview" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="requestView" targetAttribute="top"/>
+                        <Constraint attribute="bottom" target="requestView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="requestView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="requestView" targetAttribute="right"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                    </Constraints>
+                </KTPlayerScrollView>
+            </UIView>
+                
+            <UILabel id="countLable" mdoutlet="YES" style="countLableStyle">
+                <Constraints>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left"/>
+                    <Constraint attribute="centerY" target="multiRequestView" targetAttribute="centerY"/>
+                    <Constraint attribute="width" target="countLable" targetAttribute="height" id="width"/>
+                    <Constraint attribute="height" constant="{{dimen:topic_list_table_header_count_label_height}}" id="height"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIImageView id="arrowImageView" image="{{image:right_arrow}}">
+                <Constraints>
+                    <Constraint attribute="right" target="multiRequestView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="multiRequestView" targetAttribute="centerY"/>
+                    <Constraint attribute="height" target="arrowImageView" targetAttribute="width" multipliedBy="1.5"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="multiRequestView"/>
+                    <Constraint attribute="left" target="multiRequestView" />
+                    <Constraint attribute="right" target="multiRequestView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

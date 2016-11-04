@@ -1,0 +1,57 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="titleForNormalState" value="{{string:confirm}}"/>
+            </Style>
+            <Style name="labelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="superView" backgroundColor="white">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="left" target="superView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="superView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="superView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="bottom" target="superView" />
+                </Constraints>
+                
+                <UIImageView id="showFinishedLogo" image="{{image:icon_alert_done}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentView"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UILabel id="completedLabel" text="{{string:claimed}}" style="labelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="showFinishedLogo" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="contentView"></Constraint>
+                        <Constraint attribute="right" target="contentView"></Constraint>
+                    </Constraints>
+                </UILabel>
+                
+                <UIButton id="confirmBtn" style="confirmButtonStyle" clickAction="completedClicked:">
+                    <Constraints>
+                        <Constraint attribute="top" target="completedLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}"/>
+                    </Constraints>
+                </UIButton>
+                
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

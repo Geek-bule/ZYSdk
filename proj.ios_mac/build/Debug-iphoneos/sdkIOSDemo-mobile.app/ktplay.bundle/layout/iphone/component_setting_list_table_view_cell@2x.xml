@@ -1,0 +1,144 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="subTitleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textAlignment" value="2"/>
+            </Style>
+            
+            <Style name="valueLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textAlignment" value="2"/>
+            </Style>
+            
+            <Style name="headImageViewStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_small_corner_radius}}" />
+                <Setter property="layer.masksToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="reSentEmailBtnStyle">
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}"></Setter>
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+                <Setter property="contentHorizontalAlignment" value="2"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" bounds="320,320">
+            
+            <UIView id="leftView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                </Constraints>
+
+                <UILabel id="titleLabel" mdoutlet="YES" style="titleLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="leftView"/>
+                        <Constraint attribute="left" target="leftView"/>
+                        <Constraint attribute="right" target="leftView"/>
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="subTitleLabel" mdoutlet="YES" style="subTitleLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="titleLabel" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="leftView"/>
+                        <Constraint attribute="right" target="leftView"/>
+                        <Constraint attribute="bottom" target="leftView"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+            
+            <UIImageView id="headImageView" mdoutlet="YES" style="headImageViewStyle" bounds="{{dimen:user_head_small_size}},{{dimen:user_head_small_size}}" >
+                <Constraints>
+                    <Constraint attribute="centerY" target="containerView"/>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="height" constant="{{dimen:user_head_small_size}}"/>
+                    <Constraint attribute="width" target="headImageView" targetAttribute="height" />
+                </Constraints>
+            </UIImageView>
+            
+            <UILabel id="nickNameLabel" mdoutlet="YES" style="nickNameLabelStyle" >
+                <Constraints>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                    <Constraint attribute="width" target="containerView" multipliedBy="0.6"/>
+                </Constraints>
+            </UILabel>
+            
+            <UILabel id="valueLabel" mdoutlet="YES" style="valueLabelStyle" >
+                <Constraints>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView" id="valueLabelcenterYConstraint" mdoutlet="YES"/>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_small_space}}" id="valueLabeltopConstraint" mdoutlet="YES" deactivate="YES" />
+                    <Constraint attribute="width" target="containerView" multipliedBy="0.6"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIButton id="reSentEmailBtn" mdoutlet="YES" titleForNormalState="{{string:resend_email}}" clickAction="clickreSentEmailButton:" style="reSentEmailBtnStyle">
+                <Constraints>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="valueLabel" targetAttribute="bottom"/>
+                    <Constraint attribute="width" target="containerView" multipliedBy="0.6"/>
+                </Constraints>
+            </UIButton>
+            
+            <KTSwitch id="switchButton" mdoutlet="YES" >
+                <Constraints>
+                    <Constraint attribute="right" target="arrowImageView" constant="-{{dimen:base_content_element_middle_space}}*2"/>
+                    <Constraint attribute="height" target="leftView" targetAttribute="height"/>
+                    <Constraint attribute="width" target="switchButton" targetAttribute="height" />
+                    <Constraint attribute="centerY" target="containerView"/>
+                </Constraints>
+            </KTSwitch>
+            
+            
+            <UIImageView id="arrowImageView" mdoutlet="YES" image="{{image:right_arrow}}" >
+                <Constraints>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                    <Constraint attribute="height" target="arrowImageView" targetAttribute="width" multipliedBy="1.5"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

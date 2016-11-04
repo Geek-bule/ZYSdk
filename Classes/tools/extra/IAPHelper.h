@@ -12,6 +12,13 @@
 
 #include "cocos2d.h"
 
+//InAppPurchse
+#define IAP_GOLD1                   "com.zongyi.starfight.zuanshi1"
+#define IAP_GOLD2                   "com.zongyi.starfight.zuanshi2"
+#define IAP_GOLD3                   "com.zongyi.starfight.zuanshi3"
+#define IAP_GOLD4                   "com.zongyi.starfight.zuanshi4"
+
+
 struct tagIAPINFO
 {
     int iapId;

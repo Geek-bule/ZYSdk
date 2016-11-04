@@ -1,0 +1,81 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="shareLabelFontColor">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+            </Style>
+            <Style name="shareTitleLabelStyle" parent="shareLabelFontColor">
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            <Style name="shareLabelStyle" parent="shareLabelFontColor">
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+
+            <Style name="shareButtonStyle">
+                <Setter property="titleForNormalState" value="{{string:share_to_sns}}"/>
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            
+            <Style name="buttonViewStyle" parent="clipsViewStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="backgroundColor" value="{{color:theme_main_color}}" />
+            </Style>
+
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="shareView" mdoutlet="YES" backgroundColor="{{color:background_new_color_clear_black}}">
+            <UILabel id="shareTitleLabel" mdoutlet="YES" style="shareTitleLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="shareView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="shareView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="right" target="shareView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIImageView id="rewardImageView" mdoutlet="YES" bounds="{{dimen:thumb_size_small}},{{dimen:thumb_size_small}}">
+                <Constraints>
+                    <Constraint attribute="top" target="shareTitleLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="shareView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" mdoutlet="YES" id="iconShownConstraint"/>
+                    <Constraint attribute="width" constant="0" mdoutlet="YES" id="iconHiddenConstraint" deactivate="YES" />
+                    <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIButton id="shareBtn" mdoutlet="YES" clickAction="didClickShare:" style="shareButtonStyle">
+                <Constraints>
+                    <Constraint attribute="right" target="shareView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}"/>
+                    <Constraint attribute="width" target="shareBtn" targetAttribute="height" multipliedBy="2.2"/>
+                    <Constraint attribute="centerY" target="rewardImageView" targetAttribute="centerY"/>
+                </Constraints>
+                <UIView style="buttonViewStyle" userInteractionEnabled="NO">
+                    <Constraints>
+                        <Constraint attribute="edges" target="shareBtn"/>
+                    </Constraints>
+                </UIView>
+            </UIButton>
+            
+            <UILabel id="contentLabel" numberOfLines="100" mdoutlet="YES" style="shareLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="shareTitleLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="rewardImageView" targetAttribute="right" mdoutlet="YES" id="iconShownConstraint2" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="rewardImageView" targetAttribute="right" mdoutlet="YES" id="iconHiddenConstraint2" deactivate="YES"/>
+                    <Constraint attribute="right" target="shareBtn" targetAttribute="left" constant="-{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+            </UILabel>
+            
+            <UILabel id="timeLabel" numberOfLines="1" mdoutlet="YES" style="shareLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="contentLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="rewardImageView" targetAttribute="right" mdoutlet="YES" id="iconShownConstraint3" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="rewardImageView" targetAttribute="right" mdoutlet="YES" id="iconHiddenConstraint3" deactivate="YES"/>
+                    <Constraint attribute="bottom" target="shareView" targetAttribute="bottom" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UILabel>
+            
+        </UIView>
+    </Layout>
+</Page>

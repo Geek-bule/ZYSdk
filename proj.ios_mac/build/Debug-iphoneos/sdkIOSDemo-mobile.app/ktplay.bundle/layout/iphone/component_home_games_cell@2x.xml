@@ -1,0 +1,22 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:window_corner_radius}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" >
+            <UIButton id="iconButton" style="cornerRadiusStyle" mdoutlet="YES" clickAction="playerHeadViewClicked:" bounds="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}">
+                <Constraints>
+                    <Constraint attribute="edges" target="containerView"/>
+                </Constraints>
+            </UIButton>
+            
+        </UIView>
+    </Layout>
+</Page>

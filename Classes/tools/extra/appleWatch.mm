@@ -53,7 +53,7 @@
 
 - (void)startWatch
 {
-    [NSTimer scheduledTimerWithTimeInterval:3
+    [NSTimer scheduledTimerWithTimeInterval:2
      
                                      target:self
      
@@ -90,14 +90,14 @@
     NSBlockOperation *updateApplicationContextOperation = [NSBlockOperation blockOperationWithBlock:^{
         NSError *error;
         //需要上传的数据
-        int nStageOpen = 100;
+        int nStageOpen = rand()%100;
         NSString *nStargeInfo = [NSString stringWithFormat:@"Stage %d",nStageOpen];
-        int nTotalStars = 222;
-        NSString *pStarInfo = [NSString stringWithFormat:@"%d/%d",nTotalStars,nStageOpen*3];
-        int nHeartCur = 333;
-        //        double dLasttime = userDefault->getDoubleForKey(LastTime);
-        int nHeartMax = 444;
         
+        int nTotalStars = rand()%222;
+        NSString *pStarInfo = [NSString stringWithFormat:@"%d/%d",nTotalStars,nStageOpen*3];
+        
+        int nHeartCur = rand()%333;
+        int nHeartMax = rand()%444;
         NSString *pHeartInfo = [NSString stringWithFormat:@"%d/%d",nHeartCur,nHeartMax];
         
         NSDictionary *response = @{@"stage":nStargeInfo,@"starinfo":pStarInfo,@"heartinfo":pHeartInfo};

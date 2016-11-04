@@ -1,0 +1,25 @@
+dependencies: \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/adapter/AdInstlAdapterAdMob.m \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/adapter/AdInstlAdapterAdMob.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/AdInstlAdNetworkAdapter.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/AdInstlManagerDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/AdViewConfig.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/Libs/TouchJSON/JSON/CJSONDeserializer.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/Libs/TouchJSON/JSON/CJSONScanner.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/Libs/TouchJSON/CDataScanner.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/AdViewCommonDef.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/AdCommonNetworkType.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/lib/GoogleMobileAds.framework/Headers/GADInterstitial.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/lib/GoogleMobileAds.framework/Headers/GADInAppPurchaseDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/lib/GoogleMobileAds.framework/Headers/GADInterstitialDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/lib/GoogleMobileAds.framework/Headers/GADAdDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/lib/GoogleMobileAds.framework/Headers/GADRequest.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/lib/GoogleMobileAds.framework/Headers/GoogleMobileAdsDefines.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdNetworks/GoogleAdMob/lib/GoogleMobileAds.framework/Headers/GADRequestError.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/adViewAdNetworkConfig.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/AdViewDelegateProtocol.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/adViewLog.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/adViewAdNetworkRegistry.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/AdInstlManagerImpl.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/AdInstlManager.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/AdViewSDk/AdView/include/AdViewDeviceCollector.h

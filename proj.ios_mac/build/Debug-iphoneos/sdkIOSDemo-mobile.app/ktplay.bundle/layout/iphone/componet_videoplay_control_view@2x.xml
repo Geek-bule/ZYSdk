@@ -1,0 +1,79 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="labelStyle">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="buttonStyle">
+                <Setter property="titleColorForNormalState" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="buttonsView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+                
+                <UIButton id="playButton" mdoutlet="YES" imageForNormalState="{{image:video_play}}" clickAction="playButtonClick:">
+                    <Constraints>
+                        <Constraint attribute="edges" target="buttonsView"/>
+                    </Constraints>
+                </UIButton>
+                
+                <UIButton id="pauseButton" mdoutlet="YES" imageForNormalState="{{image:video_pause}}" clickAction="pasuseButtonClick:">
+                    <Constraints>
+                        <Constraint attribute="edges" target="buttonsView"/>
+                    </Constraints>
+                </UIButton>
+                
+                <UIButton id="replayButton" mdoutlet="YES" imageForNormalState="{{image:replay}}" clickAction="replayButtonClick:">
+                    <Constraints>
+                        <Constraint attribute="edges" target="buttonsView"/>
+                    </Constraints>
+                </UIButton>
+                
+            </UIView>
+            
+            <UILabel id="playTimeLabel" mdoutlet="YES" style="labelStyle" text="00 : 00">
+                <Constraints>
+                    <Constraint attribute="left" target="buttonsView" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="centerY" target="buttonsView" targetAttribute="centerY"/>
+                </Constraints>
+            </UILabel>
+            
+            <UISlider id="progressSliderView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="playTimeLabel" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="right" target="remainingTimeLabel" targetAttribute="left" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="centerY" target="buttonsView" targetAttribute="centerY"/>
+                </Constraints>
+            </UISlider>
+            
+            <UILabel id="remainingTimeLabel" mdoutlet="YES" style="labelStyle" text="- 00 : 00">
+                <Constraints>
+                    <Constraint attribute="centerY" target="buttonsView" targetAttribute="centerY"/>
+                    <Constraint attribute="right" target="videoSourceButton" targetAttribute="left" constant="-{{dimen:base_content_element_middle_space}}" id="remainingTimeLabelRightWithVideoSourceButton" mdoutlet="YES"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" priority="medium" constant="-{{dimen:base_content_element_middle_space}}" id="remainingTimeLabelRightWithContainerView" mdoutlet="YES"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIButton id="videoSourceButton" mdoutlet="YES" style="buttonStyle" clickAction="videoSourceButtonClick:">
+                <Constraints>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="centerY" target="containerView" targetAttribute="centerY"/>
+                </Constraints>
+            </UIButton>
+            
+        </UIView>
+    </Layout>
+</Page>
+

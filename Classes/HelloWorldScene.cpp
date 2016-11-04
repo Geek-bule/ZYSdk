@@ -10,11 +10,7 @@
 USING_NS_CC;
 
 
-//InAppPurchse
-#define IAP_GOLD1                   "com.zongyi.starfight.zuanshi1"
-#define IAP_GOLD2                   "com.zongyi.starfight.zuanshi2"
-#define IAP_GOLD3                   "com.zongyi.starfight.zuanshi3"
-#define IAP_GOLD4                   "com.zongyi.starfight.zuanshi4"
+
 
 
 using namespace cocostudio::timeline;
@@ -92,8 +88,12 @@ bool HelloWorld::init()
     
     //SubmitStorage
     auto pSubmitStorage = MenuItemFont::create("隐藏更多游戏", CC_CALLBACK_1(HelloWorld::submitStorageCallback, this));
-    pSubmitStorage->setPosition(Vec2(winSize.width*0.5, winSize.height*0.65));
+    pSubmitStorage->setPosition(Vec2(winSize.width*0.4, winSize.height*0.65));
     menu->addChild(pSubmitStorage);
+    
+    auto pHideStorage = MenuItemFont::create("测试", CC_CALLBACK_1(HelloWorld::updateStorageCallback, this));
+    pHideStorage->setPosition(Vec2(winSize.width*0.68, winSize.height*0.65));
+    menu->addChild(pHideStorage);
     
     //Mogo Banner
     auto pMogoBanner = MenuItemFont::create("Banner（广告条）", CC_CALLBACK_1(HelloWorld::mogoBannerCallback, this));
@@ -110,6 +110,9 @@ bool HelloWorld::init()
     pVideo->setPosition(Vec2(winSize.width*0.5, winSize.height*0.5));
     menu->addChild(pVideo,1,enBtnVideo);
     pVideo->setEnabled(false);
+    
+    //视频加载成功的回调
+    ZYTools::setVideoStatus(CC_CALLBACK_1(HelloWorld::videoBtnVisible, this));
     
 
     
@@ -146,20 +149,19 @@ bool HelloWorld::init()
     
     
     // ktplaylogin
-    //    auto pKTPlayLogin = MenuItemFont::create("KTPlay(功能展示)", CC_CALLBACK_1(HelloWorld::ktLoginCallback, this));
-    //    pKTPlayLogin->setPosition(Vec2(winSize.width*0.5, winSize.height*0.95));
-    //    menu->addChild(pKTPlayLogin);
+    auto pKTPlayLogin = MenuItemFont::create("支付订单(微信)", CC_CALLBACK_1(HelloWorld::ktLoginCallback, this));
+    pKTPlayLogin->setPosition(Vec2(winSize.width*0.5, winSize.height*0.95));
+    menu->addChild(pKTPlayLogin);
     
-    //    // ktplaylogout
-    //    auto pKTPlayLogOut = MenuItemFont::create("KTPlay(游戏登出)", CC_CALLBACK_1(HelloWorld::ktLogoutCallback, this));
-    //    pKTPlayLogOut->setPosition(Vec2(winSize.width*0.5, winSize.height*0.9));
-    //    menu->addChild(pKTPlayLogOut);
-    //    
-    //
+    // ktplaylogout
+    auto pKTPlayLogOut = MenuItemFont::create("查询订单(微信)", CC_CALLBACK_1(HelloWorld::ktLogoutCallback, this));
+    pKTPlayLogOut->setPosition(Vec2(winSize.width*0.5, winSize.height*0.9));
+    menu->addChild(pKTPlayLogOut);
+    
     //GameCenter
-    //    auto pGameCenter = MenuItemFont::create("Game Center（游戏中心）", CC_CALLBACK_1(HelloWorld::gameCenterCallback, this));
-    //    pGameCenter->setPosition(Vec2(winSize.width*0.5, winSize.height*0.45));
-    //    menu->addChild(pGameCenter);
+    auto pGameCenter = MenuItemFont::create("设备记录清理", CC_CALLBACK_1(HelloWorld::gameCenterCallback, this));
+    pGameCenter->setPosition(Vec2(winSize.width*0.5, winSize.height*0.85));
+    menu->addChild(pGameCenter);
     
     //SubmitStorage
 //    auto pUpdateStorage = MenuItemFont::create("showAdGame（展示游戏广告）", CC_CALLBACK_1(HelloWorld::updateStorageCallback, this));
@@ -198,11 +200,12 @@ bool HelloWorld::init()
 
 void HelloWorld::ktLoginCallback(cocos2d::Ref *pSender)
 {
+    ZYTools::startWxPay();
 }
 
 void HelloWorld::ktLogoutCallback(cocos2d::Ref *pSender)
 {
-//    toolsAN::LogoutKtplay();
+    ZYTools::queryWxpay();
 }
 
 void HelloWorld::ktplayCallback(cocos2d::Ref *pSender)
@@ -277,6 +280,7 @@ void HelloWorld::shareSdkCallback(cocos2d::Ref *pSender)
 
 void HelloWorld::mogoBannerCallback(cocos2d::Ref *pSender)
 {
+#ifdef ZYTOOLS_ADVIEW
     if (m_isShowBanner) {
         //显示banner
         ZYTools::showBannerView();
@@ -285,21 +289,31 @@ void HelloWorld::mogoBannerCallback(cocos2d::Ref *pSender)
         ZYTools::hideBannerView();
     }
     m_isShowBanner = !m_isShowBanner;
+#endif
 }
 
 void HelloWorld::mogoInterstitialCallback(cocos2d::Ref *pSender)
 {
+#ifdef ZYTOOLS_ADVIEW
     ZYTools::showInterstitial();
+#endif
 }
 
 void HelloWorld::videoCallback(cocos2d::Ref *pSender)
 {
-    ZYTools::showVideo();
+#ifdef ZYTOOLS_VIDEO
+    ZYTools::showVideo(CC_CALLBACK_0(HelloWorld::videoPlayFinish, this));
+#endif
+}
+
+void HelloWorld::videoPlayFinish()
+{
+    MessageBox("视频播放成功", "");
 }
 
 void HelloWorld::gameCenterCallback(cocos2d::Ref *pSender)
 {
-    
+    ShareHelper::shareHelper()->shareDeviceInfo();
 }
 
 void HelloWorld::iapCallback(cocos2d::Ref *pSender)
@@ -319,6 +333,8 @@ void HelloWorld::iapCallback(cocos2d::Ref *pSender)
 void HelloWorld::notificateCallback(cocos2d::Ref *pSender)
 {
     appleWatchCpp::startWatch();
+    //在手表段查看数据变化
+    MessageBox("在手表段查看数据变化", "");
 }
 
 void HelloWorld::MoreGameCallback(cocos2d::Ref *pSender)
@@ -334,7 +350,7 @@ void HelloWorld::submitStorageCallback(cocos2d::Ref *pSender)
 
 void HelloWorld::updateStorageCallback(cocos2d::Ref *pSender)
 {
-    
+    ZYTools::registerTest();
 }
 
 void HelloWorld::consumeHeartCallback(cocos2d::Ref *pSender)

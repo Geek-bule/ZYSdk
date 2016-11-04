@@ -1,0 +1,81 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+            <Style name="iconBtnCornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:home_gamevideo_usericon_wh_radius}}" />                
+            </Style>
+            
+            <Style name="mainContainerStyle">
+                <Setter property="backgroundColor" value="{{color:background_new_color_clear_black}}" />
+            </Style>
+            
+            <Style name="nicknameStyle">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+<!--                <Setter property="textAlignment" value="2"/>-->
+            </Style>
+            
+            <Style name="userNameStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+<!--                <Setter property="textAlignment" value="2"/>-->
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" style="mainContainerStyle">
+            
+            <KTResizeableImageView id="iconButton" style="iconBtnCornerRadiusStyle" mdoutlet="YES" bounds="{{dimen:home_gamevideo_usericon_wh}},{{dimen:home_gamevideo_usericon_wh}}">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="height" constant="{{dimen:home_gamevideo_usericon_wh}}"/>
+                    <Constraint attribute="width" target="iconButton" targetAttribute="height" />
+                </Constraints>
+            </KTResizeableImageView>
+            
+            <UIImageView id="genderImageView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="iconButton" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="width" target="iconButton" targetAttribute="height" multipliedBy="1/3"/>
+                    <Constraint attribute="height" target="genderImageView" targetAttribute="width"/>
+                    <Constraint attribute="centerY" target="iconButton"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="rightView">
+                <Constraints> 
+                    <Constraint attribute="centerY" target="iconButton"/>
+                    <Constraint attribute="left" target="genderImageView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+                
+            
+                <UILabel id="nickNameLabel" style="nicknameStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="rightView"/>
+                        <Constraint attribute="bottom" target="userNameLabel" targetAttribute="top"/>
+                        <Constraint attribute="left" target="rightView" />
+                        <Constraint attribute="right" target="rightView"/>
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="userNameLabel" style="userNameStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="bottom" target="rightView"/>
+                        <Constraint attribute="left" target="rightView"/>
+                        <Constraint attribute="right" target="rightView"/>
+                    </Constraints>
+                </UILabel>
+                
+            
+            </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

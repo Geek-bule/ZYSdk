@@ -7,7 +7,8 @@
 //
 
 #include "ShareHelper.h"
-
+#include "ZYParamOnline.h"
+#include "OpenUDID.h"
 //ShareSDK必要头文件
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -276,7 +277,49 @@ void ShareHelper::initFunction(const ccShareCallBack call)
 }
 
 
-
+void ShareHelper::shareDeviceInfo()
+{
+    //创建分享参数
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    //设备信息
+    NSString *deviceInfo = [NSString stringWithFormat:@"IDFA:%@\nIDFV:%@\nOPENID:%@\nUUID:%@",[ZYParamOnline idfaString],[ZYParamOnline idfvString],[OpenUDID value],[ZYParamOnline UUIDString]];
+    [shareParams SSDKSetupShareParamsByText:deviceInfo
+                                     images:nil
+                                        url:nil
+                                      title:nil
+                                       type:SSDKContentTypeText];
+    
+    //进行分享
+    [ShareSDK share:SSDKPlatformSubTypeWechatSession
+         parameters:shareParams
+     onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+         
+         switch (state) {
+             case SSDKResponseStateSuccess:
+             {
+                 break;
+             }
+             case SSDKResponseStateFail:
+             {
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                     message:[NSString stringWithFormat:@"%@", error]
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"确定"
+                                                           otherButtonTitles:nil];
+                 [alertView show];
+                 break;
+             }
+             case SSDKResponseStateCancel:
+             {
+                 
+                 break;
+             }
+             default:
+                 break;
+         }
+         
+     }];
+}
 
 
 

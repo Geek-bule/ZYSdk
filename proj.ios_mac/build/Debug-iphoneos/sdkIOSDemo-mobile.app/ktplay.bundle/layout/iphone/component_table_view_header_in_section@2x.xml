@@ -1,0 +1,24 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" bounds="320,320">
+            <UILabel id="titleLabel" style="titleLabelStyle" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_small_space}}" />
+                    <Constraint attribute="bottom" target="containerView" constant="-{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UILabel>
+
+        </UIView>
+    </Layout>
+</Page>

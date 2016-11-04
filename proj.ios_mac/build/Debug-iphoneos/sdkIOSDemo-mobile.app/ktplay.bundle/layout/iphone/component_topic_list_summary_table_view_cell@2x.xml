@@ -1,0 +1,169 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="cornerRadiusStyle" parent="clipsViewStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            <Style name="mainContainerStyle" parent="cornerRadiusStyle">
+                <Setter property="backgroundColor" value="{{color:text_color_white}}"/>
+            </Style>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            <Style name="timeLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            <Style name="contentLableStyle">
+                <Setter property="textColor" value="{{color:text_color_dark_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            <Style name="essenceLabelStyle" parent="clipsViewStyle">
+                <Setter property="textColor" value="red" />
+                <Setter property="font" value="{{font:primary_font}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="red" />
+                <Setter property="layer.borderWidth" value="1" />
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" style="mainContainerStyle">
+            <UIView id="iconEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="containerView" />
+                     <Constraint attribute="centerY" target="essenceEmptyView" />
+                    <Constraint attribute="right" target="icon1ImageView" deactivate="YES" mdoutlet="YES" id="icon1ShowConstraint"/>
+                    <Constraint attribute="width" constant="0" priority="high"/>
+                </Constraints>
+                <UIImageView id="icon1ImageView" contentHorizontalCompressionPriority="751" image="{{image:image_icon}}" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="left" target="iconEmptyView"  constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="top" target="iconEmptyView" />
+                        <Constraint attribute="bottom" target="iconEmptyView" />
+<!--                        <Constraint attribute="width" target="icon1ImageView" targetAttribute="height"/>-->
+                    </Constraints>
+                </UIImageView>
+            </UIView>
+            
+            <UIView id="iconEmptyView2" style="clipsViewStyle" >
+                <Constraints>
+                    <Constraint attribute="left" target="iconEmptyView" targetAttribute="right"/>
+                     <Constraint attribute="centerY" target="essenceEmptyView" />
+                    <Constraint attribute="right" target="icon2ImageView" deactivate="YES"  mdoutlet="YES" id="icon2ShowConstraint"/>
+                    <Constraint attribute="width" constant="0"  priority="high"/>
+                </Constraints>
+                <UIImageView id="icon2ImageView" contentHorizontalCompressionPriority="751" image="{{image:image_icon}}" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="left" target="iconEmptyView2"  constant="{{dimen:base_content_element_middle_space}}"/>
+                        <Constraint attribute="top" target="iconEmptyView2" />
+                        <Constraint attribute="bottom" target="iconEmptyView2" />
+<!--                        <Constraint attribute="width" target="icon2ImageView" targetAttribute="height"/>-->
+                    </Constraints>
+                </UIImageView>
+            </UIView>
+            
+            <UIView id="essenceEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="iconEmptyView2" targetAttribute="right" />
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="essenceLabel" deactivate="YES"  mdoutlet="YES" id="essenceShowConstraint"/>
+                    <Constraint attribute="width" constant="0" priority="high"/>
+                </Constraints>
+                <UILabel id="essenceLabel" text="{{string:recommended_topics}}" contentHorizontalCompressionPriority="751" style="essenceLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="left" target="essenceEmptyView"  constant="{{dimen:base_content_element_large_space}}" id="essenceLabelLeftConstraint" mdoutlet="YES"/>
+                        <Constraint attribute="top" target="essenceEmptyView" />
+                        <Constraint attribute="bottom" target="essenceEmptyView" />
+                    </Constraints>
+                </UILabel>
+            </UIView>
+            <UILabel id="titleLabel" text="hahahahahahahah" style="titleLabelStyle" mdoutlet="YES" >
+                <Constraints>
+                    <Constraint attribute="centerY" target="essenceEmptyView" />
+                    <Constraint attribute="left" target="essenceEmptyView" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"  mdoutlet="YES" id="titleLabelLeftConstraint"/>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}" />
+<!--                    <Constraint attribute="width" target="containerView" multipliedBy="0.7"/>-->
+                </Constraints>
+            </UILabel>
+            <UIView id="centerView">
+                <Constraints>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="titleLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+                <UILabel id="timeLabel" text="02-10" style="timeLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="left" target="centerView" />
+                        <Constraint attribute="top" target="centerView" />
+                        <Constraint attribute="bottom" target="centerView"/>
+                    </Constraints>
+                </UILabel>
+                <UILabel id="pointLabel" text=" · " style="timeLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="left" target="timeLabel" targetAttribute="right"/>
+                        <Constraint attribute="top" target="centerView" />
+                        <Constraint attribute="bottom" target="centerView"/>
+                    </Constraints>
+                </UILabel>
+                <UILabel id="nicknameLabel" style="timeLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="left" target="pointLabel" targetAttribute="right"/>
+                        <Constraint attribute="top" target="centerView" />
+                        <Constraint attribute="bottom" target="centerView"/>
+                        <Constraint attribute="width" target="centerView" multipliedBy="0.7"/>
+                    </Constraints>
+                </UILabel>
+            </UIView>
+            <UILabel id="contentLabel" mdoutlet="YES" style="contentLableStyle">
+                <Constraints>
+                    <Constraint attribute="left" target="centerView" />
+                    <Constraint attribute="right" target="centerView" />
+                    <Constraint attribute="top" target="centerView" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                    <Constraint attribute="bottom" target="bottomView" targetAttribute="top" constant="-{{dimen:base_content_element_small_space}}"/>
+                </Constraints>
+            </UILabel>
+            <UIView id="bottomView">
+                <Constraints>
+                    <Constraint attribute="left" target="centerView" />
+                    <Constraint attribute="right" target="centerView" />
+                    <Constraint attribute="bottom" target="containerView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+                <UIImageView id="likeImageView" image="{{image:like_normal}}" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="right" target="likeCountLabel" targetAttribute="left"/>
+                        <Constraint attribute="top" target="bottomView" />
+                        <Constraint attribute="bottom" target="bottomView"/>
+                    </Constraints>
+                </UIImageView>
+                <UILabel id="likeCountLabel" text="10" style="timeLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="right" target="replyImageView" targetAttribute="left"/>
+                        <Constraint attribute="top" target="bottomView" />
+                        <Constraint attribute="bottom" target="bottomView"/>
+                    </Constraints>
+                </UILabel>
+                <UIImageView id="replyImageView" image="{{image:reply}}">
+                    <Constraints>
+                        <Constraint attribute="right" target="replyCountLabel" targetAttribute="left"/>
+                        <Constraint attribute="top" target="bottomView" />
+                        <Constraint attribute="bottom" target="bottomView"/>
+                    </Constraints>
+                </UIImageView>
+                <UILabel id="replyCountLabel" text="10" style="timeLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="right" target="bottomView"/>
+                        <Constraint attribute="top" target="bottomView" />
+                        <Constraint attribute="bottom" target="bottomView"/>
+                    </Constraints>
+                </UILabel>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

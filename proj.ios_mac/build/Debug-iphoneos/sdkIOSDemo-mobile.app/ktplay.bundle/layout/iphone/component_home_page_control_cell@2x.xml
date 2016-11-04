@@ -1,0 +1,164 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="iconBtnCornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:home_page_usericon_wh_radius}}" />
+                <Setter property="layer.borderColor" value="{{color:text_color_white}}" />
+                <Setter property="layer.borderWidth" value="1" />
+            </Style>
+            
+            <Style name="mainContainerStyle" >
+                <Setter property="backgroundColor" value="{{color:background_new_color_clear_black}}" />
+            </Style>
+            
+            <Style name="contentLableStyle">
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:primary_s_font}}" />
+                <Setter property="numberOfLines" value="2"/>
+
+            </Style>
+            
+            <Style name="nicknameStyle">
+                <Setter property="textAlignment" value="0"/>
+                <Setter property="textColor" value="{{color:theme_main_color}}" />
+                <Setter property="font" value="{{font:primary_s_font}}" />
+            </Style>
+            
+            <Style name="replyCountStyle">
+                <Setter property="textAlignment" value="0"/>
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            
+            <Style name="adminlabelStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textAlignment" value="1" />
+                <Setter property="backgroundColor" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="text" value="{{string:admin}}  " />
+            </Style>
+            
+            <Style name="essenceLabelStyle">
+                <Setter property="textColor" value="red" />
+                <Setter property="font" value="{{font:primary_font}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="red" />
+                <Setter property="layer.borderWidth" value="1" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" style="mainContainerStyle">
+            
+            <UIButton id="iconButton" style="iconBtnCornerRadiusStyle" mdoutlet="YES" clickAction="playerHeadViewClicked:" bounds="{{dimen:home_page_usericon_wh}},{{dimen:home_page_usericon_wh}}">
+                <Constraints>
+<!--                    <Constraint attribute="top" target="containerView"/>-->
+                    <Constraint attribute="centerY" target="containerView"/>
+<!--                    <Constraint attribute="bottom" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>-->
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="width" constant="{{dimen:home_page_usericon_wh}}"/>
+                    <Constraint attribute="height" target="iconButton" targetAttribute="width"/>
+                </Constraints>
+            </UIButton>
+            
+            
+            <UIView id="rightWrapperView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView"/>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="left" target="iconButton" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+                
+                <UIView id="topWrapperView">
+                    <Constraints>
+                        <Constraint attribute="top" target="rightWrapperView" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="left" target="rightWrapperView"/>
+                        <Constraint attribute="right" target="rightWrapperView"/>
+                    </Constraints>
+                    
+                    <UIView id="nickNameView">
+                        <Constraints>
+                            <Constraint attribute="top" target="topWrapperView"/>
+                            <Constraint attribute="left" target="topWrapperView"/>
+                            <Constraint attribute="bottom" target="topWrapperView"/>
+                            <Constraint attribute="width" target="topWrapperView" multipliedBy="3/5"/>
+                        </Constraints>
+                        
+                        <UILabel id="nicknameLabel" mdoutlet="YES" style="nicknameStyle">
+                            <Constraints>
+                                <Constraint attribute="top" target="nickNameView"/>
+                                <Constraint attribute="bottom" target="nickNameView"/>
+                                <Constraint attribute="left" target="nickNameView"/>
+                                <Constraint attribute="right" target="adminLabel" targetAttribute="left"/>
+                            </Constraints>
+                        </UILabel>
+                        <UILabel id="adminLabel" mdoutlet="YES" style="adminlabelStyle">
+                            <Constraints>
+                                <Constraint attribute="centerY" target="nicknameLabel" targetAttribute="centerY"/>
+                                <Constraint attribute="right" target="nickNameView" targetAttribute="right" relation="@le"/>
+                            </Constraints>
+                        </UILabel>
+                        
+                    </UIView>
+                    <UILabel id="replyLabel" mdoutlet="YES" style="replyCountStyle" textAlignment="2">
+                        <Constraints>
+                            <Constraint attribute="top" target="topWrapperView" targetAttribute="top"/>
+                            <Constraint attribute="left" target="nickNameView" targetAttribute="right"/>
+                            <Constraint attribute="right" target="topWrapperView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+                            <Constraint attribute="bottom" target="topWrapperView"/>
+                        </Constraints>
+                    </UILabel>
+
+                    
+                </UIView>
+                
+                <UIView id="bottomWrapperView" >
+                    <Constraints>
+                        <Constraint attribute="top" target="topWrapperView" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="left" target="rightWrapperView"/>
+                        <Constraint attribute="right" target="rightWrapperView"/>
+                        <Constraint attribute="bottom" target="rightWrapperView"/>
+                    </Constraints>
+                    
+                    <UILabel id="contentLabel" mdoutlet="YES" style="contentLableStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="bottomWrapperView"/>
+                            <Constraint attribute="left" target="bottomWrapperView"/>
+                            <Constraint attribute="right" target="bottomWrapperView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                        </Constraints>
+                    </UILabel>
+                    <UILabel id="essenceLabel" style="essenceLabelStyle" mdoutlet="YES" hidden="YES">
+                        <Constraints>
+                            <Constraint attribute="top" target="contentLabel" />
+                            <Constraint attribute="left" target="contentLabel"  />
+                        </Constraints>
+                    </UILabel>
+                    
+                    <UIView id="bottomEmpty">
+                        <Constraints>
+                            <Constraint attribute="top" target="contentLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                            <Constraint attribute="left" target="bottomWrapperView"/>
+                            <Constraint attribute="right" target="bottomWrapperView" constant="-{{dimen:base_content_element_middle_space}}"/>
+                            <Constraint attribute="bottom" target="bottomWrapperView"/>
+                        </Constraints>
+                    </UIView>
+
+                </UIView>
+
+            </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

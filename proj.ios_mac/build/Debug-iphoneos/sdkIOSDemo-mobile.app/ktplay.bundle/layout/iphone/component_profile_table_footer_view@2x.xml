@@ -1,0 +1,40 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+        
+            <Style name="mainContainerStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_clear_white}}" />
+            </Style>
+            
+            <Style name="titleLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="0"/>
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" style="mainContainerStyle">
+            
+             <UILabel id="titleLabel" style="titleLabelStyle" mdoutlet="YES" >
+                 <Constraints>
+                     <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                 </Constraints>
+             </UILabel>
+             
+             <UIView id="gamesView" mdoutlet="YES">
+                 <Constraints>
+                     <Constraint attribute="top" target="titleLabel" targetAttribute="bottom"/>
+                     <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" constant="-{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                     <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                 </Constraints>
+             </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

@@ -1,0 +1,60 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="tipTitleStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            <Style name="logoStyle">
+                <Setter property="image" value="{{image:playwith_friends_logo}}" />
+            </Style>
+            <Style name="loginButtonStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+
+
+    <Layout>
+        <UIView id="superView" backgroundColor="white">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="edges" target="superView"
+                                constant="0,{{dimen:base_content_element_large_space}},0,{{dimen:base_content_element_large_space}}"
+                                />
+                </Constraints>
+                <UILabel id="tipLabel"  mdoutlet="YES" style="tipTitleStyle" text="{{string:login_to_play_with_friends}}">
+                    <Constraints>
+                        <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                        <Constraint attribute="top" target="contentView" targetAttribute="top"  constant="{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UILabel>
+
+                <UIImageView id="logoView" style="logoStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="tipLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                    </Constraints>
+                </UIImageView>
+
+                <UIButton id="loginButton" titleForNormalState="{{string:login_or_register}}" clickAction="loginOrRegisterClick:"
+                        style="loginButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                        <Constraint attribute="left" target="contentView" />
+                        <Constraint attribute="right" target="contentView" />
+                        <Constraint attribute="top" target="logoView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+
+
+
+
+
+

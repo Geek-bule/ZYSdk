@@ -1,0 +1,77 @@
+<Page>
+    <Resources>
+        <StyleSheet> 
+            <Style name="contentTextViewStyle">
+                <Setter property="font" value="{{font:secondary_font}}"/>
+                <Setter property="placeHolderLabel.font" value="{{font:secondary_font}}"/>
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+                <Setter property="placeholder" value="{{string:publish_content_placeholder}}"/>
+                <Setter property="backgroundColor" value="clear"/>
+            </Style>
+            
+            <Style name="titleTextViewStyle">
+                <Setter property="font" value="{{font:secondary_font}}"/>
+                <Setter property="textColor" value="{{color:text_color_black}}"/>
+                <Setter property="placeholder" value="{{string:publish_content_placeholder}}"/>
+                <Setter property="backgroundColor" value="clear"/>
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+        </StyleSheet>
+        
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView" >
+            
+            <UITextField id="titleTextView"  placeholder="{{string:title_optional}}" mdoutlet="YES" style="titleTextViewStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView" targetAttribute="top"/>
+                    <Constraint attribute="height" constant="{{dimen:topic_titleview_height}}" id="hasTitleTextViewHeightConstraint" mdoutlet="YES"/>
+                    <Constraint attribute="height" constant="0" id="noHasTitleTextViewHeightConstraint"  deactivate="YES" mdoutlet="YES"/>
+                    <Constraint attribute="left" target="contentView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}+5"/>
+                    <Constraint attribute="right" target="contentView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UITextField>
+            
+            <UIView id="lineView" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="top" target="titleTextView" targetAttribute="bottom" />
+                    <Constraint attribute="left" target="contentView" />
+                    <Constraint attribute="right" target="contentView" />
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" />
+                </Constraints>
+            </UIView>
+            
+            <KTSSTextView id="contentTextView"  placeholder="{{string:publish_content_placeholder}}" mdoutlet="YES" style="contentTextViewStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="lineView" targetAttribute="bottom"/>
+                    <Constraint attribute="bottom" target="keyboardView" targetAttribute="top"/>
+                    <Constraint attribute="left" target="contentView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="right" target="contentView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </KTSSTextView>
+          
+          <UIView id="toolPostionBarView" mdoutlet="YES" hidden="YES">
+              <Constraints>
+                  <Constraint attribute="top" target="contentTextView" targetAttribute="bottom"/>
+                  <Constraint attribute="left" target="contentView" targetAttribute="left"/>
+                  <Constraint attribute="right" target="contentView" targetAttribute="right"/>
+                  <Constraint attribute="height" constant="{{dimen:topic_keyboard_toolbar_height}}"/>
+              </Constraints>
+          </UIView>
+          
+            <KTKeyboardView id="keyboardView" mdoutlet="YES" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="contentView" targetAttribute="bottom" id="keyboardViewHeightConstraint" mdoutlet="YES"/>
+                    <Constraint attribute="left" target="contentView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="contentView" targetAttribute="right"/>
+                    <Constraint attribute="height" constant="{{dimen:topic_defalut_keyboard_height}}"/>
+                </Constraints>
+            </KTKeyboardView>
+        </UIView>
+    </Layout>
+</Page>
+

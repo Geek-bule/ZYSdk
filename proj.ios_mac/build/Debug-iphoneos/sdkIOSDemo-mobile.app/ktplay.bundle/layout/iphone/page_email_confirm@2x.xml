@@ -1,0 +1,77 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="superviewStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}"></Setter>
+            </Style>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="noticeLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="textAlignment" value="1" />
+            </Style>
+            <Style name="emailLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textColor" value="{{color:theme_main_color}}" />
+                <Setter property="textAlignment" value="1" />
+            </Style>
+            <Style name="noticeLabelStyle">
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="textAlignment" value="1" />
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    
+    <Layout>
+        <UIView id="superView" style="superviewStyle">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="edges" target="superView"></Constraint>
+                </Constraints>
+                
+                <UIImageView id="phonelogo" image="{{image:register_sendmail}}" >
+                    <Constraints>
+                        <Constraint attribute="top" target="contentView" constant="{{dimen:login_logo_top}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentView"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UILabel id="emailLabel" style="emailLabelStyle" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="phonelogo" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"></Constraint>
+<!--                        <Constraint attribute="centerX" target="contentView"></Constraint>-->
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="noticeLabel" style="noticeLabelStyle" text="{{string:verification_email}}" numberOfLines="0" >
+                    <Constraints>
+                        <Constraint attribute="top" target="emailLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentView"></Constraint>
+                        <Constraint attribute="left" target="contentView" constant="{{dimen:reply_list_table_content_large_space}}"></Constraint>
+                        <Constraint attribute="right" target="contentView" constant="-{{dimen:reply_list_table_content_large_space}}"></Constraint>
+                    </Constraints>
+                </UILabel>
+                
+                <UIButton id="okBtn" style="confirmButtonStyle" titleForNormalState="{{string:confirm}}" mdoutlet="YES" clickAction="okButton_clicked:">
+                    <Constraints>
+                        <Constraint attribute="top" target="noticeLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentView"></Constraint>
+                        <Constraint attribute="width" constant="{{dimen:register_view_width}}"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:window_titlebar_height}}"></Constraint>
+                    </Constraints>
+                </UIButton>
+                
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

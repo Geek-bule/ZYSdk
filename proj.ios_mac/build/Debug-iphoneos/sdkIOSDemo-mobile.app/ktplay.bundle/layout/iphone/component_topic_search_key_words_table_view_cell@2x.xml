@@ -1,0 +1,61 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="keywordButtonLabelStyle">
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIButton id="firstButton" clickAction="clickFirstButton:">
+                <Constraints>
+                    <Constraint attribute="left" target="containerView"  id="left"/>
+                    <Constraint attribute="centerY" target="containerView"  id="centerY"/>
+                     <Constraint attribute="width" target="containerView" multipliedBy="0.5"  id="width"/>
+                </Constraints>
+                <UILabel id="firstButtonLabel" mdoutlet="YES" style="keywordButtonLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="left" target="firstButton" constant="{{dimen:base_content_element_large_space}}*2"  id="left"/>
+                        <Constraint attribute="centerY" target="firstButton"  id="centerY"/>
+                        <Constraint attribute="width" target="firstButton" id="width"/>
+                    </Constraints>
+                </UILabel>
+            </UIButton>
+            <UIView id="splitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="centerX" target="containerView" id="centerX"/>
+                    <Constraint attribute="width" constant="{{dimen:base_split_line_height}}" id="width"/>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_small_space}}" id="top"/>
+                    <Constraint attribute="bottom" target="containerView" constant="-{{dimen:base_content_element_small_space}}"  id="bottom"/>
+                </Constraints>
+            </UIView>
+            <UIButton id="secondButton" clickAction="clickSecondButton:">
+                <Constraints>
+                    <Constraint attribute="right" target="containerView"  id="right"/>
+                    <Constraint attribute="centerY" target="containerView"  id="centerY"/>
+                    <Constraint attribute="width" target="containerView" multipliedBy="0.5"  id="width"/>
+                </Constraints>
+                <UILabel id="secondButtonLabel" mdoutlet="YES" style="keywordButtonLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="left" target="secondButton"  constant="{{dimen:base_content_element_large_space}}*2" id="left"/>
+                        <Constraint attribute="centerY" target="secondButton"  id="centerY"/>
+                        <Constraint attribute="width" target="secondButton" id="width"/>
+                    </Constraints>
+                </UILabel>
+            </UIButton>
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="left" target="containerView" id="left"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" id="height"/>
+                    <Constraint attribute="right" target="containerView" id="right"/>
+                    <Constraint attribute="bottom" target="containerView"  id="bottom"/>
+                </Constraints>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

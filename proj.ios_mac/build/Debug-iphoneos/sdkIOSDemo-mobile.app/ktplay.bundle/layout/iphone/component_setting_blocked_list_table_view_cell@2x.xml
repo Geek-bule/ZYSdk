@@ -1,0 +1,49 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" bounds="320,320">
+            
+            <UILabel id="nickNameLabel" mdoutlet="YES" text="sfsdfsfsd" style="nickNameLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="width" target="containerView" targetAttribute="width" multipliedBy="3/5"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                </Constraints>
+            </UILabel>
+            
+            <UIButton id="actionButton" titleColorForNormalState="{{color:theme_main_color}}" titleForNormalState="{{string:unblock}}" clickAction="actionButtonClick:">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                </Constraints>
+            </UIButton>
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

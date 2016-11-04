@@ -1,0 +1,59 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="tipTitleStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            <Style name="contentLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            <Style name="addFriendButtonStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+
+
+    <Layout>
+        <UIView id="superView" backgroundColor="white">
+            <UIView id="contentView">
+                <Constraints>
+                    <Constraint attribute="edges" target="superView"
+                                constant="0,{{dimen:base_content_element_large_space}},0,{{dimen:base_content_element_large_space}}"
+                            />
+                </Constraints>
+                <UILabel id="tipLabel" style="tipTitleStyle" text="{{string:tip_addfriends_now}}">
+                    <Constraints>
+                        <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                        <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}*2"/>
+                    </Constraints>
+                </UILabel>
+                <UILabel id="contentLabel" style="contentLabelStyle" text="{{string:tip_addfrinds_from_different_types}}">
+                    <Constraints>
+                        <Constraint attribute="centerX" target="tipLabel" targetAttribute="centerX"/>
+                        <Constraint attribute="top" target="tipLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}*2"/>
+                    </Constraints>
+                </UILabel>
+                <UIButton id="addFriendButton" titleForNormalState="{{string:add_friends}}" clickAction="clickAddFriendButton:"
+                          style="addFriendButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                        <Constraint attribute="left" target="contentView" />
+                        <Constraint attribute="right" target="contentView" />
+                        <Constraint attribute="top" target="contentLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}*2"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+
+
+
+
+
+

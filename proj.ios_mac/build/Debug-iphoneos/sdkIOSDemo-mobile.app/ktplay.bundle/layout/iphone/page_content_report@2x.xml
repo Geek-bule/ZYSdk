@@ -1,0 +1,58 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="titleReportReasonLabelStyle">
+                <Setter property="textAlignment" value="1"/>
+                <Setter property="font" value="{{font:prompt_font}}"/>
+                 <Setter property="textColor" value="{{color:text_color_gray}}"/>
+            </Style>
+            <Style name="reportButtonStyle">
+                <Setter property="titleForNormalState" value="{{string:report}}"/>
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView" backgroundColor="{{color:background_color_gray}}">
+            <UIView id="labelEmptyView">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView"/>
+                    <Constraint attribute="left" target="contentView" />
+                    <Constraint attribute="right" target="contentView" />
+                    <Constraint attribute="height" constant="{{dimen:base_table_view_section_height}}"/>
+                </Constraints>
+                <UILabel id="titleReportReasonLabel" text="{{string:select_report_reason}}"  style="titleReportReasonLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="center" target="labelEmptyView"/>
+                    </Constraints>
+                </UILabel>
+            </UIView>
+            <UITableView id="tableView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="labelEmptyView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="contentView" />
+                    <Constraint attribute="right" target="contentView" />
+                    <Constraint attribute="bottom" target="reportButton" targetAttribute="top" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+            </UITableView>
+            <UIView id="buttonEmpty" backgroundColor="white">
+                <Constraints>
+                    <Constraint attribute="bottom" target="contentView" />
+                    <Constraint attribute="left" target="contentView" />
+                    <Constraint attribute="right" target="contentView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}+{{dimen:base_content_element_large_space}}+{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+                <UIButton id="reportButton" clickAction="reportButtonClicked:" mdoutlet="YES" enabled="NO" style="reportButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="bottom" target="buttonEmpty" constant="-{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="left" target="buttonEmpty" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="right" target="buttonEmpty" constant="-{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="top"  target="buttonEmpty"  constant="{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>
+

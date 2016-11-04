@@ -1,0 +1,84 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="timelabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            
+            <Style name="iconBtnCornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_middle_corner_radius}}" />                
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            
+            <UIButton id="iconButton" style="iconBtnCornerRadiusStyle" mdoutlet="YES" clickAction="playerHeadViewClicked:" bounds="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                    <Constraint attribute="width" target="iconButton" targetAttribute="height" />
+                </Constraints>
+            </UIButton>
+
+            <UIView id="centerView">
+                <Constraints> 
+                    <Constraint attribute="centerY" target="iconButton"/>
+                    <Constraint attribute="left" target="iconButton" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}"/>
+                </Constraints>
+                
+                <UILabel id="nickNameLabel" mdoutlet="YES" style="nickNameLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="centerView"/>
+                        <Constraint attribute="bottom" target="timeLabel" targetAttribute="top"/>
+                        <Constraint attribute="left" target="centerView"/>
+                        <Constraint attribute="right" target="centerView"/>
+                    </Constraints>
+                </UILabel>
+                
+                <UILabel id="timeLabel" mdoutlet="YES" style="timelabelStyle">
+                    <Constraints>
+                        <Constraint attribute="bottom" target="centerView"/>
+                        <Constraint attribute="left" target="centerView"/>
+                        <Constraint attribute="right" target="centerView"/>
+                    </Constraints>
+                </UILabel>
+                
+            </UIView>
+
+            <UIImageView id="arrowImageView" image="{{image:right_arrow}}">
+                <Constraints>
+                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="containerView"/>
+                    <Constraint attribute="height" target="arrowImageView" targetAttribute="width" multipliedBy="1.5"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="containerView"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+
+        </UIView>
+    </Layout>
+</Page>

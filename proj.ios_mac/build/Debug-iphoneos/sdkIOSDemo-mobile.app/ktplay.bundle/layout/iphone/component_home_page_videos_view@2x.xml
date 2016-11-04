@@ -1,0 +1,51 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nameLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="0"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="videoView" backgroundColor="white">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView" />
+                </Constraints>
+                
+                <UIImageView id="activeVideoIcon" image="{{image:home_video}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="videoView" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="left" target="videoView" constant="{{dimen:base_content_element_middle_space}}-2"/>
+                        <Constraint attribute="width" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UILabel id="nameLabel" text="{{string:videos}}" style="nameLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="videoView" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="activeVideoIcon" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="right" target="videoView"/>
+                        <Constraint attribute="height" constant="14"/>
+                    </Constraints>
+                </UILabel>
+                
+                <KTHomeVideoScrollView id="videoScrollView" mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="height" constant="{{dimen:home_gamevideo_height}}+25"/>
+                        <Constraint attribute="top" target="nameLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="left" target="videoView" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="right" target="videoView" constant="-{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="bottom" target="videoView" constant="-{{dimen:base_content_element_middle_space}}"></Constraint>
+                    </Constraints>
+                </KTHomeVideoScrollView>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

@@ -1,0 +1,166 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="superviewStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}"></Setter>
+            </Style>
+            
+            <Style name="logoStyle">
+                <Setter property="image" value="{{image:new_logo}}" />
+            </Style>
+            <Style name="logoLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="splitViewStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            <Style name="tipLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="textAlignment" value="1" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            <Style name="agreeLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="textAlignment" value="1" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            <Style name="agreeBtnStyle">
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="font" value="{{font:small_font}}" />
+            </Style>
+            <Style name="agreeBtn1Style">
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="{{color:theme_main_color}}" />
+                <Setter property="layer.borderWidth" value="1" />
+            </Style>
+            <Style name="linkButtonStyle" parent="clipsViewStyle">
+                <Setter property="titleColorForNormalState" value="white" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="backgroundColor" value="{{color:theme_main_color}}"></Setter>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    
+    <Layout>
+        <UIView id="superView" style="superviewStyle">
+            <UIScrollView showsVerticalScrollIndicator="NO" id="contentScrollView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="edges" target="superView" />
+                </Constraints>
+                
+                <UIImageView id="logoView"  style="logoStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="contentScrollView" targetAttribute="top" constant="{{dimen:base_content_element_double_large_space}}"/>
+                        <Constraint attribute="centerX" target="contentScrollView" targetAttribute="centerX"/>
+                    </Constraints>
+                </UIImageView>
+                <UILabel id="logoLabel" mdoutlet="YES" style="logoLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="centerX" target="contentScrollView" targetAttribute="centerX"/>
+                        <Constraint attribute="top" target="logoView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UILabel>
+                <UIImageView id="person" image="{{image:register_person}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="logoLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentScrollView"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UIView id="regorloginview">
+                    <Constraints>
+                        <Constraint attribute="top" target="person" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="centerX" target="contentScrollView"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                    </Constraints>
+                    
+                    <UIButton id="registerButton" titleForNormalState="{{string:register}}" clickAction="registerNow:" style="confirmButtonStyle">
+                        <Constraints>
+                            <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                            <Constraint attribute="left" target="regorloginview" />
+                            <Constraint attribute="top" target="regorloginview" />
+                            <Constraint attribute="width" constant="{{dimen:register_btn_width}}"></Constraint>
+                        </Constraints>
+                    </UIButton>
+                    
+                    <UIButton id="loginLinkButton" clickAction="goToLoginNow:" style="linkButtonStyle" titleForNormalState="{{string:login}}">
+                        <Constraints>
+                            <Constraint attribute="top" target="regorloginview" />
+                            <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                            <Constraint attribute="left" target="registerButton" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                            <Constraint attribute="right" target="regorloginview"></Constraint>
+                            <Constraint attribute="width" constant="{{dimen:register_btn_width}}"></Constraint>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+                
+                <UIView id="snsEmptyView" style="clipsViewStyle" >
+                    <Constraints>
+                        <Constraint attribute="top" target="regorloginview" targetAttribute="bottom" constant="{{dimen:base_content_element_double_large_space}}"/>
+                        <Constraint attribute="bottom" target="snsLogoContainer" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="registerButton" constant="0-{{dimen:base_content_element_large_space}}-{{dimen:base_content_element_large_space}}-{{dimen:base_content_element_large_space}}" />
+                        <Constraint attribute="right" target="loginLinkButton" constant="{{dimen:base_content_element_large_space}}*3"/>
+                    </Constraints>
+                    
+                    <UILabel id="snsLoginLabel"  style="tipLabelStyle" text="----------{{string:login_with_sns}}----------" mdoutlet="YES">
+                        <Constraints>
+                            <Constraint attribute="centerX" target="snsEmptyView"/>
+                            <Constraint attribute="top" target="snsEmptyView" targetAttribute="top"/>
+                        </Constraints>
+                    </UILabel>
+                    <UIView id="snsLogoContainer" mdoutlet="YES">
+                        <Constraints>
+                            <Constraint attribute="top" target="snsLoginLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                            <Constraint attribute="centerX" target="snsEmptyView"/>
+                        </Constraints>
+                    </UIView>
+                </UIView>
+                
+                <UILabel id="agreeLabel" mdoutlet="YES" style="agreeLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="snsEmptyView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="height" constant="20"></Constraint>
+                        <Constraint attribute="centerX" target="snsEmptyView"/>
+                        <Constraint attribute="width" constant="300"/>
+                    </Constraints>
+                </UILabel>
+                
+                <UIButton id="agreeLabel1" mdoutlet="YES" style="agreeBtn1Style">
+                    <Constraints>
+                        <Constraint attribute="top" target="agreeLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="centerX" target="snsEmptyView"/>
+                        <Constraint attribute="height" constant="15"/>
+<!--                        <Constraint attribute="width" constant="300"/>-->
+                    </Constraints>
+                </UIButton>
+                
+                <UIView id="downline" backgroundColor="{{color:theme_main_color}}">
+                    <Constraints>
+                        <Constraint attribute="bottom" target="agreeLabel1"/>
+                        <Constraint attribute="left" target="agreeLabel1"/>
+                        <Constraint attribute="right" target="agreeLabel1"/>
+                        <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                    </Constraints>
+                </UIView>
+
+                <UIButton id="agreeLabel1btn" clickAction="agreeprotocolClick:">
+                    <Constraints>
+                        <Constraint attribute="edges" target="agreeLabel1"/>
+                    </Constraints>
+                </UIButton>
+                
+            </UIScrollView>
+        </UIView>
+    </Layout>
+</Page>
+

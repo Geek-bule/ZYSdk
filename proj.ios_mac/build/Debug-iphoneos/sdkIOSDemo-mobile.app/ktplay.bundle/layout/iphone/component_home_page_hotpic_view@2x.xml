@@ -1,0 +1,51 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="nameLabelStyle">
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="textAlignment" value="0"/>
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <UIView id="centerWrapperView" backgroundColor="white">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView" /> 
+                </Constraints>
+                
+                <UIImageView id="activeHotIcon" image="{{image:home_like}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="centerWrapperView" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="left" target="centerWrapperView" constant="{{dimen:base_content_element_middle_space}}-2" />
+                        <Constraint attribute="width" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                        <Constraint attribute="height" constant="{{dimen:topic_list_table_header_count_label_height}}"></Constraint>
+                    </Constraints>
+                </UIImageView>
+                
+                <UILabel id="nameLabel" text="{{string:recommended}}" style="nameLabelStyle">
+                    <Constraints>
+                        <Constraint attribute="top" target="centerWrapperView" constant="{{dimen:base_content_element_large_space}}"></Constraint>
+                        <Constraint attribute="left" target="activeHotIcon" targetAttribute="right" constant="{{dimen:base_content_element_small_space}}"/>
+                        <Constraint attribute="right" target="centerWrapperView"/>
+                        <Constraint attribute="height" constant="14"/>
+                    </Constraints>
+                </UILabel>
+                
+                <KTHotPicScrollView id="hotPicScrollView" mdoutlet="YES" >
+                    <Constraints>
+                        <Constraint attribute="height" constant="{{dimen:home_hot_height}}"/>
+                        <Constraint attribute="top" target="nameLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="left" target="centerWrapperView" constant="{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="right" target="centerWrapperView" constant="-{{dimen:base_content_element_middle_space}}"></Constraint>
+                        <Constraint attribute="bottom" target="centerWrapperView" constant="-{{dimen:base_content_element_middle_space}}"></Constraint>
+                    </Constraints>
+                </KTHotPicScrollView>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

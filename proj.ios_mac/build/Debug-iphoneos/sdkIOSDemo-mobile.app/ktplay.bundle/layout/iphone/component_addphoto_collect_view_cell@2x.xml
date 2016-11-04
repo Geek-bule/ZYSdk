@@ -1,0 +1,20 @@
+<Page>
+    <Resources>
+        <StyleSheet> 
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" backgroundColor="clear">
+            <UIImageView image="{{image:add_image}}">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                </Constraints>
+            </UIImageView>
+        </UIView>
+    </Layout>
+</Page>

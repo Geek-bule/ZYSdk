@@ -1,0 +1,68 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView">
+            <KTVideoPlayView id="videoPlayView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                </Constraints>
+            </KTVideoPlayView>
+            
+            <UIView id="customContainerView">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                </Constraints>
+                
+                <KTVideoPlayNavView id="navView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="customContainerView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="customContainerView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="customContainerView" targetAttribute="right"/>
+                    </Constraints>
+                </KTVideoPlayNavView>
+                
+                <UIView id="centerView">
+                    <Constraints>
+                        <Constraint attribute="top" target="navView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="customContainerView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="customContainerView" targetAttribute="right"/>
+                    </Constraints>
+                    
+                    <UIButton clickAction="centerButtonClicked:">
+                        <Constraints>
+                            <Constraint attribute="edges" target="centerView"/>
+                        </Constraints>
+                    </UIButton>
+                    
+                    <UIActivityIndicatorView id="activityIndicatorView" mdoutlet="YES">
+                        <Constraints>
+                            <Constraint attribute="centerX" target="centerView" targetAttribute="centerX"/>
+                            <Constraint attribute="centerY" target="centerView" targetAttribute="centerY"/>
+                        </Constraints>
+                    </UIActivityIndicatorView>
+                </UIView>
+                <KTVideoPlayControlView id="playControlView" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="centerView" targetAttribute="bottom"/>
+                        <Constraint attribute="bottom" target="customContainerView" targetAttribute="bottom"/>
+                        <Constraint attribute="left" target="customContainerView" targetAttribute="left"/>
+                        <Constraint attribute="right" target="customContainerView" targetAttribute="right"/>
+                    </Constraints>
+                </KTVideoPlayControlView>
+                
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>
+

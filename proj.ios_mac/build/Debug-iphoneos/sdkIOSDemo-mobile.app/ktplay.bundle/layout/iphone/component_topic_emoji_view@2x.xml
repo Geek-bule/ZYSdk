@@ -1,0 +1,34 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+             
+        </StyleSheet>
+    </Resources>
+    <Layout>
+        <UIView id="containerView" backgroundColor="{{color:background_color_gray}}">
+            <UIView id="collectionContainerView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                    <Constraint attribute="height" target="containerView" targetAttribute="height" multipliedBy="7/8"/>
+                </Constraints>
+            </UIView>
+            <UIView id="footerView">
+                <Constraints>
+                    <Constraint attribute="top" target="collectionContainerView" targetAttribute="bottom"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                </Constraints>
+                
+                <UIPageControl id="pageControl" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="edges" target="footerView"/>
+                    </Constraints>
+                </UIPageControl>
+                
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

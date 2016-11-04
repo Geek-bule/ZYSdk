@@ -1,0 +1,94 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="superviewStyle">
+                <Setter property="backgroundColor" value="{{color:background_color_gray}}"></Setter>
+            </Style>
+            
+            <Style name="logoStyle">
+                <Setter property="image" value="{{image:new_logo}}" />
+            </Style>
+            <Style name="logoLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="numberOfLines" value="2" />
+
+            </Style>
+            <Style name="logoFriendsStyle">
+                <Setter property="image" value="{{image:playwith_friends_logo}}" />
+            </Style>
+            <Style name="agreeLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="superView" style="superviewStyle">
+            
+            <UIScrollView id="contentScrollView"  mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="edges" target="superView" />
+                </Constraints>
+                
+                <UIView id="contentView" >
+                    <Constraints>
+                        <Constraint attribute="top" target="contentScrollView"/>
+                        <Constraint attribute="left" target="contentScrollView" />
+                        <Constraint attribute="width" target="contentScrollView"/>
+                        <Constraint attribute="bottom" target="agreeLabel"/>
+                    </Constraints>
+            
+<!--                <UIView id="contentView">-->
+<!--                    <Constraints>-->
+<!--                        <Constraint attribute="edges" target="superView"/>-->
+<!--                    </Constraints>-->
+
+                    <UIImageView id="logoView"  style="logoStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="contentView" targetAttribute="top" constant="{{dimen:base_content_element_double_large_space}}"/>
+                            <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                        </Constraints>
+                    </UIImageView>
+                    
+                    <UILabel id="logoLabel" mdoutlet="YES">
+                        <Constraints>
+                            <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                            <Constraint attribute="top" target="logoView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                            <Constraint attribute="height" constant="0"/>
+
+                        </Constraints>
+                    </UILabel>
+                    
+                    <UIImageView id="logoView2">
+                        <Constraints>
+                            <Constraint attribute="top" target="logoLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                            <Constraint attribute="height" constant="0"/>
+                            <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                        </Constraints>
+                    </UIImageView>
+                    
+                    <UILabel id="tipLabel"  style="logoLabelStyle" text="{{string:quicklaunch_netlogged}}">
+                        <Constraints>
+                            <Constraint attribute="centerX" target="contentView" targetAttribute="centerX"/>
+                            <Constraint attribute="top" target="logoView2" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                        </Constraints>
+                    </UILabel>
+                    
+                    <KTRTLabel id="agreeLabel" mdoutlet="YES" style="agreeLabelStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="tipLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                            <Constraint attribute="height" constant="{{dimen:topic_list_table_header_count_label_height}}*3"/>
+                            <Constraint attribute="centerX" target="contentView"/>
+                            <Constraint attribute="width" constant="{{dimen:register_btn_width}}"/>
+                        </Constraints>
+                    </KTRTLabel>
+                    
+                    
+                </UIView>
+                </UIScrollView>
+        </UIView>
+    </Layout>
+</Page>
+

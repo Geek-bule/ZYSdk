@@ -1,0 +1,59 @@
+<Page>
+    <Resources>
+        <StyleSheet ref="{{style:component_topic_cell_top_view_style}}"/>
+        <StyleSheet>
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="topicCellDownloadButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:download}}" />
+                <Setter property="imageForSelectedState" value="{{image:download}}" />
+                <Setter property="titleForNormalState" value="{{string:promoted_download}}" />
+                <Setter property="titleLabel.font" value="{{font:secondary_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}"/>
+            </Style>
+            <Style name="pageStyle" parent="cornerRadiusStyle">
+                <Setter property="backgroundColor" value="white"/>
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="topicDetailCellContentContainer" style="pageStyle">
+            <Import id="topicCellTopContentContainer" ref="{{layout:component_topic_cell_top_view}}">
+                <Constraints>
+                    <Constraint attribute="top" target="topicDetailCellContentContainer" targetAttribute="top"   id="top"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left"  id="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right" id="right"/>
+                </Constraints>
+            </Import>
+            <UIView id="bottomView">
+                <Constraints>
+                    <Constraint attribute="top" target="topicCellTopContentContainer"  targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}" id="top"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer"  targetAttribute="left"  id="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer"  targetAttribute="right" id="right"/>
+                    <Constraint attribute="height" constant="{{dimen:topic_list_cell_bar_height}}" id="height"/>
+                    <Constraint attribute="bottom" target="topicDetailCellContentContainer"  targetAttribute="bottom"  id="bottom"/>
+                </Constraints>
+                <UIView id="splitLine" style="splitLineStyle" >
+                    <Constraints>
+                        <Constraint attribute="left" target="bottomView" targetAttribute="left" id="left"/>
+                        <Constraint attribute="width" target="bottomView" targetAttribute="width" id="width"/>
+                        <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" id="height"/>
+                        <Constraint attribute="top" target="bottomView"  targetAttribute="top"  id="top"/>
+                    </Constraints>
+                </UIView>
+                <UIButton id="downloadButton" clickAction="clickDownloadButton:" style="topicCellDownloadButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="edges" target="bottomView"  id="edges"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

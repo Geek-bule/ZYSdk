@@ -1,0 +1,77 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+                <Setter property="numberOfLines" value="1" />
+            </Style>
+            <Style name="contentLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+                <Setter property="numberOfLines" value="2" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            <Style name="downLoadButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:download}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+    <UIView id="containerView">
+        <UIButton id="iconButton" mdoutlet="YES" clickAction="downLoadClick">
+            <Constraints>
+<!--                <Constraint attribute="top" target="containerView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}" />-->
+                <Constraint attribute="centerY" target="containerView" targetAttribute="centerY" />
+                <Constraint attribute="left" target="containerView" targetAttribute="left" constant="{{dimen:base_content_element_large_space}}" />
+                <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}" />
+                <Constraint attribute="width" constant="{{dimen:user_head_middle_size}}" />
+            </Constraints>
+        </UIButton>
+        <UIView id="labelsView">
+            <Constraints>
+                <Constraint attribute="left" target="iconButton" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}" />
+                <Constraint attribute="top" target="containerView" targetAttribute="top" />
+                <Constraint attribute="bottom" target="containerView" targetAttribute="bottom" />
+                <Constraint attribute="width" target="containerView" multipliedBy="2/3" />
+            </Constraints>
+            <UILabel id="titleLabel" style="titleLabelStyle" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="labelsView" targetAttribute="left"  />
+                    <Constraint attribute="top" target="labelsView" targetAttribute="top" constant="{{dimen:base_content_element_small_space}}" />
+                    <Constraint attribute="right" target="labelsView" targetAttribute="right" />
+<!--                    <constant attribute="bottom" target="contentLabel" targetAttribute="top" />-->
+                </Constraints>
+            </UILabel>
+            <UILabel id="contentLabel" style="contentLabelStyle" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="labelsView" targetAttribute="left" />
+                    <Constraint attribute="top" target="titleLabel" targetAttribute="bottom"  />
+                    <Constraint attribute="right" target="labelsView" targetAttribute="right"  />
+                    <Constraint attribute="bottom" target="labelsView" targetAttribute="bottom" constant="-{{dimen:base_content_element_small_space}}" />
+                </Constraints>
+            </UILabel>
+        </UIView>
+        <UIButton id="downLoadButton" style="downLoadButtonStyle" mdoutlet="YES" clickAction="downLoadClick">
+            <Constraints>
+                <Constraint attribute="right" target="containerView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                <Constraint attribute="centerY" target="containerView" targetAttribute="centerY" />
+            </Constraints>
+        </UIButton>
+            
+        <UIView id="splitLine" style="splitLineStyle" >
+            <Constraints>
+                <Constraint attribute="bottom" target="containerView"/>
+                <Constraint attribute="left" target="containerView" />
+                <Constraint attribute="right" target="containerView"/>
+                <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+            </Constraints>
+        </UIView>
+    </UIView>
+    </Layout>
+</Page>
+

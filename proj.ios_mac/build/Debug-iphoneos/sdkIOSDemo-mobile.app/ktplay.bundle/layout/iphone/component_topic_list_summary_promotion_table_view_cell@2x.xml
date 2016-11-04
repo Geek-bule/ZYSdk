@@ -1,0 +1,95 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="cornerRadiusStyle">
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:primary_font}}" />
+            </Style>
+            <Style name="tagLabelStyle">
+                <Setter property="backgroundColor" value="{{color:theme_main_color}}" />
+                <Setter property="textColor" value="{{color:text_color_white}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="textAlignment" value="1"/>
+                <Setter property="clipsToBounds" value="YES" />
+            </Style>
+            <Style name="contentLableStyle">
+                <Setter property="textColor" value="{{color:text_color_dark_gray}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            <Style name="topicCellDownloadButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:download}}" />
+                <Setter property="imageForSelectedState" value="{{image:download}}" />
+                <Setter property="titleForNormalState" value="{{string:promoted_download}}" />
+                <Setter property="titleLabel.font" value="{{font:secondary_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}"/>
+            </Style>
+            <Style name="pageStyle" parent="cornerRadiusStyle">
+                <Setter property="backgroundColor" value="white"/>
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="containerView" style="pageStyle">
+            <UIButton id="iconImageView"  clickAction="clickDownloadButton:" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="left" target="containerView"  constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="top" target="containerView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="size" constant="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}" id="size"/>
+                </Constraints>
+            </UIButton>
+            <UILabel id="titleLabel" text="hahahahahahahah" style="titleLabelStyle" mdoutlet="YES" >
+                <Constraints>
+                    <Constraint attribute="top" target="iconImageView" />
+                    <Constraint attribute="left" target="iconImageView" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+<!--                    <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}" />-->
+                    <Constraint attribute="width" target="containerView" multipliedBy="0.7" relation="@le"/>
+                </Constraints>
+            </UILabel>
+            <UILabel id="tagLabel" mdoutlet="YES" text="{{string:admin}}  " style="tagLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="titleLabel" targetAttribute="top"/>
+                    <Constraint attribute="left" target="titleLabel" targetAttribute="right" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <!--                    <Constraint attribute="width"  target="adminLabel" multipliedBy="1.1" />-->
+                </Constraints>
+            </UILabel>
+            <UILabel id="contentLabel" mdoutlet="YES" numberOfLines="2" style="contentLableStyle" text="hahahahah">
+                <Constraints>
+                    <Constraint attribute="top" target="iconImageView"  targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="iconImageView"  />
+                     <Constraint attribute="right" target="containerView" constant="-{{dimen:base_content_element_large_space}}" />
+                </Constraints>
+            </UILabel>
+            <UIView id="bottomView">
+                <Constraints>
+                    <Constraint attribute="top" target="contentLabel"  targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}" />
+                    <Constraint attribute="left" target="containerView" />
+                    <Constraint attribute="right" target="containerView"  />
+                    <Constraint attribute="height" constant="{{dimen:topic_list_cell_bar_height}}" />
+                    <Constraint attribute="bottom" target="containerView" />
+                </Constraints>
+                <UIView id="splitLine" style="splitLineStyle" >
+                    <Constraints>
+                        <Constraint attribute="left" target="bottomView" targetAttribute="left" id="left"/>
+                        <Constraint attribute="width" target="bottomView" targetAttribute="width" id="width"/>
+                        <Constraint attribute="height" constant="{{dimen:base_split_line_height}}" id="height"/>
+                        <Constraint attribute="top" target="bottomView"  targetAttribute="top"  id="top"/>
+                    </Constraints>
+                </UIView>
+                <UIButton id="downloadButton" clickAction="clickDownloadButton:" style="topicCellDownloadButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="edges" target="bottomView"  id="edges"/>
+                    </Constraints>
+                </UIButton>
+            </UIView>
+        </UIView>
+    </Layout>
+</Page>

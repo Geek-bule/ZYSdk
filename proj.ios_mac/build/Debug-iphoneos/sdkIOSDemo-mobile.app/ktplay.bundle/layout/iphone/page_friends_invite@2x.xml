@@ -1,0 +1,38 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            
+            <Style name="inviteFriendButtonStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="titleForNormalState" value="{{string:invite_to_be_friend}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    <Layout>
+         <UIView id="contentView" >
+                 <Constraints>
+                     <Constraint attribute="edges" target="superView" constant="0,{{dimen:base_content_element_middle_space}},0,{{dimen:base_content_element_middle_space}}"/>
+                 </Constraints>
+                 <UITableView id="tableView" mdoutlet="YES" bounds="320,320">
+                     <Constraints>
+                         <Constraint attribute="top" target="contentView" />
+                         <Constraint attribute="left" target="contentView" />
+                         <Constraint attribute="right" target="contentView"/>
+                         <Constraint attribute="bottom" target="inviteFriendButton" targetAttribute="top" constant="-{{dimen:base_content_element_middle_space}}" />
+                     </Constraints>
+                  </UITableView>
+                  <UIButton id="inviteFriendButton" mdoutlet="YES"  clickAction="inviteClick:" enabled="NO" style="inviteFriendButtonStyle" >
+                      <Constraints>
+                          <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_middle_space}}"/>
+                          <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_middle_space}}" />
+                          <Constraint attribute="height" constant="{{dimen:base_confirm_button_height}}" />
+                          <Constraint attribute="bottom" target="contentView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}" />
+                      </Constraints>
+                 </UIButton>
+         </UIView>
+  </Layout>
+</Page>
+                      

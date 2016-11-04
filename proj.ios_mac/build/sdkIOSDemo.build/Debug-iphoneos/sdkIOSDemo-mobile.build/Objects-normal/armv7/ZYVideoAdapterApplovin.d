@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/ZYVideoAdapterApplovin.m \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/ZYVideoAdapterApplovin.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/ZYVideo/ZYVideoAdapter.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/ZYVideo/ZYVideoType.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/ZYVideo/ZYVideoAdRegistry.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALSdk.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALSdkSettings.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAnnotations.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdService.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAd.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdSize.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdType.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdLoadDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdDisplayDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdUpdateDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdVideoPlaybackDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALNativeAdService.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALNativeAdLoadDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALNativeAd.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALNativeAdPrecacheDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALTargetingData.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALPostbackService.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALPostbackDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALEventService.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALEventTypes.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALErrorCodes.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALAdRewardDelegate.h \
+  /Users/justinyang/Desktop/svn/sdkIOSv3/sdkIOSDemov3/proj.ios_mac/sdkLibs/videoAdapter/applovinAdapter/Applovin/headers/ALInterstitialAd.h

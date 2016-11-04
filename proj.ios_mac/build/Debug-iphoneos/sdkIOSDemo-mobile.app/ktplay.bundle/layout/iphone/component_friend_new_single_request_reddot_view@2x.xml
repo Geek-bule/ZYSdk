@@ -1,0 +1,114 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="titleLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+            <Style name="nickNameLabelStyle">
+                <Setter property="textColor" value="{{color:text_color_black}}" />
+                <Setter property="font" value="{{font:secondary_font}}" />
+            </Style>
+            
+            <Style name="msglabelStyle">
+                <Setter property="textColor" value="{{color:text_color_gray}}" />
+                <Setter property="font" value="{{font:prompt_font}}" />
+            </Style>
+            
+            <Style name="iconBtnCornerRadiusStyle">
+                <Setter property="layer.masksToBounds" value="YES" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_middle_corner_radius}}" />
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+<Layout>
+    <UIView id="multiRequestView" backgroundColor="yellow">
+            <UILabel id="titleLabel" text="{{string:friend_requests}}" style="titleLabelStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="multiRequestView" targetAttribute="top" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="multiRequestView" targetAttribute="left" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="right" target="multiRequestView" targetAttribute="right" constant="-{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+            </UILabel>
+        
+            <UIView id="requestView">
+                <Constraints>
+                    <Constraint attribute="top" target="titleLabel" targetAttribute="bottom" constant="{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="bottom" target="multiRequestView" targetAttribute="bottom" constant="-{{dimen:base_content_element_middle_space}}"/>
+                    <Constraint attribute="left" target="titleLabel" targetAttribute="left"/>
+                    <Constraint attribute="right" target="redDotView" targetAttribute="left" constant="-{{dimen:base_content_element_middle_space}}"/>
+                </Constraints>
+                
+                
+                <UIButton id="iconButton" mdoutlet="YES" style="iconBtnCornerRadiusStyle" bounds="{{dimen:user_head_middle_size}},{{dimen:user_head_middle_size}}">
+                    <Constraints>
+                        <Constraint attribute="top" target="requestView"/>
+                        <Constraint attribute="centerY" target="requestView"/>
+                        <Constraint attribute="left" target="requestView" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="height" constant="{{dimen:user_head_middle_size}}"/>
+                        <Constraint attribute="width" target="iconButton" targetAttribute="height" />
+                    </Constraints>
+                </UIButton>
+                
+                <UIView id="centerView">
+                    <Constraints> 
+                        <Constraint attribute="centerY" target="iconButton"/>
+                        <Constraint attribute="left" target="iconButton" targetAttribute="right" constant="{{dimen:base_content_element_large_space}}"/>
+                        <Constraint attribute="right" target="requestView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}" relation="@le"/>
+                    </Constraints>
+                    
+                    <UILabel id="nickNameLabel" mdoutlet="YES" style="nickNameLabelStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="centerView"/>
+                            <Constraint attribute="left" target="centerView"/>
+                            <Constraint attribute="right" target="centerView"/>
+                        </Constraints>
+                    </UILabel>
+                    
+                    <UILabel id="msgLabel"  style="msglabelStyle" text="{{string:friend_requst_placeholder}}">
+                        <Constraints>
+                            <Constraint attribute="top" target="nickNameLabel" targetAttribute="bottom"/>
+                            <Constraint attribute="bottom" target="centerView"/>
+                            <Constraint attribute="left" target="centerView"/>
+                            <Constraint attribute="right" target="centerView"/>
+                        </Constraints>
+                    </UILabel>
+                    
+                </UIView>
+                
+            </UIView>
+            
+            <UIImageView id="redDotView" image="{{image:new_msg}}">
+                <Constraints>
+                    <Constraint attribute="right" target="arrowImageView" targetAttribute="left"/>
+                    <Constraint attribute="centerY" target="multiRequestView" targetAttribute="centerY"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIImageView id="arrowImageView" image="{{image:right_arrow}}">
+                <Constraints>
+                    <Constraint attribute="right" target="multiRequestView" targetAttribute="right" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="centerY" target="multiRequestView" targetAttribute="centerY"/>
+                    <Constraint attribute="height" target="arrowImageView" targetAttribute="width" multipliedBy="1.5"/>
+                </Constraints>
+            </UIImageView>
+            
+            <UIView id="bottomSplitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="bottom" target="multiRequestView"/>
+                    <Constraint attribute="left" target="multiRequestView" />
+                    <Constraint attribute="right" target="multiRequestView"/>
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                </Constraints>
+            </UIView>
+        
+        </UIView>
+    </Layout>
+</Page>

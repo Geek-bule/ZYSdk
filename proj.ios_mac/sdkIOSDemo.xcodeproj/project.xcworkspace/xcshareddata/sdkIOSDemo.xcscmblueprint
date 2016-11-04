@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DF3E23B738D326DDDE6C40FB8BD9C06F85619A0C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AE11118EE03DA79646C297E6A2677006AD2DAAD4" : 0,
+    "DF3E23B738D326DDDE6C40FB8BD9C06F85619A0C" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1F3F11DA-E2EE-41B9-A06B-E0A8631AF331",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AE11118EE03DA79646C297E6A2677006AD2DAAD4" : "sdkIOSDemov3\/proj.ios_mac\/sdkLibs\/",
+    "DF3E23B738D326DDDE6C40FB8BD9C06F85619A0C" : "sdkIOSDemov3\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "sdkIOSDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "proj.ios_mac\/sdkIOSDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Geek-bule\/sdkLibs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AE11118EE03DA79646C297E6A2677006AD2DAAD4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Geek-bule\/ZYSdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF3E23B738D326DDDE6C40FB8BD9C06F85619A0C"
+    }
+  ]
+}

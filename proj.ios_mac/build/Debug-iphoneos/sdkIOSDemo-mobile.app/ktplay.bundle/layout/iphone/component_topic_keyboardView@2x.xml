@@ -1,0 +1,30 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+
+        </StyleSheet>
+    </Resources>
+    <Layout>
+        <UIView id="containerView">
+            
+            <KTKeyboardToolBarView id="toolBarView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="containerView" targetAttribute="top"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                    <Constraint attribute="height" constant="{{dimen:topic_keyboard_toolbar_height}}"/>
+                </Constraints> 
+            </KTKeyboardToolBarView>
+            
+            <UIView id="menuContentView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="toolBarView" targetAttribute="bottom"/>
+                    <Constraint attribute="bottom" target="containerView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="containerView" targetAttribute="left"/>
+                    <Constraint attribute="right" target="containerView" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

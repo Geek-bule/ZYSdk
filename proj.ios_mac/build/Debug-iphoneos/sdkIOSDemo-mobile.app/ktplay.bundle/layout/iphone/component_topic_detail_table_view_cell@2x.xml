@@ -1,0 +1,131 @@
+<Page>
+    <Resources>
+        <StyleSheet ref="{{style:component_topic_cell_top_view_style}}"/>
+        <StyleSheet>
+            <Style name="topicCellBottomButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:secondary_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:text_color_gray}}" />
+                <Setter property="titleColorForSelectedState" value="{{color:text_color_gray}}" />
+            </Style>
+            <Style name="topicCellLikeButtonStyle" parent="topicCellBottomButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:like_normal}}" />
+                <Setter property="imageForSelectedState" value="{{image:like_selected}}" />
+            </Style>
+            <Style name="topicCellReplyButtonStyle">
+                <Setter property="imageForNormalState" value="{{image:reply}}" />
+            </Style>
+            <Style name="pageStyle">
+                <Setter property="backgroundColor" value="white"/>
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+            
+            <Style name="essenceLabelStyle">
+                <Setter property="textColor" value="red" />
+                <Setter property="font" value="{{font:primary_font}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+                <Setter property="layer.borderColor" value="red" />
+                <Setter property="layer.borderWidth" value="1" />
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            
+            <Style name="topicCellMoreButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="EnlargeEdge" value="20" />
+                
+            </Style>
+            
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="topicDetailCellContentContainer" style="pageStyle">
+            <!--分享奖励-->
+            <UIView id="snsShareView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="topicDetailCellContentContainer" targetAttribute="top"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right"/>
+                </Constraints>
+            </UIView>
+            <Import id="topicCellTopContentContainer" ref="{{layout:component_topic_cell_top_view}}">
+                <Constraints>
+                    <Constraint attribute="top" target="snsShareView" targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left" />
+                    <Constraint attribute="right" target="topicDetailCellContentContainer" targetAttribute="right" />
+                </Constraints>
+            </Import>
+            <UIView id="bottomView">
+                <Constraints>
+                    <Constraint attribute="top" target="topicCellTopContentContainer"  targetAttribute="bottom"/>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer"  targetAttribute="left"/>
+                    <Constraint attribute="right" target="topicDetailCellContentContainer"  targetAttribute="right"/>
+                    <Constraint attribute="height" constant="{{dimen:topic_list_cell_bar_height}}"/>
+                </Constraints>
+                <UIButton id="likeButton" clickAction="clickLikeButton:" mdoutlet="YES" style="topicCellLikeButtonStyle">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="bottomView"  id="centerY"/>
+                        <Constraint attribute="right" target="bottomView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UIButton>
+                <UIButton id="replyButton" mdoutlet="YES" style="topicCellReplyButtonStyle" clickAction="clickReplyButton:">
+                    <Constraints>
+                        <Constraint attribute="centerY" target="bottomView"  id="centerY"/>
+                        <Constraint attribute="right" target="likeButton" targetAttribute="left" constant="-{{dimen:base_content_element_large_space}}"/>
+                    </Constraints>
+                </UIButton>
+                
+            </UIView>
+            <!--二级恢复页面-->
+            <UIView id="replyEmptyView" style="clipsViewStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="bottomView" targetAttribute="bottom" constant="-{{dimen:base_content_element_small_space}}" />
+                    <Constraint attribute="left" target="bottomView" targetAttribute="left"/>
+                    <Constraint attribute="width" target="bottomView"  targetAttribute="width" />
+                    <Constraint attribute="bottom" target="moreReplyButtonEmptyView" targetAttribute="bottom" priority="medium" mdoutlet="YES" deactivate="YES"  id="replyContainnerShowConstraint"/>
+                    <Constraint attribute="height" constant="0" priority="low"  mdoutlet="YES" id="replyContainnerHiddenConstraint"/>
+                    <Constraint attribute="bottom" target="topicDetailCellContentContainer" priority="required" targetAttribute="bottom"/>
+                </Constraints>
+                <UIView id="replyContainner" mdoutlet="YES">
+                    <Constraints>
+                        <Constraint attribute="top" target="replyEmptyView" targetAttribute="top"/>
+                        <Constraint attribute="left" target="replyEmptyView" targetAttribute="left" id="left"/>
+                        <Constraint attribute="width" target="replyEmptyView" targetAttribute="width" id="width"/>
+                    </Constraints>
+                </UIView>
+                <!--隐藏和显示更多回复按钮-->
+                <UIView id="moreReplyButtonEmptyView" style="clipsViewStyle">
+                    <Constraints>
+                        <Constraint attribute="left" target="replyContainner" targetAttribute="left" id="left"/>
+                        <Constraint attribute="top" target="replyContainner" targetAttribute="bottom" id="top"/>
+                        <Constraint attribute="width" target="replyContainner"  targetAttribute="width"  id="width"/>
+                        <Constraint attribute="bottom" target="moreReplyButton" targetAttribute="bottom" priority="required"  mdoutlet="YES" deactivate="YES"  id="moreReplyButtonShowConstraint"/>
+                        <Constraint attribute="height" constant="0" priority="low" mdoutlet="YES" id="moreReplyButtonHiddenConstraint"/>
+                    </Constraints>
+                    <UIButton id="moreReplyButton" mdoutlet="YES" style="topicCellMoreButtonStyle" clickAction="clickMoreReplyButton:" >
+                        <Constraints>
+                            <Constraint attribute="top" target="moreReplyButtonEmptyView" targetAttribute="top" constant="{{dimen:base_content_element_large_space}}" id="top"/>
+                            <Constraint attribute="right" target="moreReplyButtonEmptyView" constant="-{{dimen:base_content_element_large_space}}"/>
+                        </Constraints>
+                    </UIButton>
+                </UIView>
+            </UIView>
+            
+            <UIView id="splitLine" style="splitLineStyle" >
+                <Constraints>
+                    <Constraint attribute="left" target="topicDetailCellContentContainer" targetAttribute="left" />
+                    <Constraint attribute="width" target="topicDetailCellContentContainer" targetAttribute="width" />
+                    <Constraint attribute="height" constant="{{dimen:base_split_line_height}}"/>
+                    <Constraint attribute="bottom" target="topicDetailCellContentContainer"  targetAttribute="bottom"/>
+                </Constraints>
+            </UIView>
+            
+        </UIView>
+    </Layout>
+</Page>

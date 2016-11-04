@@ -1,0 +1,91 @@
+<Page>
+    <Resources>
+        <StyleSheet>
+            <Style name="clipsViewStyle">
+                <Setter property="clipsToBounds" value="YES"/>
+            </Style>
+            <Style name="headImageViewStyle" parent="clipsViewStyle">
+                <Setter property="image" value="{{image:head}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:user_head_large_corner_radius}}" />
+                <Setter property="layer.borderWidth" value="{{dimen:round_view_border_width}}" />
+                <Setter property="layer.borderColor" value="{{color:theme_main_color}}" />
+                <Setter property="bounds" value="{{dimen:user_head_large_size}},{{dimen:user_head_large_size}}" />
+            </Style>
+            <Style name="accountNameLabelStyle">
+                <Setter property="font" value="{{font:title_font}}" />
+                <Setter property="textAlignment" value="1"/>
+            </Style>
+            <Style name="confirmButtonStyle" parent="clipsViewStyle">
+                <Setter property="backgroundColorForNormalState" value="{{color:theme_main_color}}" />
+                <Setter property="layer.cornerRadius" value="{{dimen:base_corner_radius}}" />
+            </Style>
+            <Style name="linkButtonStyle">
+                <Setter property="titleLabel.font" value="{{font:prompt_font}}" />
+                <Setter property="titleColorForNormalState" value="{{color:theme_main_color}}" />
+            </Style>
+            <Style name="splitLineStyle">
+                <Setter property="backgroundColor" value="{{color:split_line_color}}" />
+            </Style>
+        </StyleSheet>
+    </Resources>
+    
+    <Layout>
+        <UIView id="contentView" backgroundColor="white">
+            <UITableView id="recentAccountTableView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="top" target="contentView"/>
+                    <Constraint attribute="left" target="contentView"/>
+                    <Constraint attribute="right" target="contentView"/>
+                    <Constraint attribute="height" target="contentView" targetAttribute="height" multipliedBy="4/7"/>
+                </Constraints>
+            </UITableView>
+            <UIView id="defaultAccountView" mdoutlet="YES">
+                <Constraints>
+                    <Constraint attribute="edges" target="recentAccountTableView"/>
+                </Constraints>
+                <UIView id="headContainerView">
+                    <Constraints>
+                        <Constraint attribute="center" target="defaultAccountView"/>
+                        <Constraint attribute="left" target="defaultAccountView"/>
+                        <Constraint attribute="right" target="defaultAccountView"/>
+<!--                        <Constraint attribute="right" target="headImageView"/>-->
+                        <Constraint attribute="bottom" target="accountNameLable"/>
+                    </Constraints>
+                    <UIImageView id="headImageView" mdoutlet="YES" style="headImageViewStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="headContainerView" constant="{{dimen:base_content_element_large_space}}"/>
+<!--                            <Constraint attribute="left" target="headContainerView"/>-->
+                            <Constraint attribute="width" constant="{{dimen:user_head_large_size}}"/>
+                            <Constraint attribute="height" target="headImageView" targetAttribute="width"/>
+                            <Constraint attribute="centerX" target="headContainerView"/>
+                        </Constraints>
+                    </UIImageView>
+                    <UIImageView id="selectedImageView" image="{{image:select_button_bg_selected}}" mdoutlet="YES" />
+                    <UILabel id="accountNameLable" mdoutlet="YES" text="test" style="accountNameLabelStyle">
+                        <Constraints>
+                            <Constraint attribute="top" target="headImageView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                            <Constraint attribute="left" target="headContainerView" constant="{{dimen:base_content_element_large_space}}"/>
+                            <Constraint attribute="right" target="headContainerView" constant="-{{dimen:base_content_element_large_space}}"/>
+<!--                            <Constraint attribute="centerX" target="headImageView"/>-->
+                        </Constraints>
+                    </UILabel>
+                </UIView>
+            </UIView>
+            <UIButton id="confirmButton" titleForNormalState="{{string:login_with_selected_account}}" clickAction="loginWithCurrentAccount:" style="confirmButtonStyle">
+                <Constraints>
+                    <Constraint attribute="top" target="defaultAccountView" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="left" target="contentView" constant="{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="right" target="contentView" constant="-{{dimen:base_content_element_large_space}}"/>
+                    <Constraint attribute="height"  constant="{{dimen:base_confirm_button_height}}"/>
+                </Constraints>
+            </UIButton>
+            <UIButton id="otherAccountLoginButton" titleForNormalState="{{string:login_with_other_accounts}}" clickAction="loginWithOtherAccount:" style="linkButtonStyle">
+                <Constraints>
+                    <Constraint attribute="centerX" target="confirmButton"/>
+                    <Constraint attribute="top" target="confirmButton" targetAttribute="bottom" constant="{{dimen:base_content_element_large_space}}*2"/>
+                </Constraints>
+            </UIButton>
+        </UIView>
+    </Layout>
+</Page>
+

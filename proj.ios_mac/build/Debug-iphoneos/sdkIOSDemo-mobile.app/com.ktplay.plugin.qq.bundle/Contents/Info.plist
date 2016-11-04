@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.ktplay.plugin.qq</string>
+	<key>CFBundleName</key>
+	<string>qq</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>KTPluginMainClassName</key>
+	<string>KTQQ</string>
+	<key>Category</key>
+	<string>sns</string>
+	<key>Priority</key>
+	<integer>0</integer>
+	<key>Region</key>
+	<string>China</string>
+	<key>Selectors</key>
+	<array>
+		<string>postStatus:success:failure:</string>
+		<string>requestUserInfo:success:failure:</string>
+		<string>requestFriend:success:failure:</string>
+	</array>
+	<key>UserInfo</key>
+	<dict>
+		<key>type</key>
+		<string>Standard</string>
+		<key>targets</key>
+		<array>
+			<dict>
+				<key>target</key>
+				<string>qq</string>
+				<key>displayName_zh</key>
+				<string>QQ</string>
+				<key>displayName_en</key>
+				<string>QQ</string>
+				<key>small_Icon</key>
+				<string>small</string>
+				<key>medium_Icon</key>
+				<string>medium</string>
+			</dict>
+		</array>
+		<key>scheme</key>
+		<string>tencent,QQ</string>
+	</dict>
+</dict>
+</plist>
