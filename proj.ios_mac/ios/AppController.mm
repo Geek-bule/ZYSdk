@@ -54,16 +54,9 @@ static AppDelegate s_sharedApplication;
 
     // Add the view controller's view to the window and display.
     window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
-    
-    CGRect windowSize;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {// system is iOS8
-        windowSize = CGRectMake(0, 0, [window bounds].size.height, [window bounds].size.width);
-    }else{
-        windowSize = [window bounds];
-    }
 
     // Init the CCEAGLView
-    CCEAGLView *eaglView = [CCEAGLView viewWithFrame: windowSize
+    CCEAGLView *eaglView = [CCEAGLView viewWithFrame: [window bounds]
                                          pixelFormat: (NSString*)cocos2d::GLViewImpl::_pixelFormat
                                          depthFormat: cocos2d::GLViewImpl::_depthFormat
                                   preserveBackbuffer: NO

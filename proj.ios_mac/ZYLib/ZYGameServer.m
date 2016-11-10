@@ -15,6 +15,9 @@
 #import "ZYAdStatistics.h"
 
 
+
+#define ZY_HOST                 @"http://121.42.183.124"//@"http://192.168.1.147"//
+#define ZY_PORT                 @"80"//@"8080"//
 #define ZY_URL_REGISTER         @"ZYGameServer/app/v1/login"
 #define ZY_URL_MOREGAME         @"ZYGameServer/app/v1/gameInfo"
 #define ZY_URL_JUMPDOWN         @"ZYGameServer/app/v1/gamePush/jump"
@@ -23,16 +26,24 @@
 #define ZY_URL_STATISTICS       @"ZYGameServer/app/v1/gamePush/statistics"
 
 
+
 #define cellHeight              40
 
 
 @interface ZYGameServer()<UIAlertViewDelegate>
 {
     sqlite3 *_db;
-//    UITableView *_table;
 }
 
 @property(nonatomic)BOOL isShowLog;
+
+@property (nonatomic, retain) NSMutableDictionary* adGameInfoDic;   //推荐的更多游戏
+@property (nonatomic, retain) NSMutableDictionary* rewardInfoDic;   //奖励的列表
+@property (nonatomic, retain) NSMutableArray* adGameZynoArray;      //推荐的zyno列表
+@property (nonatomic, retain) NSMutableArray* adDisableImg;         //删除的图片列表
+@property (nonatomic, retain) NSMutableArray* adDefaultArray;       //默认列表的zyno
+@property (nonatomic, retain) NSMutableArray* adLoadImgArray;       //图片下载列表
+@property (nonatomic, retain) NSString* adGameRic;                  //领取奖励的ric拼接字符串
 
 @property (nonatomic, retain) NSString* ZYTransId;      //随机数
 @property (nonatomic, retain) NSString* ZYToken;        //token
@@ -50,6 +61,7 @@
 @end
 
 @implementation ZYGameServer
+
 
 + (ZYGameServer*)shareServer
 {
@@ -96,11 +108,27 @@
     //注册
     [self registerMobile:@"loadMoreGameInfo" back:^(NSString *token) {
         [self loadMoreGameInfo];
-        //统计
-        [[ZYAdStatistics shareStatistics] setSqlite:_db];
+        
     }];
     
-    
+    //统计
+    [[ZYAdStatistics shareStatistics] setSqlite:_db];
+}
+
+- (NSArray*)getGameZynoArray
+{
+    return _adGameZynoArray;
+}
+
+
+- (NSArray*)getDefaultArray
+{
+    return _adDefaultArray;
+}
+
+- (NSDictionary*)getGameInfoDic
+{
+    return _adGameInfoDic;
 }
 
 
@@ -194,11 +222,32 @@
             char *buttonFlash = (char*)sqlite3_column_text(statement, 6);
             info.buttonFlash = [[NSString alloc]initWithUTF8String:buttonFlash];
             
-            char *img = (char*)sqlite3_column_text(statement, 7);
+            int buttonType = (int)sqlite3_column_text(statement, 7);
+            info.buttonType = [NSNumber numberWithInt:buttonType];
+            
+            char *img = (char*)sqlite3_column_text(statement, 8);
             info.img = [[NSString alloc]initWithUTF8String:img];
             
-            char *listImg = (char*)sqlite3_column_text(statement, 8);
+            char *listImg = (char*)sqlite3_column_text(statement, 9);
             info.listImg = [[NSString alloc]initWithUTF8String:listImg];
+            
+            char *rewardId = (char*)sqlite3_column_text(statement, 10);
+            info.rewardId = [[NSString alloc]initWithUTF8String:rewardId];
+            
+            char *rewardName = (char*)sqlite3_column_text(statement, 11);
+            info.rewardName = [[NSString alloc]initWithUTF8String:rewardName];
+            
+            char *rewardIcon = (char*)sqlite3_column_text(statement, 12);
+            info.rewardIcon = [[NSString alloc]initWithUTF8String:rewardIcon];
+            
+            int reward = (int)sqlite3_column_text(statement, 13);
+            info.reward = [NSNumber numberWithInt:reward];
+            
+            char *pushdate = (char*)sqlite3_column_text(statement, 14);
+            info.pushdate = [[NSString alloc]initWithUTF8String:pushdate];
+            
+            char *defdate = (char*)sqlite3_column_text(statement, 15);
+            info.defdate = [[NSString alloc]initWithUTF8String:defdate];
             
             [_adGameInfoDic setObject:info forKey:info.zyno];
         }
@@ -242,11 +291,11 @@
         if ([_adGameInfoDic count] > 0) {
             for (NSString *key in _adGameInfoDic) {
                 ZYGameInfo *info = _adGameInfoDic[key];
-                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'),",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward];
+                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'),",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.buttonType,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward,info.pushdate,info.defdate];
             }
             paramVec = [paramVec substringToIndex:[paramVec length]-1];
             //inser data from db
-            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, img, lisImg, rewardid, rewardname, rewardicon, reward) VALUES %@",paramVec];
+            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, buttonType, img, listImg, rewardid, rewardname, rewardicon, reward, pushdate, defdate) VALUES %@",paramVec];
             [self execSql:insertTabel and:NO];
         }
         
@@ -352,9 +401,10 @@
     if (![self isTokenActive]) {
         return;
     }
-    CGRect winSize = [[UIScreen mainScreen] bounds];
     NSString *url = [NSString stringWithFormat:@"%@:%@/%@",ZY_HOST,ZY_PORT,ZY_URL_MOREGAME];
-    NSDictionary * parameter = @{@"zyno":_ZYAppId, @"channel":_ZYChannelId, @"screen":(winSize.size.width>winSize.size.height)?@"landscape":@"portrait"};
+    UIDeviceOrientation orientation = (UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation;
+    BOOL bIsLand = UIDeviceOrientationIsLandscape(orientation);
+    NSDictionary * parameter = @{@"zyno":_ZYAppId, @"channel":_ZYChannelId, @"screen":(bIsLand)?@"landscape":@"portrait"};
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -377,17 +427,21 @@
                 NSMutableArray *zynoArray = [[NSMutableArray alloc] init];
                 for (id value in dataList) {
                     ZYGameInfo *info = [[ZYGameInfo alloc] initWithDictionary:value];
+                    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setDateFormat:@"YYYYMMdd"];
+                    info.defdate = [dateFormatter stringFromDate:currentDate];
                     //对比2个版本
                     [self compareWith:info];
                     //存储默认的zyno
                     [zynoArray addObject:info.zyno];
                     //判断是不是
-                    if (![fileManager fileExistsAtPath:[self getFilePath:info.button]]) {
-                        [_adLoadImgArray addObject:info.button];
-                    }
-                    if (![fileManager fileExistsAtPath:[self getFilePath:info.buttonFlash]]) {
-                        [_adLoadImgArray addObject:info.buttonFlash];
-                    }
+//                    if (![fileManager fileExistsAtPath:[self getFilePath:info.button]]) {
+//                        [_adLoadImgArray addObject:info.button];
+//                    }
+//                    if (![fileManager fileExistsAtPath:[self getFilePath:info.buttonFlash]]) {
+//                        [_adLoadImgArray addObject:info.buttonFlash];
+//                    }
                     if (![fileManager fileExistsAtPath:[self getFilePath:info.listImg]]) {
                         [_adLoadImgArray addObject:info.listImg];
                     }
@@ -401,6 +455,10 @@
                 NSMutableArray *zynoArray = [[NSMutableArray alloc] init];
                 for (id value in dataList) {
                     ZYGameInfo *info = [[ZYGameInfo alloc] initWithDictionary:value];
+                    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setDateFormat:@"YYYYMMdd"];
+                    info.pushdate = [dateFormatter stringFromDate:currentDate];
                     //对比2个版本
                     [self compareWith:info];
                     //存储推荐的zyno
@@ -472,9 +530,42 @@
     }
 }
 
+//做一个时间监测，超过10天不会推的就把图片删除掉
+//＊＊＊＊但是db里面的信息就没有做时间判断处理，需要设计一下＊＊＊＊
+- (void)ImageDateCheck
+{
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYYMMdd"];
+    
+    for (NSString *key in _adGameInfoDic) {
+        ZYGameInfo *info = _adGameInfoDic[key];
+        if (info.pushdate) {
+            NSDate *pushDateFromString = [dateFormatter dateFromString:info.pushdate];
+            int timediff = [currentDate timeIntervalSince1970]-[pushDateFromString timeIntervalSince1970];
+            if (timediff >= 15*24*60*60) {
+                [_adDisableImg addObject:info.button];
+                [_adDisableImg addObject:info.buttonFlash];
+                [_adDisableImg addObject:info.img];
+                [_adDisableImg addObject:info.rewardIcon];
+            }
+        }
+        
+        if (info.defdate) {
+            NSDate *defDateFromString = [dateFormatter dateFromString:info.defdate];
+            int timediff = [currentDate timeIntervalSince1970]-[defDateFromString timeIntervalSince1970];
+            if (timediff >= 5*24*60*60) {
+                [_adDisableImg addObject:info.listImg];
+            }
+        }
+        
+    }
+}
+
 
 - (void)removeDownloadImg
 {
+    [self ImageDateCheck];
     if ([_adDisableImg count] >0) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         for (id value in _adDisableImg) {

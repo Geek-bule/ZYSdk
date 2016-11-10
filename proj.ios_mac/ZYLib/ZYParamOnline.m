@@ -21,13 +21,18 @@
 #include <net/if_dl.h>
 
 
-#define DBNAME    @"zongyi.db"
+
+
+#define DBNAME                          @"zongyi.db"
 
 
 #define kAppleLookupURLTemplate         @"https://itunes.apple.com/lookup?id=%@"
 #define kAppleLookupURLTemplateCn       @"https://itunes.apple.com/cn/lookup?id=%@"
 
 
+
+#define ZY_HOST                         @"http://121.42.183.124"//@"http://192.168.1.147"//
+#define ZY_PORT                         @"80"//@"8080"//
 #define ZY_URL_PARAM                    @"ZYGameServer/app/v1/gameParam"
 
 
@@ -135,7 +140,7 @@
             APLog(@"在线参数：创建数据库文件");
         }
         //创建在线参数table
-        NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS param (name varchar(100) NOT NULL, value TEXT);CREATE TABLE IF NOT EXISTS adgame (zyno varchar(50) not null, scheme varchar(200) NOT NULL, packageName varchar(50) NOT NULL, version varchar(50) NOT NULL, url varchar(300) NOT NULL, button varchar(300) NOT NULL, buttonFlash varchar(300) NOT NULL, img varchar(300) NOT NULL, lisImg varchar(300) NOT NULL, rewardid varchar(50) not null, rewardname varchar(50) not null, rewardicon varchar(300) not null, reward int(10) NOT NULL);CREATE TABLE IF NOT EXISTS defaultlist (zyno varchar(50) not null); CREATE TABLE IF NOT EXISTS showlist (zyno varchar(50) not null);CREATE TABLE IF NOT EXISTS statistics (zyno varchar(100) not null,date date not null,record text not null);";
+        NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS param (name varchar(100) NOT NULL, value TEXT);CREATE TABLE IF NOT EXISTS adgame (zyno varchar(50) not null, scheme varchar(200) NOT NULL, packageName varchar(50) NOT NULL, version varchar(50) NOT NULL, url varchar(300) NOT NULL, button varchar(300) NOT NULL, buttonFlash varchar(300) NOT NULL, buttonType int(20) not null, img varchar(300) NOT NULL, listImg varchar(300) NOT NULL, rewardid varchar(50) not null, rewardname varchar(50) not null, rewardicon varchar(300) not null, reward int(20) NOT NULL, pushdate date, defdate date);CREATE TABLE IF NOT EXISTS defaultlist (zyno varchar(50) not null); CREATE TABLE IF NOT EXISTS showlist (zyno varchar(50) not null);CREATE TABLE IF NOT EXISTS statistics (zyno varchar(100) not null,date date not null,record text not null);";
         [self execSql:sqlCreateTable and:NO];
         
         
@@ -379,6 +384,12 @@
 - (void)showLog
 {
     _isShowLog = YES;
+}
+
+
+- (NSString*)getSdkVersion
+{
+    return ZYSDK_VERSION;
 }
 
 

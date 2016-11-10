@@ -69,6 +69,8 @@ public:
         enBtnShare,
         enBtnKTplay,
         enBtnWatch,
+        enBtnWxPay,
+        enBtnDevice,
         enBtnVideo,
         enBtnMenu,
         enBtnInter,

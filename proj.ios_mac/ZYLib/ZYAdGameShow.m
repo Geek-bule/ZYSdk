@@ -11,7 +11,6 @@
 #import "ZYGameInfo.h"
 #import "ZYAdStatistics.h"
 #import "ZYParamOnline.h"
-#import "ZYScrollView.h"
 
 
 
@@ -29,16 +28,18 @@
     BOOL _isHidden;
     int _currPage;
 }
-@property (strong, nonatomic) ZYScrollView *scrollView;
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *view;
 @property (strong, nonatomic) UIView *buttonView;
 @property (strong, nonatomic) UIButton *buttonLeft;
 @property (strong, nonatomic) UIButton *buttonRight;
-@property (retain, nonatomic) NSMutableArray *adZynoArray;
-@property (retain, nonatomic) NSMutableArray *adDefaultList;
-@property (nonatomic) CGPoint btnViewPos;
-@property (nonatomic) CGFloat btnScale;
+@property (strong, nonatomic) NSMutableArray *adZynoArray;
+@property (strong, nonatomic) NSMutableArray *adDefaultList;
+@property (nonatomic, assign) CGPoint btnViewPos;
+@property (nonatomic, assign) CGFloat btnScale;
+@property (nonatomic, assign) CGFloat winWidth;
+@property (nonatomic, assign) CGFloat winHeight;
 @end
 
 @implementation ZYAdGameShow
@@ -59,36 +60,56 @@
 {
     self = [super init];
     if (self) {
-        CGRect winSize = [[UIScreen mainScreen] bounds];
+        
         _btnViewPos = CGPointMake(0.2, 0.20);
         _btnScale = 1.0;
         _isHidden = YES;
         _currPage = 0;
         
-        self.scrollView = [[ZYScrollView alloc] initWithFrame:winSize];
-        self.scrollView.effect = ZYScrollViewEffectDepth;
-        self.scrollView.delegate = self;
-        self.scrollView.contentSize = winSize.size;
-        
         _adZynoArray = [[NSMutableArray alloc] init];
         _adDefaultList = [[NSMutableArray alloc] init];
         currPageNum = 0;
         
-        float winWidth = (winSize.size.width > winSize.size.height)?winSize.size.height:winSize.size.width;
-        float winHeight = (winSize.size.width > winSize.size.height)?winSize.size.width:winSize.size.height;
-        float rateScreent = winWidth/winHeight;
-        if (rateScreent > 0.67) {
-            //ipad height* 0.8
-            adImageRate = winHeight*0.85/IMAGE_HEIGHT;
-        }else{
-            //iphone width* 0.8
-            adImageRate = winWidth*0.85/IMAGE_WIDTH;
+        //屏幕适配
+        CGRect winSize = [[UIScreen mainScreen] bounds];
+        UIDeviceOrientation orientation = (UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation;
+        BOOL bIsLand = UIDeviceOrientationIsLandscape(orientation);
+        
+        _winWidth = winSize.size.width;
+        _winHeight = winSize.size.height;
+        
+        if (bIsLand) {
+            _winWidth = winSize.size.height>winSize.size.width?winSize.size.height:winSize.size.width;
+            _winHeight = winSize.size.height<winSize.size.width?winSize.size.height:winSize.size.width;
         }
+        
+        {
+            float winWidth = (_winWidth > _winHeight)?_winHeight:_winWidth;
+            float winHeight = (_winWidth > _winHeight)?_winWidth:_winHeight;
+            float rateScreent = winWidth/winHeight;
+            if (rateScreent > 0.67) {
+                //ipad height* 0.8
+                adImageRate = winHeight*0.85/IMAGE_HEIGHT;
+            }else{
+                //iphone width* 0.8
+                adImageRate = winWidth*0.85/IMAGE_WIDTH;
+            }
+        }
+        
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, _winWidth, _winHeight)];
+        self.scrollView.pagingEnabled = YES;
+        self.scrollView.clipsToBounds = NO;
+        self.scrollView.delegate = self;
+        self.scrollView.contentSize = CGSizeMake(_winWidth, _winHeight);
         
         //设置回调
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(reloadAdPage)
                                                      name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didChangedStatusBarOrientation:)
+                                                     name:UIApplicationDidChangeStatusBarOrientationNotification
                                                    object:nil];
     }
     return self;
@@ -103,6 +124,11 @@
 - (void)reloadAdPage
 {
     [self setAdHide:_isHidden Page:_currPage];
+}
+
+
+- (void)didChangedStatusBarOrientation:(NSNotification*)n {
+    
 }
 
 
@@ -142,16 +168,15 @@
 
 - (void)addAdButton
 {
-    CGRect winSize = [[UIScreen mainScreen] bounds];
     [self.buttonView removeFromSuperview];
-    NSArray*list = [[ZYGameServer shareServer] adGameZynoArray];
+    NSArray* list = [[ZYGameServer shareServer] getGameZynoArray];
     if (!list || [list count] == 0) {
-        NSArray*listDefault = [[ZYGameServer shareServer] adDefaultArray];
+        NSArray* listDefault = [[ZYGameServer shareServer] getDefaultArray];
         if (listDefault && listDefault.count> 0) {
             UIImage*image = [self imagesNamedFromCustomBundle:@"zyadmore"];
             CGFloat imageWidth = image.size.width*adImageRate;
             CGFloat imageHeight = image.size.height*adImageRate;
-            self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(winSize.size.width*_btnViewPos.x-imageWidth/2, winSize.size.height*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
+            self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(_winWidth*_btnViewPos.x-imageWidth/2, _winHeight*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
             [self.view addSubview:self.buttonView];
             
             UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickOpen)];
@@ -168,65 +193,66 @@
         return;
     }
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    int nCount = 0;
-    for (id value in list) {
-        ZYGameInfo* info = [ZYGameServer shareServer].adGameInfoDic[value];
-        NSString* buttonPath = [self getFilePath:info.button];
-        NSString* buttonFlashPath = [self getFilePath:info.buttonFlash];
-        NSString* imgPath = [self getFilePath:info.img];
-        if ([fileManager fileExistsAtPath:buttonPath]
-            &&
-            [fileManager fileExistsAtPath:buttonFlashPath]
-            &&
-            [fileManager fileExistsAtPath:imgPath] ) {
-            
-            currPageNum = nCount;
-            nCount ++;
-            
-            UIImage*image = [UIImage imageWithContentsOfFile:buttonPath];
-            CGFloat imageWidth = image.size.width*adImageRate;
-            CGFloat imageHeight = image.size.height*adImageRate;
-            self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(winSize.size.width*_btnViewPos.x-imageWidth/2, winSize.size.height*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
-            [self.view addSubview:self.buttonView];
-            
-            
-            UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickOpen)];
-            [self.buttonView addGestureRecognizer:singleTap];
-            self.buttonView.userInteractionEnabled=YES;
-            
-            
-            CGFloat disWidth = image.size.width*adImageRate*0.15/2;
-            CGFloat disHeight = image.size.height*adImageRate*0.15/2;
-            UIView *clipView = [[UIView alloc] initWithFrame:CGRectMake( disWidth, disHeight, image.size.width*adImageRate*0.85, image.size.height*adImageRate*0.85)];
-            [clipView setClipsToBounds:YES];
-            clipView.layer.cornerRadius = 90*adImageRate;
-            clipView.layer.masksToBounds = YES;
-            clipView.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
-            [self.buttonView addSubview:clipView];
-            
-            UIImage*imageFlash = [UIImage imageWithContentsOfFile:buttonFlashPath];
-            UIImageView* imageView1 = [[UIImageView alloc] initWithImage:imageFlash];
-            imageView1.frame = CGRectMake(-disWidth, -disHeight, imageFlash.size.width*adImageRate, imageFlash.size.height*adImageRate);
-            [clipView addSubview:imageView1];
-            
-            [UIView animateWithDuration:4.0 // 动画时长
-                             animations:^{
-                                 imageView1.frame = CGRectMake(image.size.width*adImageRate-imageFlash.size.width*adImageRate-disWidth, image.size.height*adImageRate-imageFlash.size.height*adImageRate-disHeight, imageFlash.size.width*adImageRate, imageFlash.size.height*adImageRate);
-                             }];
-            
-            UIImageView*buttonImage = [[UIImageView alloc] initWithImage:image];
-            buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
-            buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
-            [self.buttonView addSubview:buttonImage];
-            
-            [self shakeToShow:self.buttonView];
-            
-            [[ZYAdStatistics shareStatistics] statistics:info.zyno andKey:@"iconShow"];
-
-            
-            return;
-        }
+    
+//    for (id value in list) {
+    NSDictionary *adDic = [[ZYGameServer shareServer] getGameInfoDic];
+    int nCount = rand()%list.count;
+    ZYGameInfo* info = adDic[list[nCount]];
+    NSString* buttonPath = [self getFilePath:info.button];
+    NSString* buttonFlashPath = [self getFilePath:info.buttonFlash];
+    NSString* imgPath = [self getFilePath:info.img];
+    if ([fileManager fileExistsAtPath:buttonPath]
+        &&
+        [fileManager fileExistsAtPath:buttonFlashPath]
+        &&
+        [fileManager fileExistsAtPath:imgPath] ) {
+        
+        currPageNum = nCount;
+        
+        UIImage*image = [UIImage imageWithContentsOfFile:buttonPath];
+        CGFloat imageWidth = image.size.width*adImageRate;
+        CGFloat imageHeight = image.size.height*adImageRate;
+        self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(_winWidth*_btnViewPos.x-imageWidth/2, _winHeight*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
+        [self.view addSubview:self.buttonView];
+        
+        
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickOpen)];
+        [self.buttonView addGestureRecognizer:singleTap];
+        self.buttonView.userInteractionEnabled=YES;
+        
+        
+        CGFloat disWidth = image.size.width*adImageRate*0.15/2;
+        CGFloat disHeight = image.size.height*adImageRate*0.15/2;
+        UIView *clipView = [[UIView alloc] initWithFrame:CGRectMake( disWidth, disHeight, image.size.width*adImageRate*0.85, image.size.height*adImageRate*0.85)];
+        [clipView setClipsToBounds:YES];
+        clipView.layer.cornerRadius = 90*adImageRate;
+        clipView.layer.masksToBounds = YES;
+        clipView.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
+        [self.buttonView addSubview:clipView];
+        
+        UIImage*imageFlash = [UIImage imageWithContentsOfFile:buttonFlashPath];
+        UIImageView* imageView1 = [[UIImageView alloc] initWithImage:imageFlash];
+        imageView1.frame = CGRectMake(-disWidth, -disHeight, imageFlash.size.width*adImageRate, imageFlash.size.height*adImageRate);
+        [clipView addSubview:imageView1];
+        
+        [UIView animateWithDuration:3.0 // 动画时长
+                         animations:^{
+                             imageView1.frame = CGRectMake(image.size.width*adImageRate-imageFlash.size.width*adImageRate-disWidth, image.size.height*adImageRate-imageFlash.size.height*adImageRate-disHeight, imageFlash.size.width*adImageRate, imageFlash.size.height*adImageRate);
+                         }];
+        
+        UIImageView*buttonImage = [[UIImageView alloc] initWithImage:image];
+        buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
+        buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
+        [self.buttonView addSubview:buttonImage];
+        
+        [self shakeToShow:self.buttonView];
+        
+        [[ZYAdStatistics shareStatistics] statistics:info.zyno andKey:@"iconShow"];
+        
+        return;
     }
+//    }
+    NSLog(@"进入循环模式");
     //如果一直没有就间隔时间再进行
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addAdButton) userInfo:nil repeats:NO];
 }
@@ -254,15 +280,14 @@
 
 - (void)addAdGameView
 {
-    CGRect winSize = [[UIScreen mainScreen] bounds];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [_adZynoArray removeAllObjects];
     int count = 0;
     //add scroll view
-    NSArray*list = [[ZYGameServer shareServer] adGameZynoArray];
+    NSArray*list = [[ZYGameServer shareServer] getGameZynoArray];
     if (list && [list count] > 0) {
         for (id value in list) {
-            ZYGameInfo* info = [ZYGameServer shareServer].adGameInfoDic[value];
+            ZYGameInfo* info = [[ZYGameServer shareServer] getGameInfoDic][value];
             NSString* buttonPath = [self getFilePath:info.button];
             NSString* imgPath = [self getFilePath:info.img];
             if ([fileManager fileExistsAtPath:buttonPath]
@@ -280,7 +305,7 @@
                 UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
                 int adImageWidth = image.size.width*adImageRate;
                 int adImageHeight = image.size.height*adImageRate;
-                imageView.frame = CGRectMake((winSize.size.width-adImageWidth)/2+x-8, (winSize.size.height-adImageHeight)/2, adImageWidth, adImageHeight);
+                imageView.frame = CGRectMake((_winWidth-adImageWidth)/2+x, (_winHeight-adImageHeight)/2, adImageWidth, adImageHeight);
                 [self.scrollView addSubview:imageView];
                 self.scrollView.contentSize = CGSizeMake(x + width, height);
                 UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
@@ -304,7 +329,7 @@
                 [imageView addSubview:buttonNo];
                 
                 //是否显示有奖励
-                if (info.reward.intValue > 0) {
+                if (info.reward.intValue > 0 && info.rewardId != 0 ) {
                     UIImage* imageGift = [self imagesNamedFromCustomBundle:@"zyadgift"];
                     int imageGiftWidth = imageGift.size.width*adImageRate;
                     int imageGiftHeight = imageGift.size.height*adImageRate;
@@ -320,7 +345,7 @@
     }
     
     
-    NSArray*listDefault = [[ZYGameServer shareServer] adDefaultArray];
+    NSArray*listDefault = [[ZYGameServer shareServer] getDefaultArray];
     CGFloat width = CGRectGetWidth(self.scrollView.frame);
     CGFloat height = CGRectGetHeight(self.scrollView.frame);
     CGFloat x = self.scrollView.subviews.count * width;
@@ -328,7 +353,7 @@
     UIImage *imageMoreBG = [self imagesNamedFromCustomBundle:@"zyadmorebg"];
     int imageMoreWidth = imageMoreBG.size.width*adImageRate;
     int imageMoreHeight = imageMoreBG.size.height*adImageRate;
-    UIImageView*buttonMoreBG = [[UIImageView alloc] initWithFrame:CGRectMake((winSize.size.width-imageMoreWidth)/2+x-8, (winSize.size.height-imageMoreHeight)/2, imageMoreWidth, imageMoreHeight)];
+    UIImageView*buttonMoreBG = [[UIImageView alloc] initWithFrame:CGRectMake((_winWidth-imageMoreWidth)/2+x, (_winHeight-imageMoreHeight)/2, imageMoreWidth, imageMoreHeight)];
     buttonMoreBG.image = imageMoreBG;
     [self.scrollView addSubview:buttonMoreBG];
     buttonMoreBG.userInteractionEnabled=YES;
@@ -342,11 +367,18 @@
     [buttonClose addTarget:self action:@selector(onClickClose) forControlEvents:UIControlEventTouchUpInside];
     [buttonMoreBG addSubview:buttonClose];
     
+    //显示版本号
+    UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageMoreWidth*0.69, imageMoreHeight*0.05, 40, 30)];
+    versionLabel.text = ZYSDK_VERSION;
+    versionLabel.font = [UIFont fontWithName:@"Arial" size:10];
+    versionLabel.textAlignment = UITextAlignmentLeft;
+    [buttonMoreBG addSubview:versionLabel];
+    
     
     if (listDefault && listDefault.count> 0) {
         [_adDefaultList removeAllObjects];
         for (id value in listDefault) {
-            ZYGameInfo* info = [ZYGameServer shareServer].adGameInfoDic[value];
+            ZYGameInfo* info = [[ZYGameServer shareServer] getGameInfoDic][value];
             NSString* imgPath = [self getFilePath:info.listImg];
             if ([fileManager fileExistsAtPath:imgPath]) {
                 [_adDefaultList addObject:info];
@@ -358,7 +390,7 @@
         UIImage* imageList = [UIImage imageWithContentsOfFile:imgPath];//[self imagesNamedFromCustomBundle:@"t1"];
         int imageWidth = imageList.size.width*adImageRate;
         int imageHeigh = imageList.size.height*adImageRate;
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake((imageMoreWidth-imageWidth)/2, 38, imageWidth, (imageHeigh+cellDistance)*3.3) style:UITableViewStylePlain];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake((imageMoreWidth-imageWidth)/2, imageMoreWidth*0.18, imageWidth, (imageHeigh+cellDistance)*3.3) style:UITableViewStylePlain];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView setSeparatorColor:[UIColor clearColor]];
@@ -383,7 +415,7 @@
     int imageLeftHeight = imageLeft.size.height*adImageRate;
     self.buttonLeft = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
     [self.buttonLeft setBackgroundImage:imageLeft forState:UIControlStateNormal];
-    self.buttonLeft.frame = CGRectMake(6, winSize.size.height/2, imageLeftWidth, imageLeftHeight);//button的frame
+    self.buttonLeft.frame = CGRectMake(6, _winHeight/2, imageLeftWidth, imageLeftHeight);//button的frame
     [self.buttonLeft addTarget:self action:@selector(onClickLeft) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.buttonLeft];
     
@@ -392,9 +424,11 @@
     int imageRightHeight = imageRight.size.height*adImageRate;
     self.buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
     [self.buttonRight setBackgroundImage:imageRight forState:UIControlStateNormal];
-    self.buttonRight.frame = CGRectMake(winSize.size.width-imageRightWidth-6, winSize.size.height/2, imageRightWidth, imageRightHeight);//button的frame
+    self.buttonRight.frame = CGRectMake(_winWidth-imageRightWidth-6, _winHeight/2, imageRightWidth, imageRightHeight);//button的frame
     [self.buttonRight addTarget:self action:@selector(onClickRight) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.buttonRight];
+    
+    [self.scrollView setContentOffset:CGPointMake(width*currPageNum, 0) animated:NO];
 }
 
 - (void)removeAdGameView
@@ -432,10 +466,9 @@
 
 - (void)onClickLeft
 {
-    CGRect winSize= [[UIScreen mainScreen] bounds];
     if (currPageNum > 0) {
         currPageNum--;
-        [self.scrollView setContentOffset:CGPointMake(winSize.size.width*currPageNum, 0) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(_winWidth*currPageNum, 0) animated:YES];
         if (currPageNum < _adZynoArray.count) {
             NSString* zyno = _adZynoArray[currPageNum];
             [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];
@@ -445,10 +478,9 @@
 
 - (void)onClickRight
 {
-    CGRect winSize= [[UIScreen mainScreen] bounds];
     if (currPageNum < _adZynoArray.count) {
         currPageNum++;
-        [self.scrollView setContentOffset:CGPointMake(winSize.size.width*currPageNum, 0) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(_winWidth*currPageNum, 0) animated:YES];
         if (currPageNum < _adZynoArray.count) {
             NSString* zyno = _adZynoArray[currPageNum];
             [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];

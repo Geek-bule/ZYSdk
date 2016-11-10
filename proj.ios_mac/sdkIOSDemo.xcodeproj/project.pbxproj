@@ -30,7 +30,6 @@
 		1B1E65F51D7D559C00F7CA8F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC8CB151D2F838D00BA2057 /* AdSupport.framework */; };
 		1B1E65F61D7D55A800F7CA8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0B25FE1D2BCB7300B23CE4 /* UIKit.framework */; };
 		1B22E2561D95250900BABB0B /* ZYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B22E2551D95250900BABB0B /* ZYAlertView.m */; };
-		1B2BFA971DBDD6DE00A2235B /* ZYScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B6507001D7EA1BE00761F39 /* ZYScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFA981DBDD6DE00A2235B /* ZYIosRateApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1E65E61D7D1D7C00F7CA8F /* ZYIosRateApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFA991DBDD6DE00A2235B /* ZYParamOnline.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1E65E81D7D1D7C00F7CA8F /* ZYParamOnline.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFA9A1DBDD6DE00A2235B /* ZYGameServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1E65E41D7D1D7C00F7CA8F /* ZYGameServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -156,7 +155,6 @@
 		1B6506FC1D7E56D600761F39 /* ZYVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6506F41D7E56D500761F39 /* ZYVideoAdapter.m */; };
 		1B6506FE1D7E56D600761F39 /* ZYVideoAdRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6506F81D7E56D500761F39 /* ZYVideoAdRegistry.m */; };
 		1B6506FF1D7E56D600761F39 /* ZYVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6506FA1D7E56D600761F39 /* ZYVideoManager.m */; };
-		1B6507021D7EA1BE00761F39 /* ZYScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6507011D7EA1BE00761F39 /* ZYScrollView.m */; };
 		1B6507051D7EA22100761F39 /* ZYAdGameShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6507041D7EA22100761F39 /* ZYAdGameShow.m */; };
 		1B72DDC41D78367F009296BB /* AdViewInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B72DDBD1D78367F009296BB /* AdViewInterstitial.m */; };
 		1B72DDC61D78367F009296BB /* AdViewSplashAds.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B72DDC11D78367F009296BB /* AdViewSplashAds.m */; };
@@ -643,8 +641,6 @@
 		1B6506F91D7E56D600761F39 /* ZYVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVideoManager.h; sourceTree = "<group>"; };
 		1B6506FA1D7E56D600761F39 /* ZYVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVideoManager.m; sourceTree = "<group>"; };
 		1B6506FB1D7E56D600761F39 /* ZYVideoType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVideoType.h; sourceTree = "<group>"; };
-		1B6507001D7EA1BE00761F39 /* ZYScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYScrollView.h; sourceTree = "<group>"; };
-		1B6507011D7EA1BE00761F39 /* ZYScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYScrollView.m; sourceTree = "<group>"; };
 		1B6507031D7EA22100761F39 /* ZYAdGameShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYAdGameShow.h; sourceTree = "<group>"; };
 		1B6507041D7EA22100761F39 /* ZYAdGameShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYAdGameShow.m; sourceTree = "<group>"; };
 		1B72DD971D783573009296BB /* libZYLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZYLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1746,8 +1742,6 @@
 		1B72DD981D783573009296BB /* ZYLib */ = {
 			isa = PBXGroup;
 			children = (
-				1B6507001D7EA1BE00761F39 /* ZYScrollView.h */,
-				1B6507011D7EA1BE00761F39 /* ZYScrollView.m */,
 				1B1E65E61D7D1D7C00F7CA8F /* ZYIosRateApp.h */,
 				1B1E65E71D7D1D7C00F7CA8F /* ZYIosRateApp.m */,
 				1B1E65E81D7D1D7C00F7CA8F /* ZYParamOnline.h */,
@@ -2047,7 +2041,6 @@
 			files = (
 				1B2BFA981DBDD6DE00A2235B /* ZYIosRateApp.h in Headers */,
 				1B2BFA991DBDD6DE00A2235B /* ZYParamOnline.h in Headers */,
-				1B2BFA971DBDD6DE00A2235B /* ZYScrollView.h in Headers */,
 				1B2BFA9C1DBDD6DE00A2235B /* ZYAdStatistics.h in Headers */,
 				1B2BFA9D1DBDD6DE00A2235B /* ZYGameInfo.h in Headers */,
 				1B2BFA9E1DBDD6DF00A2235B /* ZYAwardInfo.h in Headers */,
@@ -2362,7 +2355,6 @@
 				1B1E65EA1D7D1D7C00F7CA8F /* ZYGameServer.m in Sources */,
 				1B6507051D7EA22100761F39 /* ZYAdGameShow.m in Sources */,
 				1B2CAD1F1D879EBC007C8B21 /* ZYAwardInfo.m in Sources */,
-				1B6507021D7EA1BE00761F39 /* ZYScrollView.m in Sources */,
 				1B22E2561D95250900BABB0B /* ZYAlertView.m in Sources */,
 				1B80300A1D9A25460060C56A /* ZYAdStatistics.m in Sources */,
 				1B1E65EC1D7D1D7C00F7CA8F /* ZYParamOnline.m in Sources */,

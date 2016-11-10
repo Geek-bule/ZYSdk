@@ -77,7 +77,7 @@
     NSDate *dateFromString = [dateFormatter dateFromString:storeDate];
     NSDate *dateToString = [dateFormatter dateFromString:_nowDate];
     int timediff = [dateToString timeIntervalSince1970]-[dateFromString timeIntervalSince1970];
-    if (timediff >= 0*24*60*60) {
+    if (timediff >= 7*24*60*60) {
         NSDictionary* statisDic = [self loadDataFromDb:_db andDate:nil];
         if (statisDic && [statisDic count] != 0) {
             NSMutableArray* statisArray = [[NSMutableArray alloc] init];

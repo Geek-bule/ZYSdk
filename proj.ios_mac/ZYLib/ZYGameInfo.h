@@ -17,12 +17,15 @@
 @property (nonatomic, strong) NSString *version;
 @property (nonatomic, strong) NSString *button;
 @property (nonatomic, strong) NSString *buttonFlash;
+@property (nonatomic, strong) NSNumber *buttonType;
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSString *listImg;
 @property (nonatomic, strong) NSString *rewardId;
 @property (nonatomic, strong) NSString *rewardName;
 @property (nonatomic, strong) NSString *rewardIcon;
 @property (nonatomic, strong) NSNumber *reward;
+@property (nonatomic, strong) NSString *pushdate;
+@property (nonatomic, strong) NSString *defdate;
 
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key;

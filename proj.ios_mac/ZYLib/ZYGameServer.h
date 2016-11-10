@@ -17,13 +17,6 @@ typedef void (^awardBack)(NSArray* awardDic);
 
 @interface ZYGameServer : NSObject
 
-@property (nonatomic, retain) NSMutableDictionary* adGameInfoDic;   //推荐的更多游戏
-@property (nonatomic, retain) NSMutableDictionary* rewardInfoDic;   //奖励的列表
-@property (nonatomic, retain) NSMutableArray* adGameZynoArray;      //推荐的zyno列表
-@property (nonatomic, retain) NSMutableArray* adDisableImg;         //删除的图片列表
-@property (nonatomic, retain) NSMutableArray* adDefaultArray;       //默认列表的zyno
-@property (nonatomic, retain) NSMutableArray* adLoadImgArray;       //图片下载列表
-@property (nonatomic, retain) NSString* adGameRic;                  //领取奖励的ric拼接字符串
 
 
 + (ZYGameServer*)shareServer;
@@ -39,6 +32,12 @@ typedef void (^awardBack)(NSArray* awardDic);
 - (void)statisticsApp:(NSDictionary*)jsonData;
 
 - (void)registerTest;
+
+- (NSArray*)getGameZynoArray;
+
+- (NSArray*)getDefaultArray;
+
+- (NSDictionary*)getGameInfoDic;
 
 /**
  *展示log

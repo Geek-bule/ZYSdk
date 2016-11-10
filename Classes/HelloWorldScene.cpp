@@ -78,36 +78,36 @@ bool HelloWorld::init()
     
     //rate
     auto pRateTip = MenuItemFont::create("Rate (游戏评论)", CC_CALLBACK_1(HelloWorld::rateGameCallback, this));
-    pRateTip->setPosition(Vec2(winSize.width*0.5, winSize.height*0.75));
+    pRateTip->setPosition(Vec2(winSize.width*0.5, winSize.height*0.9));
     menu->addChild(pRateTip);
     
     //UdidLogin
     auto pMoreGame = MenuItemFont::create("MoreGame（更多游戏）", CC_CALLBACK_1(HelloWorld::MoreGameCallback, this));
-    pMoreGame->setPosition(Vec2(winSize.width*0.5, winSize.height*0.7));
+    pMoreGame->setPosition(Vec2(winSize.width*0.5, winSize.height*0.85));
     menu->addChild(pMoreGame);
     
     //SubmitStorage
     auto pSubmitStorage = MenuItemFont::create("隐藏更多游戏", CC_CALLBACK_1(HelloWorld::submitStorageCallback, this));
-    pSubmitStorage->setPosition(Vec2(winSize.width*0.4, winSize.height*0.65));
+    pSubmitStorage->setPosition(Vec2(winSize.width*0.4, winSize.height*0.8));
     menu->addChild(pSubmitStorage);
     
     auto pHideStorage = MenuItemFont::create("测试", CC_CALLBACK_1(HelloWorld::updateStorageCallback, this));
-    pHideStorage->setPosition(Vec2(winSize.width*0.68, winSize.height*0.65));
+    pHideStorage->setPosition(Vec2(winSize.width*0.68, winSize.height*0.8));
     menu->addChild(pHideStorage);
     
     //Mogo Banner
     auto pMogoBanner = MenuItemFont::create("Banner（广告条）", CC_CALLBACK_1(HelloWorld::mogoBannerCallback, this));
-    pMogoBanner->setPosition(Vec2(winSize.width*0.5, winSize.height*0.6));
+    pMogoBanner->setPosition(Vec2(winSize.width*0.5, winSize.height*0.75));
     menu->addChild(pMogoBanner);
     
     //Mogo Interstitial
     auto pMogoInterstitial = MenuItemFont::create("Interstitial（显示插屏）", CC_CALLBACK_1(HelloWorld::mogoInterstitialCallback, this));
-    pMogoInterstitial->setPosition(Vec2(winSize.width*0.5, winSize.height*0.55));
+    pMogoInterstitial->setPosition(Vec2(winSize.width*0.5, winSize.height*0.7));
     menu->addChild(pMogoInterstitial,1,enBtnInter);
     
     //Video
     auto pVideo = MenuItemFont::create("Video Show（视频）（隐藏按钮）", CC_CALLBACK_1(HelloWorld::videoCallback, this));
-    pVideo->setPosition(Vec2(winSize.width*0.5, winSize.height*0.5));
+    pVideo->setPosition(Vec2(winSize.width*0.5, winSize.height*0.65));
     menu->addChild(pVideo,1,enBtnVideo);
     pVideo->setEnabled(false);
     
@@ -118,50 +118,51 @@ bool HelloWorld::init()
     
     // ktplay firend list
     auto pFirendList = MenuItemFont::create("Extra 初始化", CC_CALLBACK_1(HelloWorld::friendsCallback, this));
-    pFirendList->setPosition(Vec2(winSize.width*0.5, winSize.height*0.4));
+    pFirendList->setPosition(Vec2(winSize.width*0.5, winSize.height*0.55));
     menu->addChild(pFirendList);
     
     //In App Purchase
     auto pIAP = MenuItemFont::create("In App Purchase（内购加载）", CC_CALLBACK_1(HelloWorld::iapCallback, this));
-    pIAP->setPosition(Vec2(winSize.width*0.5, winSize.height*0.35));
+    pIAP->setPosition(Vec2(winSize.width*0.5, winSize.height*0.5));
     menu->addChild(pIAP,1,enBtnInApp);
     pIAP->setEnabled(false);
     
     //share sdk
     auto pShareTip = MenuItemFont::create("Share Sdk（分享）", CC_CALLBACK_1(HelloWorld::shareSdkCallback, this));
-    pShareTip->setPosition(Vec2(winSize.width*0.5, winSize.height*0.3));
+    pShareTip->setPosition(Vec2(winSize.width*0.5, winSize.height*0.45));
     menu->addChild(pShareTip,1,enBtnShare);
     pShareTip->setEnabled(false);
     
     // ktplay
     auto pVersionTip = MenuItemFont::create("KTPlay(游戏社区)", CC_CALLBACK_1(HelloWorld::ktplayCallback, this));
-    pVersionTip->setPosition(Vec2(winSize.width*0.5, winSize.height*0.25));
+    pVersionTip->setPosition(Vec2(winSize.width*0.5, winSize.height*0.4));
     menu->addChild(pVersionTip,1,enBtnKTplay);
     pVersionTip->setEnabled(false);
     
 
     //apple watch
     auto pNotificate = MenuItemFont::create("watch（手表功能）", CC_CALLBACK_1(HelloWorld::notificateCallback, this));
-    pNotificate->setPosition(Vec2(winSize.width*0.5, winSize.height*0.2));
+    pNotificate->setPosition(Vec2(winSize.width*0.5, winSize.height*0.35));
     menu->addChild(pNotificate,1,enBtnWatch);
     pNotificate->setEnabled(false);
     
     
-    
     // ktplaylogin
     auto pKTPlayLogin = MenuItemFont::create("支付订单(微信)", CC_CALLBACK_1(HelloWorld::ktLoginCallback, this));
-    pKTPlayLogin->setPosition(Vec2(winSize.width*0.5, winSize.height*0.95));
-    menu->addChild(pKTPlayLogin);
+    pKTPlayLogin->setPosition(Vec2(winSize.width*0.5, winSize.height*0.3));
+    menu->addChild(pKTPlayLogin,1,enBtnWxPay);
+    pKTPlayLogin->setEnabled(false);
     
-    // ktplaylogout
-    auto pKTPlayLogOut = MenuItemFont::create("查询订单(微信)", CC_CALLBACK_1(HelloWorld::ktLogoutCallback, this));
-    pKTPlayLogOut->setPosition(Vec2(winSize.width*0.5, winSize.height*0.9));
-    menu->addChild(pKTPlayLogOut);
+//    // ktplaylogout
+//    auto pKTPlayLogOut = MenuItemFont::create("查询订单(微信)", CC_CALLBACK_1(HelloWorld::ktLogoutCallback, this));
+//    pKTPlayLogOut->setPosition(Vec2(winSize.width*0.5, winSize.height*0.25));
+//    menu->addChild(pKTPlayLogOut);
     
     //GameCenter
     auto pGameCenter = MenuItemFont::create("设备记录清理", CC_CALLBACK_1(HelloWorld::gameCenterCallback, this));
-    pGameCenter->setPosition(Vec2(winSize.width*0.5, winSize.height*0.85));
-    menu->addChild(pGameCenter);
+    pGameCenter->setPosition(Vec2(winSize.width*0.5, winSize.height*0.25));
+    menu->addChild(pGameCenter,1,enBtnDevice);
+    pGameCenter->setEnabled(false);
     
     //SubmitStorage
 //    auto pUpdateStorage = MenuItemFont::create("showAdGame（展示游戏广告）", CC_CALLBACK_1(HelloWorld::updateStorageCallback, this));
@@ -169,9 +170,9 @@ bool HelloWorld::init()
 //    menu->addChild(pUpdateStorage);
 
     //UpdateHeart
-//    auto pConsumeHeart = MenuItemFont::create("DeepLink(深度连接)", CC_CALLBACK_1(HelloWorld::consumeHeartCallback, this));
-//    pConsumeHeart->setPosition(Vec2(winSize.width*0.5, winSize.height*0.2));
-//    menu->addChild(pConsumeHeart);
+    auto pConsumeHeart = MenuItemFont::create("DeepLink(深度连接)", CC_CALLBACK_1(HelloWorld::consumeHeartCallback, this));
+    pConsumeHeart->setPosition(Vec2(winSize.width*0.5, winSize.height*0.2));
+    menu->addChild(pConsumeHeart);
 //
 //    //UpdateHeart
 //    auto pAddHeart = MenuItemFont::create("AddHeart", CC_CALLBACK_1(HelloWorld::addHeartCallback, this));
@@ -216,6 +217,7 @@ void HelloWorld::ktplayCallback(cocos2d::Ref *pSender)
 void shareSdkCallBack(int award)
 {
     //分享成功后的回调
+    cocos2d::MessageBox("在这个函数里面给玩家购买商品！！（如果不需要可以屏蔽）", "支付成功回调");
 }
 
 void OrderSuccess(std::string identifier)
@@ -245,6 +247,8 @@ void HelloWorld::friendsCallback(cocos2d::Ref *pSender)
     ShareHelper::shareHelper()->initFunction(shareSdkCallBack);
     auto pItemIAP = (MenuItemFont*)getChildByTag(enBtnMenu)->getChildByTag(enBtnInApp);
     pItemIAP->setEnabled(true);
+    auto pItemDevice = (MenuItemFont*)getChildByTag(enBtnMenu)->getChildByTag(enBtnDevice);
+    pItemDevice->setEnabled(true);
     
     //IAP 初始化
     InIAPHelper::shareIAP()->initIAPId();
@@ -266,6 +270,13 @@ void HelloWorld::friendsCallback(cocos2d::Ref *pSender)
     appleWatchCpp::init();
     auto pItemWatch = (MenuItemFont*)getChildByTag(enBtnMenu)->getChildByTag(enBtnWatch);
     pItemWatch->setEnabled(true);
+    
+    //微信支付
+    auto pItemWxPay = (MenuItemFont*)getChildByTag(enBtnMenu)->getChildByTag(enBtnWxPay);
+    pItemWxPay->setEnabled(true);
+    
+    
+    
 }
 
 void HelloWorld::rateGameCallback(cocos2d::Ref *pSender)
@@ -355,7 +366,9 @@ void HelloWorld::updateStorageCallback(cocos2d::Ref *pSender)
 
 void HelloWorld::consumeHeartCallback(cocos2d::Ref *pSender)
 {
-    
+    cocos2d::experimental::ui::WebView *web = cocos2d::experimental::ui::WebView::create();
+    web->loadFile("11111111.html");
+    this->addChild(web);
 }
 
 void HelloWorld::addHeartCallback(cocos2d::Ref *pSender)

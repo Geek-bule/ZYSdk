@@ -145,7 +145,7 @@ void ZYTools::setAdGamePos()
 {
     //设置互推图片的位置和大小
     //这个设置根据自己的需求来修改
-    [[ZYAdGameShow shareShow] setAdPot:CGPointMake(0.5, 0.2) Scale:1.0];
+    [[ZYAdGameShow shareShow] setAdPot:CGPointMake(0.2, 0.9) Scale:1.0];
 }
 
 void ZYTools::registerTest()

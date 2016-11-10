@@ -12,9 +12,15 @@
 #import "AFNetworking.h"
 
 
-#define ZY_HOST                 @"http://121.42.183.124"
-#define ZY_PORT                 @"80"
-
+#define ZYSDK_VERSION       @"v1.1.5"
+/**
+ 1.1.4  1.增加互推图片的超时时间，超过15天的图片就从本地删除
+        2.增加本地数据库参数  pushdate defdate
+ 
+ 1.1.5  1.fix 修复了ios7下广告的横竖屏判断不准确问题
+        2.fix 准确获取横竖屏广告图
+ 
+ */
 
 typedef void (^paramBack)(NSDictionary *dict);
 
@@ -68,6 +74,11 @@ typedef void (^paramBack)(NSDictionary *dict);
  */
 - (void)showLog;
 
+
+/**
+ *获取sdk的版本号
+ */
+- (NSString*)getSdkVersion;
 
 /**
  IDFA
