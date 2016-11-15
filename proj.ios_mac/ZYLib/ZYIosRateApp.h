@@ -17,22 +17,24 @@ typedef void (^rateBack)();
 
 
 /**
- 是否可以评论
+ *  @brief  是否可以评论
  */
 - (BOOL)isCanRateApp;
 
 /**
- 直接跳转评论界面
+ *  @brief  直接跳转评论界面
+ *  @param  rateCall        评论成功回调
  */
 - (void)RateWithUrlAndBlock:(rateBack) rateCall;
 
 /**
- 弹出提示框提示玩家是否进行评论
+ *  @brief  弹出提示框提示玩家是否进行评论
+ *  @param  rateCall        评论成功回调
  */
 - (void)RateWithTipAndBlock:(rateBack) rateCall;
 
 /**
- 展示log
+ *  @brief  展示log
  */
 - (void)showLog;
 

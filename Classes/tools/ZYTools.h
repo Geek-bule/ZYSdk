@@ -10,6 +10,7 @@
 #define ZYTools_hpp
 
 #include "cocos2d.h"
+USING_NS_CC;
 
 //=================================================================
 /**  
@@ -33,6 +34,12 @@
 typedef std::function<void()> ccVideoCallback;
 typedef std::function<void(bool)> ccStatusCallback;
 
+//三角形按钮位置
+#define TRIANGLE_TOP_LEFT           1
+#define TRIANGLE_TOP_RIGHT          2
+#define TRIANGLE_BOTTOM_LEFT        3
+#define TRIANGLE_BOTTOM_RIGHT       4
+
 
 class ZYTools
 {
@@ -53,11 +60,14 @@ public:
     //直接跳转评论页（里面有是否可以弹出评论的判断）
     static void rateWithUrl();
     
-    //游戏互推设置显示或隐藏
-    static void setAdGame(bool isShow);
+    //游戏互推圆形按钮设置显示或隐藏
+    static void setAdCircle(bool isShow,Vec2 pot,float scale);
     
-    //游戏互推图标显示的位置
-    static void setAdGamePos();
+    //游戏互推三角按钮设置显示或隐藏
+    static void setAdTriangle(bool isShow,float scale);
+    
+    //游戏互推大图展示
+    static void showBigPic();
     
     //游戏互推的测试函数
     static void registerTest();

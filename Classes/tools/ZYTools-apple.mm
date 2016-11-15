@@ -10,7 +10,8 @@
 #include "ZYGameServer.h"
 #include "ZYParamOnline.h"
 #include "ZYAdGameShow.h"
-#include "platform/ios/CCEAGLView-ios.h"
+#include "platform/ios/CCEAGLView-ios.h"    //cocos2dx 3.x
+//#include "EAGLView.h"                       //cocos2dx 2.x
 #include "ZYIosRateApp.h"
 #include "ZYAwardInfo.h"
 #include "HelloWorldScene.h"
@@ -42,9 +43,13 @@ void ZYTools::init()
     [[ZYGameServer shareServer] setAward:nil andGive:^(NSArray *awardDic) {
         //TODO:在这里给玩家奖励
         if (awardDic.count > 0) {
-            for (ZYAwardInfo *info in awardDic) {
-                
+            int reward = 0;
+            for (id value in awardDic) {
+                ZYAwardInfo *info = [[ZYAwardInfo alloc] initWithDictionary:value];
+                reward += info.reward.intValue;
+                NSLog(@"%d",reward);
             }
+            
             UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
                                                          message:@"领取互推奖励成功"
                                                         delegate:nil
@@ -65,9 +70,12 @@ void ZYTools::init()
 
 void ZYTools::initAdSdk()
 {
-    //添加互推
+    //cocos2dx 2.x
+//    EAGLView *eaglview = [EAGLView sharedEGLView];
+    //cocos2dx 3.x
     auto view = cocos2d::Director::getInstance()->getOpenGLView();
     CCEAGLView *eaglview = (CCEAGLView *) view->getEAGLView();
+    //添加互推
     [[ZYAdGameShow shareShow] showAdGame:eaglview];
 #ifdef ZYTOOLS_ADVIEW
     //初始化横幅
@@ -98,7 +106,7 @@ void ZYTools::showLog()
 //    [[ZYIosRateApp shareRate] showLog];
 //    [[ZYAdview shareAdview] showBannerLog];
 //    [[ZYAdview shareAdview] showInterlLog];
-    [[ZYVideoManager sharedManager] showLog];
+//    [[ZYVideoManager sharedManager] showLog];
 }
 
 
@@ -135,17 +143,30 @@ void ZYTools::rateWithUrl()
     }
 }
 
-void ZYTools::setAdGame(bool isShow)
+void ZYTools::setAdCircle(bool isShow, cocos2d::Vec2 pot, float scale)
 {
     //设置互推功能显示与否
-    [[ZYAdGameShow shareShow] setAdHide:!isShow Page:0];
+    if (isShow) {
+        //设置互推图片的位置和大小
+        //这个设置根据自己的需求来修改
+        [[ZYAdGameShow shareShow] showCircle:CGPointMake(pot.x, pot.y) Scale:scale];
+    }else{
+        [[ZYAdGameShow shareShow] hideCircle];
+    }
 }
 
-void ZYTools::setAdGamePos()
+void ZYTools::setAdTriangle(bool isShow, float scale)
 {
-    //设置互推图片的位置和大小
-    //这个设置根据自己的需求来修改
-    [[ZYAdGameShow shareShow] setAdPot:CGPointMake(0.2, 0.9) Scale:1.0];
+    if (isShow) {
+        [[ZYAdGameShow shareShow] showTriangle:TRIANGLE_TOP_RIGHT Scale:scale];
+    }else{
+        [[ZYAdGameShow shareShow] hideTriangle];
+    }
+}
+
+void ZYTools::showBigPic()
+{
+    [[ZYAdGameShow shareShow] showDirect];
 }
 
 void ZYTools::registerTest()
@@ -198,6 +219,9 @@ void ZYTools::initConfig()
 //init banner
 void ZYTools::initBannerView()
 {
+    //cocos2dx 2.x
+//    EAGLView *eaglview = [EAGLView sharedEGLView];
+    //cocos2dx 3.x
     auto view = cocos2d::Director::getInstance()->getOpenGLView();
     CCEAGLView *eaglview = (CCEAGLView *) view->getEAGLView();
     [[ZYAdview shareAdview] createBanner:eaglview];

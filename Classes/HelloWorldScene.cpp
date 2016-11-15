@@ -59,6 +59,8 @@ bool HelloWorld::init()
     m_isLoadIntertitial = false;
     m_isLoadIap = false;
     m_switchBanner = false;
+    m_isAdCircle = false;
+    m_isAdTriangle = false;
     
     //屏幕尺寸
     winSize = Director::getInstance()->getWinSize();
@@ -82,32 +84,37 @@ bool HelloWorld::init()
     menu->addChild(pRateTip);
     
     //UdidLogin
-    auto pMoreGame = MenuItemFont::create("MoreGame（更多游戏）", CC_CALLBACK_1(HelloWorld::MoreGameCallback, this));
+    auto pMoreGame = MenuItemFont::create("显示互推圆形按钮", CC_CALLBACK_1(HelloWorld::MoreGameCallback, this));
     pMoreGame->setPosition(Vec2(winSize.width*0.5, winSize.height*0.85));
-    menu->addChild(pMoreGame);
+    menu->addChild(pMoreGame,1,enBtnMoreGame);
+    
+    //moregame
+    auto pMoreGame2 = MenuItemFont::create("显示互推三角按钮", CC_CALLBACK_1(HelloWorld::consumeHeartCallback, this));
+    pMoreGame2->setPosition(Vec2(winSize.width*0.5, winSize.height*0.8));
+    menu->addChild(pMoreGame2,1,enBtnMoreGame2);
     
     //SubmitStorage
-    auto pSubmitStorage = MenuItemFont::create("隐藏更多游戏", CC_CALLBACK_1(HelloWorld::submitStorageCallback, this));
-    pSubmitStorage->setPosition(Vec2(winSize.width*0.4, winSize.height*0.8));
+    auto pSubmitStorage = MenuItemFont::create("显示互推大图", CC_CALLBACK_1(HelloWorld::submitStorageCallback, this));
+    pSubmitStorage->setPosition(Vec2(winSize.width*0.5, winSize.height*0.75));
     menu->addChild(pSubmitStorage);
     
-    auto pHideStorage = MenuItemFont::create("测试", CC_CALLBACK_1(HelloWorld::updateStorageCallback, this));
-    pHideStorage->setPosition(Vec2(winSize.width*0.68, winSize.height*0.8));
+    auto pHideStorage = MenuItemFont::create("*测试*", CC_CALLBACK_1(HelloWorld::updateStorageCallback, this));
+    pHideStorage->setPosition(Vec2(winSize.width*0.82, winSize.height*0.75));
     menu->addChild(pHideStorage);
     
     //Mogo Banner
     auto pMogoBanner = MenuItemFont::create("Banner（广告条）", CC_CALLBACK_1(HelloWorld::mogoBannerCallback, this));
-    pMogoBanner->setPosition(Vec2(winSize.width*0.5, winSize.height*0.75));
+    pMogoBanner->setPosition(Vec2(winSize.width*0.5, winSize.height*0.7));
     menu->addChild(pMogoBanner);
     
     //Mogo Interstitial
     auto pMogoInterstitial = MenuItemFont::create("Interstitial（显示插屏）", CC_CALLBACK_1(HelloWorld::mogoInterstitialCallback, this));
-    pMogoInterstitial->setPosition(Vec2(winSize.width*0.5, winSize.height*0.7));
+    pMogoInterstitial->setPosition(Vec2(winSize.width*0.5, winSize.height*0.65));
     menu->addChild(pMogoInterstitial,1,enBtnInter);
     
     //Video
     auto pVideo = MenuItemFont::create("Video Show（视频）（隐藏按钮）", CC_CALLBACK_1(HelloWorld::videoCallback, this));
-    pVideo->setPosition(Vec2(winSize.width*0.5, winSize.height*0.65));
+    pVideo->setPosition(Vec2(winSize.width*0.5, winSize.height*0.6));
     menu->addChild(pVideo,1,enBtnVideo);
     pVideo->setEnabled(false);
     
@@ -170,9 +177,9 @@ bool HelloWorld::init()
 //    menu->addChild(pUpdateStorage);
 
     //UpdateHeart
-    auto pConsumeHeart = MenuItemFont::create("DeepLink(深度连接)", CC_CALLBACK_1(HelloWorld::consumeHeartCallback, this));
-    pConsumeHeart->setPosition(Vec2(winSize.width*0.5, winSize.height*0.2));
-    menu->addChild(pConsumeHeart);
+//    auto pConsumeHeart = MenuItemFont::create("DeepLink(深度连接)", CC_CALLBACK_1(HelloWorld::consumeHeartCallback, this));
+//    pConsumeHeart->setPosition(Vec2(winSize.width*0.5, winSize.height*0.2));
+//    menu->addChild(pConsumeHeart);
 //
 //    //UpdateHeart
 //    auto pAddHeart = MenuItemFont::create("AddHeart", CC_CALLBACK_1(HelloWorld::addHeartCallback, this));
@@ -350,25 +357,36 @@ void HelloWorld::notificateCallback(cocos2d::Ref *pSender)
 
 void HelloWorld::MoreGameCallback(cocos2d::Ref *pSender)
 {
-    ZYTools::setAdGamePos();
-    ZYTools::setAdGame(true);
+    auto pItem = (MenuItemFont*) getChildByTag(enBtnMenu)->getChildByTag(enBtnMoreGame);
+    m_isAdCircle = !m_isAdCircle;
+    if (m_isAdCircle) {
+        pItem->setString("隐藏互推圆形按钮");
+    }else{
+        pItem->setString("显示互推圆形按钮");
+    }
+    ZYTools::setAdCircle(m_isAdCircle, Vec2(0.2, 0.8), 1.0);
+}
+
+void HelloWorld::consumeHeartCallback(cocos2d::Ref *pSender)
+{
+    auto pItem = (MenuItemFont*) getChildByTag(enBtnMenu)->getChildByTag(enBtnMoreGame2);
+    m_isAdTriangle = !m_isAdTriangle;
+    if (m_isAdTriangle) {
+        pItem->setString("隐藏互推三角按钮");
+    }else{
+        pItem->setString("显示互推三角按钮");
+    }
+    ZYTools::setAdTriangle(m_isAdTriangle, 1.0);
 }
 
 void HelloWorld::submitStorageCallback(cocos2d::Ref *pSender)
 {
-    ZYTools::setAdGame(false);
+    ZYTools::showBigPic();
 }
 
 void HelloWorld::updateStorageCallback(cocos2d::Ref *pSender)
 {
     ZYTools::registerTest();
-}
-
-void HelloWorld::consumeHeartCallback(cocos2d::Ref *pSender)
-{
-    cocos2d::experimental::ui::WebView *web = cocos2d::experimental::ui::WebView::create();
-    web->loadFile("11111111.html");
-    this->addChild(web);
 }
 
 void HelloWorld::addHeartCallback(cocos2d::Ref *pSender)

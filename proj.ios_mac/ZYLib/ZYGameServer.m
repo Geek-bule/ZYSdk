@@ -33,6 +33,7 @@
 @interface ZYGameServer()<UIAlertViewDelegate>
 {
     sqlite3 *_db;
+    bool _isAlertExsit;
 }
 
 @property(nonatomic)BOOL isShowLog;
@@ -87,6 +88,7 @@
         _adDisableImg = [[NSMutableArray alloc] init];
         _adLoadImgArray = [[NSMutableArray alloc] init];
         _isShowLog = NO;
+        _isAlertExsit = NO;
         
         //设置回调
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -172,6 +174,7 @@
     [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"zyos"];
     [manager.requestSerializer setValue:[self getLanguage] forHTTPHeaderField:@"language"];
     [manager.requestSerializer setValue:_ZYToken forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:[ZYParamOnline deviceName] forHTTPHeaderField:@"deviceName"];
     if (_isShowLog)NSLog(@"互推：header:%@",manager.requestSerializer.HTTPRequestHeaders);
     
 }
@@ -187,6 +190,7 @@
     [manager.requestSerializer setValue:[OpenUDID value] forHTTPHeaderField:@"openudid"];
     [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"os"];
     [manager.requestSerializer setValue:[self getLanguage] forHTTPHeaderField:@"language"];
+    [manager.requestSerializer setValue:[ZYParamOnline deviceName] forHTTPHeaderField:@"deviceName"];
     if (_isShowLog)NSLog(@"互推：header:%@",manager.requestSerializer.HTTPRequestHeaders);
 }
 
@@ -210,11 +214,11 @@
             char *packageName = (char*)sqlite3_column_text(statement, 2);
             info.packageName = [[NSString alloc]initWithUTF8String:packageName];
             
-            char *url = (char*)sqlite3_column_text(statement, 3);
-            info.url = [[NSString alloc]initWithUTF8String:url];
-            
-            char *version = (char*)sqlite3_column_text(statement, 4);
+            char *version = (char*)sqlite3_column_text(statement, 3);
             info.version = [[NSString alloc]initWithUTF8String:version];
+            
+            char *url = (char*)sqlite3_column_text(statement, 4);
+            info.url = [[NSString alloc]initWithUTF8String:url];
             
             char *button = (char*)sqlite3_column_text(statement, 5);
             info.button = [[NSString alloc]initWithUTF8String:button];
@@ -222,31 +226,34 @@
             char *buttonFlash = (char*)sqlite3_column_text(statement, 6);
             info.buttonFlash = [[NSString alloc]initWithUTF8String:buttonFlash];
             
-            int buttonType = (int)sqlite3_column_text(statement, 7);
+            char *triButton = (char*)sqlite3_column_text(statement, 7);
+            info.triButton = [[NSString alloc]initWithUTF8String:triButton];
+            
+            int buttonType = sqlite3_column_int(statement, 8);
             info.buttonType = [NSNumber numberWithInt:buttonType];
             
-            char *img = (char*)sqlite3_column_text(statement, 8);
+            char *img = (char*)sqlite3_column_text(statement, 9);
             info.img = [[NSString alloc]initWithUTF8String:img];
             
-            char *listImg = (char*)sqlite3_column_text(statement, 9);
+            char *listImg = (char*)sqlite3_column_text(statement, 10);
             info.listImg = [[NSString alloc]initWithUTF8String:listImg];
             
-            char *rewardId = (char*)sqlite3_column_text(statement, 10);
+            char *rewardId = (char*)sqlite3_column_text(statement, 11);
             info.rewardId = [[NSString alloc]initWithUTF8String:rewardId];
             
-            char *rewardName = (char*)sqlite3_column_text(statement, 11);
+            char *rewardName = (char*)sqlite3_column_text(statement, 12);
             info.rewardName = [[NSString alloc]initWithUTF8String:rewardName];
             
-            char *rewardIcon = (char*)sqlite3_column_text(statement, 12);
+            char *rewardIcon = (char*)sqlite3_column_text(statement, 13);
             info.rewardIcon = [[NSString alloc]initWithUTF8String:rewardIcon];
             
-            int reward = (int)sqlite3_column_text(statement, 13);
+            int reward = sqlite3_column_int(statement, 14);
             info.reward = [NSNumber numberWithInt:reward];
             
-            char *pushdate = (char*)sqlite3_column_text(statement, 14);
+            char *pushdate = (char*)sqlite3_column_text(statement, 15);
             info.pushdate = [[NSString alloc]initWithUTF8String:pushdate];
             
-            char *defdate = (char*)sqlite3_column_text(statement, 15);
+            char *defdate = (char*)sqlite3_column_text(statement, 16);
             info.defdate = [[NSString alloc]initWithUTF8String:defdate];
             
             [_adGameInfoDic setObject:info forKey:info.zyno];
@@ -291,11 +298,11 @@
         if ([_adGameInfoDic count] > 0) {
             for (NSString *key in _adGameInfoDic) {
                 ZYGameInfo *info = _adGameInfoDic[key];
-                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@'),",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.buttonType,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward,info.pushdate,info.defdate];
+                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%d','%@','%@','%@','%@','%@','%d','%@','%@'),",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.triButton,info.buttonType.intValue,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward.intValue,info.pushdate,info.defdate];
             }
             paramVec = [paramVec substringToIndex:[paramVec length]-1];
             //inser data from db
-            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, buttonType, img, listImg, rewardid, rewardname, rewardicon, reward, pushdate, defdate) VALUES %@",paramVec];
+            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, triButton, buttonType, img, listImg, rewardid, rewardname, rewardicon, reward, pushdate, defdate) VALUES %@",paramVec];
             [self execSql:insertTabel and:NO];
         }
         
@@ -436,12 +443,6 @@
                     //存储默认的zyno
                     [zynoArray addObject:info.zyno];
                     //判断是不是
-//                    if (![fileManager fileExistsAtPath:[self getFilePath:info.button]]) {
-//                        [_adLoadImgArray addObject:info.button];
-//                    }
-//                    if (![fileManager fileExistsAtPath:[self getFilePath:info.buttonFlash]]) {
-//                        [_adLoadImgArray addObject:info.buttonFlash];
-//                    }
                     if (![fileManager fileExistsAtPath:[self getFilePath:info.listImg]]) {
                         [_adLoadImgArray addObject:info.listImg];
                     }
@@ -469,6 +470,9 @@
                     }
                     if (![fileManager fileExistsAtPath:[self getFilePath:info.buttonFlash]]) {
                         [_adLoadImgArray addObject:info.buttonFlash];
+                    }
+                    if (![fileManager fileExistsAtPath:[self getFilePath:info.triButton]]) {
+                        [_adLoadImgArray addObject:info.triButton];
                     }
                     if (![fileManager fileExistsAtPath:[self getFilePath:info.img]]) {
                         [_adLoadImgArray addObject:info.img];
@@ -546,6 +550,7 @@
             if (timediff >= 15*24*60*60) {
                 [_adDisableImg addObject:info.button];
                 [_adDisableImg addObject:info.buttonFlash];
+                [_adDisableImg addObject:info.triButton];
                 [_adDisableImg addObject:info.img];
                 [_adDisableImg addObject:info.rewardIcon];
             }
@@ -714,41 +719,43 @@
                     
                     //如何防止重复切入切除出现多个alert
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"下载奖励礼包"
-                                                                           message:nil
-                                                                          delegate:self
-                                                                 cancelButtonTitle:nil
-                                                                 otherButtonTitles:@"领取", nil];
-                        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(180, 5, 250, _rewardInfoDic.count*cellHeight)];
-                        int count= 0;
-                        for (NSString *key in _rewardInfoDic) {
-                            ZYAwardInfo *info = [_rewardInfoDic objectForKey:key];
-                            
-                            NSString* imgPath = [self getFilePath:info.rewardIcon];
-                            NSFileManager* fileManager = [NSFileManager defaultManager];
-                            if ([fileManager fileExistsAtPath:imgPath]) {
-                                UIImage *rewardIcon = [UIImage imageWithContentsOfFile:imgPath];
-                                UIImageView* rewardIconView = [[UIImageView alloc] initWithImage:rewardIcon];
-                                rewardIconView.frame = CGRectMake(40, count*45, cellHeight, cellHeight);
-                                [view addSubview:rewardIconView];
+                        if (!_isAlertExsit) {
+                            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"下载奖励礼包"
+                                                                               message:nil
+                                                                              delegate:self
+                                                                     cancelButtonTitle:nil
+                                                                     otherButtonTitles:@"领取", nil];
+                            UIView *view = [[UIView alloc]initWithFrame:CGRectMake(180, 5, 250, _rewardInfoDic.count*cellHeight)];
+                            int count= 0;
+                            for (NSString *key in _rewardInfoDic) {
+                                ZYAwardInfo *info = [_rewardInfoDic objectForKey:key];
+                                
+                                NSString* imgPath = [self getFilePath:info.rewardIcon];
+                                NSFileManager* fileManager = [NSFileManager defaultManager];
+                                if ([fileManager fileExistsAtPath:imgPath]) {
+                                    UIImage *rewardIcon = [UIImage imageWithContentsOfFile:imgPath];
+                                    UIImageView* rewardIconView = [[UIImageView alloc] initWithImage:rewardIcon];
+                                    rewardIconView.frame = CGRectMake(40, count*45, cellHeight, cellHeight);
+                                    [view addSubview:rewardIconView];
+                                }
+                                
+                                UILabel *pLabel = [[UILabel alloc] init];
+                                pLabel.frame = CGRectMake(90, count*45, 250-95, cellHeight);
+                                [view addSubview:pLabel];
+                                [pLabel setText:[NSString stringWithFormat:@"%@:%d",info.rewardName,info.reward.intValue]];
+                                
+                                count++;
                             }
                             
-                            UILabel *pLabel = [[UILabel alloc] init];
-                            pLabel.frame = CGRectMake(90, count*45, 250-95, cellHeight);
-                            [view addSubview:pLabel];
-                            [pLabel setText:[NSString stringWithFormat:@"%@:%d",info.rewardName,info.reward.intValue]];
-                            
-                            count++;
+                            //check if os version is 7 or above
+                            if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+                                [alertView setValue:view forKey:@"accessoryView"];
+                            }else{
+                                [alertView addSubview:view];
+                            }
+                            _isAlertExsit = YES;
+                            [alertView show];
                         }
-                        
-                        //check if os version is 7 or above
-                        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-                            [alertView setValue:view forKey:@"accessoryView"];
-                        }else{
-                            [alertView addSubview:view];
-                        }
-                        
-                        [alertView show];
                     });
                 }
             }
@@ -822,6 +829,7 @@
         if (_adGameRic != nil && _adGameRic.length != 0) {
             [self reviceReward:_adGameRic];
         }
+        _isAlertExsit = NO;
     }
 }
 

@@ -24,6 +24,7 @@
 
 
 #define DBNAME                          @"zongyi.db"
+#define DB_VERSION                      @"1.3"          //db的版本吗，如果结构改变的时候升级版本
 
 
 #define kAppleLookupURLTemplate         @"https://itunes.apple.com/lookup?id=%@"
@@ -98,7 +99,8 @@
 - (id)init{
     self = [super init];
     if (self) {
-        //
+        
+        //init
         _paramDict = [[NSMutableDictionary alloc] init];
         _isShowLog = NO;
         _isReviewStatus = YES;
@@ -135,12 +137,29 @@
         
         //先读取本地的sql文件数据
         NSString *databasePath = [path stringByAppendingPathComponent:DBNAME];
-        //判断有没有文件，没有就创建
+        //判断dbversion文件是否存在
+        NSString* dbVersionPath = [NSString stringWithFormat:@"%@/%@",path,@"version"];
+        if (![fileManager fileExistsAtPath:dbVersionPath]) {
+            NSDictionary *versionConfig = @{@"sdkVersion":ZYSDK_VERSION,@"dbVersion":DB_VERSION};
+            [versionConfig writeToFile:dbVersionPath atomically:YES];
+        }else {
+            NSMutableDictionary *versionConfig = [[NSMutableDictionary alloc] initWithContentsOfFile:dbVersionPath];
+            if (![versionConfig[@"dbVersion"] isEqualToString:DB_VERSION]) {
+                //删除老版本的db和图片
+                [fileManager removeItemAtPath:databasePath error:nil];
+                NSString *imageDirPath = [NSString stringWithFormat:@"%@/images",path];
+                [fileManager removeItemAtPath:imageDirPath error:nil];
+                NSDictionary *versionConfig = @{@"sdkVersion":ZYSDK_VERSION,@"dbVersion":DB_VERSION};
+                [versionConfig writeToFile:dbVersionPath atomically:YES];
+            }
+        }
+        
+        //判断有没有db文件，没有就创建
         if (sqlite3_open([databasePath UTF8String], &db) != SQLITE_OK) {
             APLog(@"在线参数：创建数据库文件");
         }
         //创建在线参数table
-        NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS param (name varchar(100) NOT NULL, value TEXT);CREATE TABLE IF NOT EXISTS adgame (zyno varchar(50) not null, scheme varchar(200) NOT NULL, packageName varchar(50) NOT NULL, version varchar(50) NOT NULL, url varchar(300) NOT NULL, button varchar(300) NOT NULL, buttonFlash varchar(300) NOT NULL, buttonType int(20) not null, img varchar(300) NOT NULL, listImg varchar(300) NOT NULL, rewardid varchar(50) not null, rewardname varchar(50) not null, rewardicon varchar(300) not null, reward int(20) NOT NULL, pushdate date, defdate date);CREATE TABLE IF NOT EXISTS defaultlist (zyno varchar(50) not null); CREATE TABLE IF NOT EXISTS showlist (zyno varchar(50) not null);CREATE TABLE IF NOT EXISTS statistics (zyno varchar(100) not null,date date not null,record text not null);";
+        NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS param (name varchar(100) NOT NULL, value TEXT);CREATE TABLE IF NOT EXISTS adgame (zyno varchar(50) not null, scheme varchar(200) NOT NULL, packageName varchar(50) NOT NULL, version varchar(50) NOT NULL, url varchar(300) NOT NULL, button varchar(300) NOT NULL, buttonFlash varchar(300) NOT NULL,triButton varchar(300), buttonType int(20) not null, img varchar(300) NOT NULL, listImg varchar(300) NOT NULL, rewardid varchar(50) not null, rewardname varchar(50) not null, rewardicon varchar(300) not null, reward int(20) NOT NULL, pushdate date, defdate date);CREATE TABLE IF NOT EXISTS defaultlist (zyno varchar(50) not null); CREATE TABLE IF NOT EXISTS showlist (zyno varchar(50) not null);CREATE TABLE IF NOT EXISTS statistics (zyno varchar(100) not null,date date not null,record text not null);";
         [self execSql:sqlCreateTable and:NO];
         
         
@@ -438,14 +457,10 @@
     return @"";
 }
 
-+ (NSString *)UUIDString
++ (NSString *)deviceName
 {
-    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
-    CFStringRef strRef = CFUUIDCreateString(kCFAllocatorDefault , uuidRef);
-    NSString *uuidString = [(__bridge NSString*)strRef stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    CFRelease(strRef);
-    CFRelease(uuidRef);
-    return uuidString;
+    NSString*name = [UIDevice currentDevice].name;
+    return name;
 }
 
 @end

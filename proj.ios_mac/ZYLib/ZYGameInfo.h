@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *version;
 @property (nonatomic, strong) NSString *button;
 @property (nonatomic, strong) NSString *buttonFlash;
+@property (nonatomic, strong) NSString *triButton;
 @property (nonatomic, strong) NSNumber *buttonType;
 @property (nonatomic, strong) NSString *img;
 @property (nonatomic, strong) NSString *listImg;

@@ -19,19 +19,35 @@
 #define IMAGE_HEIGHT        910
 
 
+#define OPENTYPE_NONE       0
+#define OPENTYPE_DIRECT     1
+#define OPENTYPE_CIRCLE     2
+#define OPENTYPE_TRIANGLE   3
+
 
 
 @interface ZYAdGameShow()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {
+    //大图页数
     int currPageNum;
+    //图片的缩放比例
     float adImageRate;
-    BOOL _isHidden;
-    int _currPage;
+    //打开方式
+    int _openType;
+    //三角形位置
+    int _trianleType;
+    //显示与否
+    bool _circleVisible;
+    bool _triangleVisible;
+    //page
+    int _circlePage;
+    int _trianglePage;
 }
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *view;
 @property (strong, nonatomic) UIView *buttonView;
+@property (strong, nonatomic) UIButton *triButton;
 @property (strong, nonatomic) UIButton *buttonLeft;
 @property (strong, nonatomic) UIButton *buttonRight;
 @property (strong, nonatomic) NSMutableArray *adZynoArray;
@@ -63,12 +79,16 @@
         
         _btnViewPos = CGPointMake(0.2, 0.20);
         _btnScale = 1.0;
-        _isHidden = YES;
-        _currPage = 0;
+        _openType = OPENTYPE_NONE;
+        currPageNum = 0;
+        _circleVisible = NO;
+        _circlePage = 0;
+        _triangleVisible = NO;
+        _trianglePage = 0;
         
         _adZynoArray = [[NSMutableArray alloc] init];
         _adDefaultList = [[NSMutableArray alloc] init];
-        currPageNum = 0;
+        
         
         //屏幕适配
         CGRect winSize = [[UIScreen mainScreen] bounds];
@@ -104,7 +124,7 @@
         
         //设置回调
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(reloadAdPage)
+                                                 selector:@selector(willEnterForeground)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -115,88 +135,100 @@
     return self;
 }
 
+- (void)willEnterForeground
+{
+    
+}
+
+- (void)didChangedStatusBarOrientation:(NSNotification*)n {
+    
+}
+
+#pragma mark public method
+
 - (void)showAdGame:(UIView*)mainView
 {
     self.view = mainView;
 }
 
 
-- (void)reloadAdPage
-{
-    [self setAdHide:_isHidden Page:_currPage];
-}
-
-
-- (void)didChangedStatusBarOrientation:(NSNotification*)n {
-    
-}
-
-
-- (void)setAdHide:(BOOL)isHide Page:(int)page
+- (void)showDirect
 {
     NSString* adGame = [[ZYParamOnline shareParam] getParamOf:@"ZYAdgame"];
     if (adGame.intValue != 1) {
         return;
     }
-    _isHidden = isHide;
-    _currPage = page;
-    if (_isHidden) {
-        [self removeAdButton];
-        [self removeAdGameView];
-    }else{
-        [self removeAdButton];
-        [self removeAdGameView];
-        switch (_currPage) {
-            case 0:
-                [self addAdButton];
-                break;
-            case 1:
-                [self addAdGameView];
-                break;
-            default:
-                break;
-        }
+    
+    if (_openType == OPENTYPE_NONE) {
+        _openType = OPENTYPE_DIRECT;
+        [self addAdGameView:0];
     }
 }
 
-- (void)setAdPot:(CGPoint)pot Scale:(CGFloat)scale
-{
-    _btnViewPos = pot;
-    _btnScale = scale;
-}
 
-
-- (void)addAdButton
+- (void)showCircle:(CGPoint)pot Scale:(CGFloat)scale
 {
-    [self.buttonView removeFromSuperview];
-    NSArray* list = [[ZYGameServer shareServer] getGameZynoArray];
-    if (!list || [list count] == 0) {
-        NSArray* listDefault = [[ZYGameServer shareServer] getDefaultArray];
-        if (listDefault && listDefault.count> 0) {
-            UIImage*image = [self imagesNamedFromCustomBundle:@"zyadmore"];
-            CGFloat imageWidth = image.size.width*adImageRate;
-            CGFloat imageHeight = image.size.height*adImageRate;
-            self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(_winWidth*_btnViewPos.x-imageWidth/2, _winHeight*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
-            [self.view addSubview:self.buttonView];
-            
-            UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickOpen)];
-            [self.buttonView addGestureRecognizer:singleTap];
-            self.buttonView.userInteractionEnabled=YES;
-            
-            UIImageView*buttonImage = [[UIImageView alloc] initWithImage:image];
-            buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
-            buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
-            [self.buttonView addSubview:buttonImage];
-            
-            [self shakeToShow:self.buttonView];
-        }
+    NSString* adGame = [[ZYParamOnline shareParam] getParamOf:@"ZYAdgame"];
+    if (adGame.intValue != 1) {
         return;
     }
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+   
+    _btnViewPos = pot;
+    _btnScale = scale;
+    _circleVisible = YES;
+    [self addCircleButton];
+}
+
+- (void)hideCircle
+{
+    _circleVisible = NO;
+    [self removeCircleButton];
+}
+
+
+- (void)showTriangle:(int)potType Scale:(CGFloat)scale
+{
+    NSString* adGame = [[ZYParamOnline shareParam] getParamOf:@"ZYAdgame"];
+    if (adGame.intValue != 1) {
+        return;
+    }
     
-//    for (id value in list) {
+    _trianleType = potType;
+    _triangleVisible = YES;
+    [self addTriangleButton:scale];
+}
+
+- (void)hideTriangle
+{
+    _triangleVisible = NO;
+    [self removeTriangleButton];
+}
+
+
+#pragma mark private method
+
+//创建圆形按钮
+- (void)addCircleButton
+{
+    [self.buttonView removeFromSuperview];
+    NSString* adGame = [[ZYParamOnline shareParam] getParamOf:@"ZYAdgame"];
+    if (adGame.intValue != 1 || !_circleVisible) {
+        return;
+    }
+    NSArray* list = [[ZYGameServer shareServer] getGameZynoArray];
+    if (!list || [list count] == 0) {
+        [self addMoreGameButton];
+        return;
+    }
+    int nCount = rand()%(list.count+1);
+    if (nCount==list.count) {
+        _circlePage = nCount;
+        [self addMoreGameButton];
+        return;
+    }
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSDictionary *adDic = [[ZYGameServer shareServer] getGameInfoDic];
-    int nCount = rand()%list.count;
     ZYGameInfo* info = adDic[list[nCount]];
     NSString* buttonPath = [self getFilePath:info.button];
     NSString* buttonFlashPath = [self getFilePath:info.buttonFlash];
@@ -207,7 +239,7 @@
         &&
         [fileManager fileExistsAtPath:imgPath] ) {
         
-        currPageNum = nCount;
+        _circlePage = nCount;
         
         UIImage*image = [UIImage imageWithContentsOfFile:buttonPath];
         CGFloat imageWidth = image.size.width*adImageRate;
@@ -216,7 +248,7 @@
         [self.view addSubview:self.buttonView];
         
         
-        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickOpen)];
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCircleClickOpen)];
         [self.buttonView addGestureRecognizer:singleTap];
         self.buttonView.userInteractionEnabled=YES;
         
@@ -251,16 +283,41 @@
         
         return;
     }
-//    }
     NSLog(@"进入循环模式");
     //如果一直没有就间隔时间再进行
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addAdButton) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addCircleButton) userInfo:nil repeats:NO];
 }
 
+
+- (void)addMoreGameButton
+{
+    NSArray* listDefault = [[ZYGameServer shareServer] getDefaultArray];
+    if (listDefault && listDefault.count> 0) {
+        UIImage*image = [self imagesNamedFromCustomBundle:@"zyadmore"];
+        CGFloat imageWidth = image.size.width*adImageRate;
+        CGFloat imageHeight = image.size.height*adImageRate;
+        self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(_winWidth*_btnViewPos.x-imageWidth/2, _winHeight*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
+        [self.view addSubview:self.buttonView];
+        
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCircleClickOpen)];
+        [self.buttonView addGestureRecognizer:singleTap];
+        self.buttonView.userInteractionEnabled=YES;
+        
+        UIImageView*buttonImage = [[UIImageView alloc] initWithImage:image];
+        buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
+        buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
+        [self.buttonView addSubview:buttonImage];
+        
+        [self shakeToShow:self.buttonView];
+    }
+}
+
+//圆形按钮动画
 - (void) shakeToShow:(UIView*)aView{
     CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
     animation.duration = 0.8;
     animation.repeatCount = MAXFLOAT;
+    animation.removedOnCompletion = NO;
     
     NSMutableArray *values = [NSMutableArray array];
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
@@ -270,15 +327,77 @@
     [aView.layer addAnimation:animation forKey:nil];
 }
 
-
-
-- (void)removeAdButton
+//删除圆形按钮
+- (void)removeCircleButton
 {
     //remove button
     [self.buttonView removeFromSuperview];
 }
 
-- (void)addAdGameView
+//创建三角按钮
+- (void)addTriangleButton:(CGFloat)scale
+{
+    [self.triButton removeFromSuperview];
+    NSString* adGame = [[ZYParamOnline shareParam] getParamOf:@"ZYAdgame"];
+    if (adGame.intValue != 1 || !_triangleVisible) {
+        return;
+    }
+    
+    NSArray* list = [[ZYGameServer shareServer] getGameZynoArray];
+    if (list && [list count] > 0) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSDictionary *adDic = [[ZYGameServer shareServer] getGameInfoDic];
+        int nCount = rand()%list.count;
+        ZYGameInfo* info = adDic[list[nCount]];
+        NSString* buttonPath = [self getFilePath:info.triButton];
+        NSString* imgPath = [self getFilePath:info.img];
+        if ([fileManager fileExistsAtPath:buttonPath]
+            &&
+            [fileManager fileExistsAtPath:imgPath] ) {
+            //page
+            _trianglePage = nCount;
+            //按钮
+            UIImage*image = [UIImage imageWithContentsOfFile:buttonPath];
+            int imageWidth = image.size.width*adImageRate;
+            int imageHeight = image.size.height*adImageRate;
+            self.triButton = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
+            [self.triButton setBackgroundImage:image forState:UIControlStateNormal];
+            [self.triButton addTarget:self action:@selector(onTriangleClickOpen) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:self.triButton];
+//            switch (_trianleType) {
+//                case TRIANGLE_TOP_LEFT:
+                    self.triButton.frame = CGRectMake(0, 0, imageWidth*scale, imageHeight*scale);//button的frame
+//                    break;
+//                case TRIANGLE_TOP_RIGHT:
+//                    self.triButton.frame = CGRectMake(_winWidth-imageWidth, 0, imageWidth, imageHeight);//button的frame
+//                    self.triButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//                    break;
+//                case TRIANGLE_BOTTOM_LEFT:
+//                    self.triButton.frame = CGRectMake(0, _winHeight-imageHeight, imageWidth, imageHeight);//button的frame
+//                    break;
+//                case TRIANGLE_BOTTOM_RIGHT:
+//                    self.triButton.frame = CGRectMake(_winWidth-imageWidth, _winHeight-imageHeight, imageWidth, imageHeight);//button的frame
+//                    break;
+//                default:
+//                    break;
+//            }
+            return;
+        }
+    }
+    NSLog(@"进入循环模式");
+    //如果一直没有就间隔时间再进行
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addTriangleButton:) userInfo:nil repeats:NO];
+}
+
+//删除三角按钮
+-(void)removeTriangleButton
+{
+    [self.triButton removeFromSuperview];
+}
+
+
+//创建大图界面
+- (void)addAdGameView:(int)page
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [_adZynoArray removeAllObjects];
@@ -329,7 +448,7 @@
                 [imageView addSubview:buttonNo];
                 
                 //是否显示有奖励
-                if (info.reward.intValue > 0 && info.rewardId != 0 ) {
+                if (info.reward.intValue > 0 && ![info.rewardId isEqualToString:@""] ) {
                     UIImage* imageGift = [self imagesNamedFromCustomBundle:@"zyadgift"];
                     int imageGiftWidth = imageGift.size.width*adImageRate;
                     int imageGiftHeight = imageGift.size.height*adImageRate;
@@ -343,6 +462,7 @@
         [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"iconClick"];
         [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];
     }
+    currPageNum = page;
     
     
     NSArray*listDefault = [[ZYGameServer shareServer] getDefaultArray];
@@ -427,10 +547,18 @@
     self.buttonRight.frame = CGRectMake(_winWidth-imageRightWidth-6, _winHeight/2, imageRightWidth, imageRightHeight);//button的frame
     [self.buttonRight addTarget:self action:@selector(onClickRight) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.buttonRight];
-    
+    //切换到目标页
     [self.scrollView setContentOffset:CGPointMake(width*currPageNum, 0) animated:NO];
+    
+    if (currPageNum == _adZynoArray.count) {
+        self.buttonRight.hidden = YES;
+    }
+    if (currPageNum == 0) {
+        self.buttonLeft.hidden = YES;
+    }
 }
 
+//移除大图界面
 - (void)removeAdGameView
 {
     for (UIView *view_ in self.scrollView.subviews) {
@@ -444,14 +572,44 @@
 //button相应的事件
 - (void)onClickClose {
     [self removeAdGameView];
-    [self addAdButton];
+    switch (_openType) {
+        case OPENTYPE_NONE:
+            //error
+            break;
+        case OPENTYPE_CIRCLE:
+            [self addCircleButton];
+            break;
+        case OPENTYPE_DIRECT:
+            //nothing
+            break;
+        case OPENTYPE_TRIANGLE:
+            
+            break;
+        default:
+            break;
+    }
+    _openType = OPENTYPE_NONE;
 }
 
-- (void)onClickOpen {
-    [self removeAdButton];
-    [self addAdGameView];
+//圆形按钮点击打开
+- (void)onCircleClickOpen {
+    if (_openType == OPENTYPE_NONE) {
+        _openType = OPENTYPE_CIRCLE;
+        [self removeCircleButton];
+        [self addAdGameView:_circlePage];
+    }
 }
 
+//三角按钮点击打开
+- (void)onTriangleClickOpen {
+    if (_openType == OPENTYPE_NONE) {
+        _openType = OPENTYPE_CIRCLE;
+        [self removeCircleButton];
+        [self addAdGameView:_trianglePage];
+    }
+}
+
+//点击大图
 - (void)onClickImage{
     //jump to download
     if (_adZynoArray.count > currPageNum && _adZynoArray.count >0) {
@@ -463,7 +621,7 @@
     }
 }
 
-
+//左方向按钮
 - (void)onClickLeft
 {
     if (currPageNum > 0) {
@@ -476,6 +634,7 @@
     }
 }
 
+//右方向按钮
 - (void)onClickRight
 {
     if (currPageNum < _adZynoArray.count) {
@@ -506,6 +665,17 @@
     if (currPageNum < _adZynoArray.count) {
         NSString* zyno = _adZynoArray[currPageNum];
         [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];
+    }
+    
+    if (currPageNum == _adZynoArray.count) {
+        self.buttonRight.hidden = YES;
+    }else{
+        self.buttonRight.hidden = NO;
+    }
+    if (currPageNum == 0) {
+        self.buttonLeft.hidden = YES;
+    }else{
+        self.buttonLeft.hidden = NO;
     }
 }
 
@@ -551,15 +721,16 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        
+        ZYGameInfo* info = [_adDefaultList objectAtIndex:indexPath.row];
+        NSString* imgPath = [self getFilePath:info.listImg];
+        UIImage* imageList = [UIImage imageWithContentsOfFile:imgPath];
+        int imageWidth = imageList.size.width*adImageRate;
+        int imageHeigh = imageList.size.height*adImageRate;
+        UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, cellDistance/2, imageWidth, imageHeigh)];
+        imageView.image=imageList;
+        [cell.contentView addSubview:imageView];
     }
-    ZYGameInfo* info = [_adDefaultList objectAtIndex:indexPath.row];
-    NSString* imgPath = [self getFilePath:info.listImg];
-    UIImage* imageList = [UIImage imageWithContentsOfFile:imgPath];
-    int imageWidth = imageList.size.width*adImageRate;
-    int imageHeigh = imageList.size.height*adImageRate;
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, cellDistance/2, imageWidth, imageHeigh)];
-    imageView.image=imageList;
-    [cell.contentView addSubview:imageView];
     
     return cell;
 }

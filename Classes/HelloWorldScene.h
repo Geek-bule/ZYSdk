@@ -62,12 +62,16 @@ public:
     bool m_switchBanner;
     bool m_isLoadIntertitial;
     bool m_isLoadIap;
+    bool m_isAdCircle;
+    bool m_isAdTriangle;
     cocos2d::Size winSize;
     
     enum{
         enBtnInApp=1,
         enBtnShare,
         enBtnKTplay,
+        enBtnMoreGame,
+        enBtnMoreGame2,
         enBtnWatch,
         enBtnWxPay,
         enBtnDevice,
