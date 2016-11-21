@@ -7,6 +7,7 @@
 #include "ShareHelper.h"
 #include "toolsKt.hpp"
 #include "appleWatch.h"
+#include "DDZServer.h"
 USING_NS_CC;
 
 

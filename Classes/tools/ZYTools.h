@@ -54,6 +54,9 @@ public:
     //是否显示日志，在函数自行注释或取消注释
     static void showLog();
     
+    //判断是否可以评论
+    static bool isCanRate();
+    
     //主动弹出评论（里面有是否可以弹出评论的判断）
     static void rateWithTip();
     

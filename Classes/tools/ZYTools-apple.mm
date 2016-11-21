@@ -51,7 +51,7 @@ void ZYTools::init()
             }
             
             UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
-                                                         message:@"领取互推奖励成功"
+                                                         message:@"领取奖励成功"
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
                                                otherButtonTitles:nil];
@@ -109,38 +109,37 @@ void ZYTools::showLog()
 //    [[ZYVideoManager sharedManager] showLog];
 }
 
-
-void ZYTools::rateWithTip()
+bool ZYTools::isCanRate()
 {
     //判断是不是可以弹出评论
     if ([[ZYIosRateApp shareRate] isCanRateApp]) {
-        //可以弹出评论就弹出评论
-        [[ZYIosRateApp shareRate] RateWithTipAndBlock:^{
-            //评论成功的回调 TODO：
-            UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
-                                                         message:@"评论成功"
-                                                        delegate:nil       //委托给Self，才会执行上面的调用
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
-            [av show];
-            [av release];
-         }];
+        return true;
     }else{
-        //不可以弹出评论的时候进行处理
+        return false;
     }
+}
+
+void ZYTools::rateWithTip()
+{
+    //可以弹出评论就弹出评论
+    [[ZYIosRateApp shareRate] RateWithTipAndBlock:^{
+        //评论成功的回调 TODO：
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
+                                                     message:@"评论成功"
+                                                    delegate:nil       //委托给Self，才会执行上面的调用
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        [av release];
+    }];
 }
 
 void ZYTools::rateWithUrl()
 {
-    //判断是不是可以弹出评论
-    if ([[ZYIosRateApp shareRate] isCanRateApp]) {
-        //可以弹出评论就弹出评论
-        [[ZYIosRateApp shareRate] RateWithUrlAndBlock:^{
-            //评论成功的回调 TODO：
-         }];
-    }else{
-        //不可以弹出评论的时候进行处理
-    }
+    //可以弹出评论就弹出评论
+    [[ZYIosRateApp shareRate] RateWithUrlAndBlock:^{
+        //评论成功的回调 TODO：
+    }];
 }
 
 void ZYTools::setAdCircle(bool isShow, cocos2d::Vec2 pot, float scale)

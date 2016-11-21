@@ -175,6 +175,8 @@
 		1B7F4ED41DC724C600DA3693 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7F4ECF1DC724C600DA3693 /* libWeChatSDK.a */; };
 		1B7F4ED51DC724C600DA3693 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F4ED01DC724C600DA3693 /* README.txt */; };
 		1B80300A1D9A25460060C56A /* ZYAdStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8030091D9A25460060C56A /* ZYAdStatistics.m */; };
+		1BC042AC1DE2979900E86C20 /* MD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BC042AA1DE2979800E86C20 /* MD5.cpp */; };
+		1BC042B21DE29AC700E86C20 /* DDZServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1BC042B11DE29AC700E86C20 /* DDZServer.mm */; };
 		1BD92C741D2A44DE006F729C /* shareImage in Resources */ = {isa = PBXBuildFile; fileRef = 1BD92C731D2A44DE006F729C /* shareImage */; };
 		1BF343F0952DDDCB56141ECA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1E4EA3889AD258148A023D /* libsqlite3.dylib */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -682,6 +684,10 @@
 		1B8030081D9A25460060C56A /* ZYAdStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYAdStatistics.h; sourceTree = "<group>"; };
 		1B8030091D9A25460060C56A /* ZYAdStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYAdStatistics.m; sourceTree = "<group>"; };
 		1BB74B3C1D2BC92E00D6A080 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		1BC042AA1DE2979800E86C20 /* MD5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MD5.cpp; sourceTree = "<group>"; };
+		1BC042AB1DE2979800E86C20 /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
+		1BC042B01DE29AC700E86C20 /* DDZServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDZServer.h; sourceTree = "<group>"; };
+		1BC042B11DE29AC700E86C20 /* DDZServer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DDZServer.mm; sourceTree = "<group>"; };
 		1BC8CB151D2F838D00BA2057 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
 		1BD92C731D2A44DE006F729C /* shareImage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shareImage; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -982,6 +988,10 @@
 		1B3937101D9E602200408A71 /* extra */ = {
 			isa = PBXGroup;
 			children = (
+				1BC042B01DE29AC700E86C20 /* DDZServer.h */,
+				1BC042B11DE29AC700E86C20 /* DDZServer.mm */,
+				1BC042AA1DE2979800E86C20 /* MD5.cpp */,
+				1BC042AB1DE2979800E86C20 /* MD5.h */,
 				1B7F4EC91DC71CCA00DA3693 /* WeChatApi.h */,
 				1B7F4ECA1DC71CCA00DA3693 /* WeChatApi.mm */,
 				1B5DFE191DB1DC200010991B /* uMeng.h */,
@@ -2404,6 +2414,7 @@
 				1B3EC76E1DA8DD370054B466 /* AFURLSessionManager.m in Sources */,
 				1B5DFE1B1DB1DC200010991B /* uMeng.mm in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				1BC042AC1DE2979900E86C20 /* MD5.cpp in Sources */,
 				1B3EC74D1DA8C10F0054B466 /* AdViewAdapterBaidu.m in Sources */,
 				1B3937161D9E671400408A71 /* HelloWorldScene.cpp in Sources */,
 				1B3EC69E1DA8B9BD0054B466 /* AdInstlAdapterInMobi.m in Sources */,
@@ -2441,6 +2452,7 @@
 				1B3EC6EA1DA8BDE90054B466 /* toolsKt.cpp in Sources */,
 				1B3EC6D21DA8B9BD0054B466 /* ZYVideoAdapterVungle.m in Sources */,
 				1B3EC6AC1DA8B9BD0054B466 /* JSONKit.m in Sources */,
+				1BC042B21DE29AC700E86C20 /* DDZServer.mm in Sources */,
 				1B3EC7701DA8DD370054B466 /* CATSecurity.m in Sources */,
 				1B3EC76D1DA8DD370054B466 /* AFURLResponseSerialization.m in Sources */,
 				1B3EC7691DA8DD370054B466 /* AFHTTPSessionManager.m in Sources */,

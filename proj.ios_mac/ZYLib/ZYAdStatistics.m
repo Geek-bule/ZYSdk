@@ -149,15 +149,13 @@
 
 -(void)execSql:(NSString *)sql andClose:(BOOL)close
 {
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        char *err;
-        if (sqlite3_exec(_db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
-            NSLog(@"数据统计：数据库操作数据失败!sql:%s",[sql UTF8String]);
-        }
-        if (close) {
-            sqlite3_close(_db);
-        }
-//    });
+    char *err;
+    if (sqlite3_exec(_db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
+        NSLog(@"数据统计：数据库操作数据失败!sql:%s",[sql UTF8String]);
+    }
+    if (close) {
+        sqlite3_close(_db);
+    }
 }
 
 
@@ -200,21 +198,7 @@
 }
 
 
-- (void)storeAdGameInfo
-{
-    //inser data from db
-//    NSString *paramVec = [[NSString alloc] init];
-//    if ([_adGameInfoDic count] > 0) {
-//        for (NSString *key in _adGameInfoDic) {
-//            ZYGameInfo *info = _adGameInfoDic[key];
-//            paramVec = [paramVec stringByAppendingFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%d'),",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward];
-//        }
-//        paramVec = [paramVec substringToIndex:[paramVec length]-1];
-//        //inser data from db
-//        NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, img, lisImg, rewardid, rewardname, rewardicon, reward) VALUES %@",paramVec];
-//        [self execSql:insertTabel and:NO];
-//    }
-}
+
 
 
 @end

@@ -9,11 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 
-#define button_show             1
-#define button_click            2
-#define image_show              3
-#define image_click             4
-
 
 @interface ZYAdStatistics : NSObject
 

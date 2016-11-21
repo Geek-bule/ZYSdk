@@ -344,10 +344,21 @@
     }
     
     NSArray* list = [[ZYGameServer shareServer] getGameZynoArray];
-    if (list && [list count] > 0) {
+    if (!list || [list count] == 0) {
+        [self addMoreTriangleButton:scale];
+        return;
+    }
+    
+    int nCount = rand()%(list.count+1);
+    if (nCount==list.count) {
+        _trianglePage = nCount;
+        [self addMoreTriangleButton:scale];
+        return;
+    }
+    
+    if (list && [list count] > 0 && nCount < [list count]) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSDictionary *adDic = [[ZYGameServer shareServer] getGameInfoDic];
-        int nCount = rand()%list.count;
         ZYGameInfo* info = adDic[list[nCount]];
         NSString* buttonPath = [self getFilePath:info.triButton];
         NSString* imgPath = [self getFilePath:info.img];
@@ -364,29 +375,29 @@
             [self.triButton setBackgroundImage:image forState:UIControlStateNormal];
             [self.triButton addTarget:self action:@selector(onTriangleClickOpen) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:self.triButton];
-//            switch (_trianleType) {
-//                case TRIANGLE_TOP_LEFT:
-                    self.triButton.frame = CGRectMake(0, 0, imageWidth*scale, imageHeight*scale);//button的frame
-//                    break;
-//                case TRIANGLE_TOP_RIGHT:
-//                    self.triButton.frame = CGRectMake(_winWidth-imageWidth, 0, imageWidth, imageHeight);//button的frame
-//                    self.triButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-//                    break;
-//                case TRIANGLE_BOTTOM_LEFT:
-//                    self.triButton.frame = CGRectMake(0, _winHeight-imageHeight, imageWidth, imageHeight);//button的frame
-//                    break;
-//                case TRIANGLE_BOTTOM_RIGHT:
-//                    self.triButton.frame = CGRectMake(_winWidth-imageWidth, _winHeight-imageHeight, imageWidth, imageHeight);//button的frame
-//                    break;
-//                default:
-//                    break;
-//            }
+            self.triButton.frame = CGRectMake(0, 0, imageWidth*scale, imageHeight*scale);//button的frame
+
             return;
         }
     }
     NSLog(@"进入循环模式");
     //如果一直没有就间隔时间再进行
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addTriangleButton:) userInfo:nil repeats:NO];
+}
+
+- (void)addMoreTriangleButton:(CGFloat)scale
+{
+    NSArray* listDefault = [[ZYGameServer shareServer] getDefaultArray];
+    if (listDefault && listDefault.count> 0) {
+        UIImage*image = [self imagesNamedFromCustomBundle:@"zyadmoretri"];
+        int imageWidth = image.size.width*adImageRate;
+        int imageHeight = image.size.height*adImageRate;
+        self.triButton = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
+        [self.triButton setBackgroundImage:image forState:UIControlStateNormal];
+        [self.triButton addTarget:self action:@selector(onTriangleClickOpen) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.triButton];
+        self.triButton.frame = CGRectMake(0, 0, imageWidth*scale, imageHeight*scale);//button的frame
+    }
 }
 
 //删除三角按钮
@@ -455,14 +466,31 @@
                     UIImageView* imageGiftView = [[UIImageView alloc] initWithImage:imageGift];
                     imageGiftView.frame = CGRectMake(adImageWidth-imageGiftWidth/2-20, -imageGiftHeight/2+20, imageGiftWidth, imageGiftHeight);
                     [imageView addSubview:imageGiftView];
+                    [self giftShake:imageGiftView];
+                    
+                    UITapGestureRecognizer *singleTapGift =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickImage)];
+                    singleTapGift.delegate = self;
+                    [imageGiftView addGestureRecognizer:singleTapGift];
+                    
+                    //添加提示文字
+                    UILabel *labelTip = [[UILabel alloc] initWithFrame:CGRectMake(-(_winWidth-adImageWidth)/2+15, adImageHeight-40, _winWidth-30, 100)];
+                    labelTip.text = @"下载并体验我们的其他应用可以获得奖励哦！\n注意：点击本页跳转App Store下载，并联网进入该应用。之后返回当前应用即可领取奖励。";
+                    labelTip.shadowColor = [UIColor blackColor];//默认没有阴影
+                    labelTip.shadowOffset = CGSizeMake(1,1);
+                    labelTip.numberOfLines = 0;
+                    labelTip.textColor = [UIColor colorWithRed:(1) green:(1) blue:(1) alpha:1];
+                    labelTip.font = [UIFont systemFontOfSize:12];
+                    [imageView addSubview:labelTip];
+                    
                 }
             }
         }
-        NSString* zyno = _adZynoArray[0];
-        [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"iconClick"];
-        [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];
+        if ([_adZynoArray count] > 0 && page < [_adZynoArray count]) {
+            NSString* zyno = _adZynoArray[page];
+            [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"iconClick"];
+            [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];
+        }
     }
-    currPageNum = page;
     
     
     NSArray*listDefault = [[ZYGameServer shareServer] getDefaultArray];
@@ -505,57 +533,101 @@
             }
         }
         //额外增加一个列表
-        ZYGameInfo* info = [_adDefaultList objectAtIndex:0];
-        NSString* imgPath = [self getFilePath:info.listImg];
-        UIImage* imageList = [UIImage imageWithContentsOfFile:imgPath];//[self imagesNamedFromCustomBundle:@"t1"];
-        int imageWidth = imageList.size.width*adImageRate;
-        int imageHeigh = imageList.size.height*adImageRate;
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake((imageMoreWidth-imageWidth)/2, imageMoreWidth*0.18, imageWidth, (imageHeigh+cellDistance)*3.3) style:UITableViewStylePlain];
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-        [self.tableView setSeparatorColor:[UIColor clearColor]];
-        self.tableView.backgroundColor=[UIColor clearColor];
-        self.tableView.userInteractionEnabled=YES;
-        [buttonMoreBG addSubview:self.tableView];
-        self.scrollView.contentSize = CGSizeMake(x + width, height);
+        if ([_adDefaultList count] > 0) {
+            ZYGameInfo* info = [_adDefaultList objectAtIndex:0];
+            NSString* imgPath = [self getFilePath:info.listImg];
+            UIImage* imageList = [UIImage imageWithContentsOfFile:imgPath];//[self imagesNamedFromCustomBundle:@"t1"];
+            int imageWidth = imageList.size.width*adImageRate;
+            int imageHeigh = imageList.size.height*adImageRate;
+            self.tableView = [[UITableView alloc] initWithFrame:CGRectMake((imageMoreWidth-imageWidth)/2, imageMoreWidth*0.18, imageWidth, (imageHeigh+cellDistance)*3.3) style:UITableViewStylePlain];
+            self.tableView.delegate = self;
+            self.tableView.dataSource = self;
+            [self.tableView setSeparatorColor:[UIColor clearColor]];
+            self.tableView.backgroundColor=[UIColor clearColor];
+            self.tableView.userInteractionEnabled=YES;
+            [buttonMoreBG addSubview:self.tableView];
+            self.scrollView.contentSize = CGSizeMake(x + width, height);
+        }
     }
     
     [self.view addSubview:self.scrollView];
-    self.scrollView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-    
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickClose)];
     singleTap.delegate = self;
     [self.scrollView addGestureRecognizer:singleTap];
     self.scrollView.userInteractionEnabled=YES;
+    self.scrollView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     
-    
-    //2个按钮
-    UIImage* imageLeft = [self imagesNamedFromCustomBundle:@"zyadleft"];
-    int imageLeftWidth = imageLeft.size.width*adImageRate;
-    int imageLeftHeight = imageLeft.size.height*adImageRate;
-    self.buttonLeft = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
-    [self.buttonLeft setBackgroundImage:imageLeft forState:UIControlStateNormal];
-    self.buttonLeft.frame = CGRectMake(6, _winHeight/2, imageLeftWidth, imageLeftHeight);//button的frame
-    [self.buttonLeft addTarget:self action:@selector(onClickLeft) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.buttonLeft];
-    
-    UIImage* imageRight = [self imagesNamedFromCustomBundle:@"zyadright"];
-    int imageRightWidth = imageRight.size.width*adImageRate;
-    int imageRightHeight = imageRight.size.height*adImageRate;
-    self.buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
-    [self.buttonRight setBackgroundImage:imageRight forState:UIControlStateNormal];
-    self.buttonRight.frame = CGRectMake(_winWidth-imageRightWidth-6, _winHeight/2, imageRightWidth, imageRightHeight);//button的frame
-    [self.buttonRight addTarget:self action:@selector(onClickRight) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.buttonRight];
-    //切换到目标页
-    [self.scrollView setContentOffset:CGPointMake(width*currPageNum, 0) animated:NO];
-    
-    if (currPageNum == _adZynoArray.count) {
-        self.buttonRight.hidden = YES;
+    if (_adZynoArray.count > 0){
+        if (page > _adZynoArray.count) {
+            currPageNum = 0;
+        }else{
+            currPageNum = page;
+        }
+        //切换到目标页
+        [self.scrollView setContentOffset:CGPointMake(width*currPageNum, 0) animated:NO];
+        
+        //2个按钮
+        UIImage* imageLeft = [self imagesNamedFromCustomBundle:@"zyadleft"];
+        int imageLeftWidth = imageLeft.size.width*adImageRate;
+        int imageLeftHeight = imageLeft.size.height*adImageRate;
+        self.buttonLeft = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
+        [self.buttonLeft setBackgroundImage:imageLeft forState:UIControlStateNormal];
+        self.buttonLeft.frame = CGRectMake(6, _winHeight/2, imageLeftWidth, imageLeftHeight);//button的frame
+        [self.buttonLeft addTarget:self action:@selector(onClickLeft) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.buttonLeft];
+        
+        UIImage* imageRight = [self imagesNamedFromCustomBundle:@"zyadright"];
+        int imageRightWidth = imageRight.size.width*adImageRate;
+        int imageRightHeight = imageRight.size.height*adImageRate;
+        self.buttonRight = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
+        [self.buttonRight setBackgroundImage:imageRight forState:UIControlStateNormal];
+        self.buttonRight.frame = CGRectMake(_winWidth-imageRightWidth-6, _winHeight/2, imageRightWidth, imageRightHeight);//button的frame
+        [self.buttonRight addTarget:self action:@selector(onClickRight) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.buttonRight];
+        
+        //
+        if (currPageNum == _adZynoArray.count) {
+            self.buttonRight.hidden = YES;
+        }
+        if (currPageNum == 0) {
+            self.buttonLeft.hidden = YES;
+        }
     }
-    if (currPageNum == 0) {
-        self.buttonLeft.hidden = YES;
-    }
+}
+
+//
+- (void)giftShake:(UIView*)aView
+{
+    CAKeyframeAnimation *trans = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.y"];
+    NSArray *values = @[@(0),@(10),@(20),@(10),@(-30),@(10),@(20),@(10),@(-30), @(0)];
+    trans.values = values;
+    NSArray *times = @[@(0.67),@(0.72),@(0.74),@(0.76),@(0.81),@(0.86),@(0.88),@(0.90),@(0.95), @(1)];
+    trans.keyTimes = times;
+    trans.duration = 3.5;
+    trans.repeatCount = MAXFLOAT;
+    trans.removedOnCompletion = NO;
+    
+    CAKeyframeAnimation *scaleXAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale.x"];
+    NSArray *scaleXValues = @[@(1),@(1),@(1.5),@(1),@(1),@(1),@(1.5),@(1),@(1),@(1)];
+    scaleXAnimation.values = scaleXValues;
+    NSArray *scaleXtimes = @[@(0.67),@(0.72),@(0.74),@(0.76),@(0.81),@(0.86),@(0.88),@(0.90),@(0.95), @(1)];
+    scaleXAnimation.keyTimes = scaleXtimes;
+    scaleXAnimation.duration = 3.5;
+    scaleXAnimation.repeatCount = MAXFLOAT;
+    scaleXAnimation.removedOnCompletion = NO;
+    
+    CAKeyframeAnimation *scaleYAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale.y"];
+    NSArray *scaleYValues = @[@(1),@(1),@(0.6),@(1),@(1),@(1),@(0.6),@(1),@(1),@(1)];
+    scaleYAnimation.values = scaleYValues;
+    NSArray *scaleYtimes = @[@(0.67),@(0.72),@(0.74),@(0.76),@(0.81),@(0.86),@(0.88),@(0.90),@(0.95), @(1)];
+    scaleYAnimation.keyTimes = scaleYtimes;
+    scaleYAnimation.duration = 3.5;
+    scaleYAnimation.repeatCount = MAXFLOAT;
+    scaleYAnimation.removedOnCompletion = NO;
+    
+    [aView.layer addAnimation:trans forKey:@"trans"];
+    [aView.layer addAnimation:scaleXAnimation forKey:@"scaleX"];
+    [aView.layer addAnimation:scaleYAnimation forKey:@"scaleY"];
 }
 
 //移除大图界面
@@ -659,23 +731,25 @@
 #pragma mark scrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sView
 {
-    NSInteger index = fabs(sView.contentOffset.x) / sView.frame.size.width;
-    currPageNum = index;
-    //统计
-    if (currPageNum < _adZynoArray.count) {
-        NSString* zyno = _adZynoArray[currPageNum];
-        [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];
-    }
-    
-    if (currPageNum == _adZynoArray.count) {
-        self.buttonRight.hidden = YES;
-    }else{
-        self.buttonRight.hidden = NO;
-    }
-    if (currPageNum == 0) {
-        self.buttonLeft.hidden = YES;
-    }else{
-        self.buttonLeft.hidden = NO;
+    if (sView == self.scrollView) {
+        NSInteger index = fabs(sView.contentOffset.x) / sView.frame.size.width;
+        currPageNum = index;
+        //统计
+        if (currPageNum < _adZynoArray.count) {
+            NSString* zyno = _adZynoArray[currPageNum];
+            [[ZYAdStatistics shareStatistics] statistics:zyno andKey:@"imgShow"];
+        }
+        
+        if (currPageNum == _adZynoArray.count) {
+            self.buttonRight.hidden = YES;
+        }else{
+            self.buttonRight.hidden = NO;
+        }
+        if (currPageNum == 0) {
+            self.buttonLeft.hidden = YES;
+        }else{
+            self.buttonLeft.hidden = NO;
+        }
     }
 }
 
@@ -715,7 +789,7 @@
 //设置每行对应的cell（展示的内容）
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifer=@"cell";
+    NSString *identifer= [NSString stringWithFormat:@"cell%@",indexPath];
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifer];
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];

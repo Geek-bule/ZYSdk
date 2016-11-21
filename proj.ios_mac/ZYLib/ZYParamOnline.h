@@ -12,7 +12,8 @@
 #import "AFNetworking.h"
 
 
-#define ZYSDK_VERSION       @"v1.1.7"
+#define ZYSDK_VERSION       @"v1.2.0"
+
 /**
  1.1.4  1.增加互推图片的超时时间，超过15天的图片就从本地删除
         2.增加本地数据库参数  pushdate defdate
@@ -28,6 +29,20 @@
         2.修改了互推函数的接口结构
         3.标准所有界面的注释
         4.添加了一个三角形按钮
+ 1.1.8
+        1.添加header：deviceName
+        2.fix bug os to zyos
+        3.给下载奖励的时候顺便要删除对应游戏的图片和信息
+        3.add 三角的更多游戏图标，并加入随机逻辑
+ 1.1.9
+        1.压缩图片大小
+        2.添加礼包跳动动画，添加提示文字
+        3.修复更多游戏界面的滑动错乱的bug
+        4.修复下载奖励造成的bug
+ 1.2.0
+        1.修正奖励提醒文字位置
+        2.给予奖励之后的游戏图片删除，但是信息没有删除,造成bug
+        3.修改服务器只能获取到信息不能下载到图片时出现的bug
  
  */
 
@@ -38,7 +53,7 @@ typedef void (^paramBack)(NSDictionary *dict);
 
 + (ZYParamOnline*)shareParam;
 
-+ (AFSecurityPolicy *)customSecurityPolicy;
+//+ (AFSecurityPolicy *)customSecurityPolicy;
 
 /**
  *  @brief  配置文件属性

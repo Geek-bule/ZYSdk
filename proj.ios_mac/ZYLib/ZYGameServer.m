@@ -16,8 +16,8 @@
 
 
 
-#define ZY_HOST                 @"http://121.42.183.124"//@"http://192.168.1.147"//
-#define ZY_PORT                 @"80"//@"8080"//
+#define ZY_HOST                 @"http://121.42.183.124"//@"https://www.zongyiplay.com"//@"http://192.168.1.147"//
+#define ZY_PORT                 @"80"//@"6601"//@"8080"//
 #define ZY_URL_REGISTER         @"ZYGameServer/app/v1/login"
 #define ZY_URL_MOREGAME         @"ZYGameServer/app/v1/gameInfo"
 #define ZY_URL_JUMPDOWN         @"ZYGameServer/app/v1/gamePush/jump"
@@ -109,6 +109,7 @@
     
     //注册
     [self registerMobile:@"loadMoreGameInfo" back:^(NSString *token) {
+        
         [self loadMoreGameInfo];
         
     }];
@@ -188,7 +189,7 @@
     [manager.requestSerializer setValue:[ZYParamOnline idfaString] forHTTPHeaderField:@"idfa"];
     [manager.requestSerializer setValue:[ZYParamOnline idfvString] forHTTPHeaderField:@"idfv"];
     [manager.requestSerializer setValue:[OpenUDID value] forHTTPHeaderField:@"openudid"];
-    [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"os"];
+    [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"zyos"];
     [manager.requestSerializer setValue:[self getLanguage] forHTTPHeaderField:@"language"];
     [manager.requestSerializer setValue:[ZYParamOnline deviceName] forHTTPHeaderField:@"deviceName"];
     if (_isShowLog)NSLog(@"互推：header:%@",manager.requestSerializer.HTTPRequestHeaders);
@@ -419,7 +420,7 @@
     [self addHeader:manager];
     if (_isShowLog)NSLog(@"互推：loadgame=>%@?%@",url,parameter);
     
-    manager.securityPolicy = [ZYParamOnline customSecurityPolicy];
+//    manager.securityPolicy = [ZYParamOnline customSecurityPolicy];
     
     [manager GET:url parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
@@ -518,6 +519,9 @@
         }
         if (![oldInfo.buttonFlash isEqualToString:info.buttonFlash]) {
             [_adDisableImg addObject:oldInfo.buttonFlash];
+        }
+        if (![oldInfo.triButton isEqualToString:info.triButton]) {
+            [_adDisableImg addObject:oldInfo.triButton];
         }
         if (![oldInfo.img isEqualToString:info.img]) {
             [_adDisableImg addObject:oldInfo.img];
@@ -707,15 +711,29 @@
             }else {
                 if (dataList.count > 0) {
                     _adGameRic = @"";
-                    int nCount = 1;
                     for (id value in dataList) {
                         ZYAwardInfo *info = [[ZYAwardInfo alloc] initWithDictionary:value];
+                        //删除已经下载的游戏
+                        ZYGameInfo* gameInfo = [_adGameInfoDic objectForKey:info.zyno];
+                        [_adDisableImg addObject:gameInfo.button];
+                        [_adDisableImg addObject:gameInfo.buttonFlash];
+                        [_adDisableImg addObject:gameInfo.triButton];
+                        [_adDisableImg addObject:gameInfo.img];
+                        for (NSString* zyno in _adGameZynoArray) {
+                            if ([info.zyno isEqualToString:zyno]) {
+                                [_adGameZynoArray removeObject:zyno];
+                                break;
+                            }
+                        }
+                        
+                        //奖励列表
                         [_rewardInfoDic setObject:info forKey:info.rid];
                         _adGameRic = [_adGameRic stringByAppendingString:[NSString stringWithFormat:@"%d",info.rid.intValue]];
                         _adGameRic = [_adGameRic stringByAppendingString:@","];
-                        nCount++;
                     }
                     _adGameRic = [_adGameRic substringToIndex:[_adGameRic length]-1];
+                    //删除图
+                    [self removeDownloadImg];
                     
                     //如何防止重复切入切除出现多个alert
                     dispatch_async(dispatch_get_main_queue(), ^{

@@ -32,8 +32,8 @@
 
 
 
-#define ZY_HOST                         @"http://121.42.183.124"//@"http://192.168.1.147"//
-#define ZY_PORT                         @"80"//@"8080"//
+#define ZY_HOST                         @"http://121.42.183.124"//@"https://www.zongyiplay.com"//@"http://192.168.1.147"//
+#define ZY_PORT                         @"80"//@"6601"//@"8080"//
 #define ZY_URL_PARAM                    @"ZYGameServer/app/v1/gameParam"
 
 
