@@ -153,9 +153,6 @@
     if (sqlite3_exec(_db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
         NSLog(@"数据统计：数据库操作数据失败!sql:%s",[sql UTF8String]);
     }
-    if (close) {
-        sqlite3_close(_db);
-    }
 }
 
 

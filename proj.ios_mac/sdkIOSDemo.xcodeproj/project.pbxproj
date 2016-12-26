@@ -29,7 +29,6 @@
 		1B1E65F31D7D4A0100F7CA8F /* ZYAdview.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B1E65F21D7D4A0100F7CA8F /* ZYAdview.m */; };
 		1B1E65F51D7D559C00F7CA8F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC8CB151D2F838D00BA2057 /* AdSupport.framework */; };
 		1B1E65F61D7D55A800F7CA8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0B25FE1D2BCB7300B23CE4 /* UIKit.framework */; };
-		1B22E2561D95250900BABB0B /* ZYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B22E2551D95250900BABB0B /* ZYAlertView.m */; };
 		1B2BFA981DBDD6DE00A2235B /* ZYIosRateApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1E65E61D7D1D7C00F7CA8F /* ZYIosRateApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFA991DBDD6DE00A2235B /* ZYParamOnline.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1E65E81D7D1D7C00F7CA8F /* ZYParamOnline.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFA9A1DBDD6DE00A2235B /* ZYGameServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1E65E41D7D1D7C00F7CA8F /* ZYGameServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,7 +36,6 @@
 		1B2BFA9C1DBDD6DE00A2235B /* ZYAdStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B8030081D9A25460060C56A /* ZYAdStatistics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFA9D1DBDD6DE00A2235B /* ZYGameInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B4C90561D7FE5B000D641DA /* ZYGameInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFA9E1DBDD6DF00A2235B /* ZYAwardInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2CAD1D1D879EBC007C8B21 /* ZYAwardInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1B2BFA9F1DBDD6DF00A2235B /* ZYAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B22E2541D95250900BABB0B /* ZYAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFAA11DBDD72000A2235B /* ZYAdview.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B1E65F11D7D4A0100F7CA8F /* ZYAdview.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFAA21DBDD72000A2235B /* AdViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B72DDC81D783E0F009296BB /* AdViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2BFAA31DBDD72000A2235B /* AdViewToolX.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B72DDCA1D783E0F009296BB /* AdViewToolX.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,7 +149,6 @@
 		1B4C90551D7FC4A500D641DA /* libZYVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B72DDD21D7843A4009296BB /* libZYVideo.a */; };
 		1B4C90581D7FE5B000D641DA /* ZYGameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4C90571D7FE5B000D641DA /* ZYGameInfo.m */; };
 		1B5DFE1B1DB1DC200010991B /* uMeng.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B5DFE1A1DB1DC200010991B /* uMeng.mm */; };
-		1B62F3A61D27CB92000D845E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B62F3731D27CB92000D845E /* Localizable.strings */; };
 		1B6506FC1D7E56D600761F39 /* ZYVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6506F41D7E56D500761F39 /* ZYVideoAdapter.m */; };
 		1B6506FE1D7E56D600761F39 /* ZYVideoAdRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6506F81D7E56D500761F39 /* ZYVideoAdRegistry.m */; };
 		1B6506FF1D7E56D600761F39 /* ZYVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6506FA1D7E56D600761F39 /* ZYVideoManager.m */; };
@@ -228,6 +225,7 @@
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		510B4E479F09E5521F975D77 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F16404A85558EDA56AE92C9 /* WatchConnectivity.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		51213D3A1E10F32900072A9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51213D3C1E10F32900072A9C /* InfoPlist.strings */; };
 		521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6219F0C34300D177D7 /* Default-667h@2x.png */; };
 		521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6319F0C34300D177D7 /* Default-736h@3x.png */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
@@ -381,8 +379,6 @@
 		1B1E65E91D7D1D7C00F7CA8F /* ZYParamOnline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYParamOnline.m; sourceTree = "<group>"; };
 		1B1E65F11D7D4A0100F7CA8F /* ZYAdview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYAdview.h; sourceTree = "<group>"; };
 		1B1E65F21D7D4A0100F7CA8F /* ZYAdview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYAdview.m; sourceTree = "<group>"; };
-		1B22E2541D95250900BABB0B /* ZYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYAlertView.h; sourceTree = "<group>"; };
-		1B22E2551D95250900BABB0B /* ZYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYAlertView.m; sourceTree = "<group>"; };
 		1B2CAD1D1D879EBC007C8B21 /* ZYAwardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYAwardInfo.h; sourceTree = "<group>"; };
 		1B2CAD1E1D879EBC007C8B21 /* ZYAwardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYAwardInfo.m; sourceTree = "<group>"; };
 		1B39370C1D9E515500408A71 /* ZYTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYTools.h; sourceTree = "<group>"; };
@@ -634,8 +630,6 @@
 		1B4C90571D7FE5B000D641DA /* ZYGameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYGameInfo.m; sourceTree = "<group>"; };
 		1B5DFE191DB1DC200010991B /* uMeng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uMeng.h; sourceTree = "<group>"; };
 		1B5DFE1A1DB1DC200010991B /* uMeng.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = uMeng.mm; sourceTree = "<group>"; };
-		1B62F3741D27CB92000D845E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1B62F3A01D27CB92000D845E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1B6506F31D7E56D500761F39 /* ZYVideoAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVideoAdapter.h; sourceTree = "<group>"; };
 		1B6506F41D7E56D500761F39 /* ZYVideoAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVideoAdapter.m; sourceTree = "<group>"; };
 		1B6506F71D7E56D500761F39 /* ZYVideoAdRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVideoAdRegistry.h; sourceTree = "<group>"; };
@@ -739,6 +733,8 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		51213D3B1E10F32900072A9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		51213D3D1E10F32E00072A9C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		516B41EDA82F363F870DA467 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		521A8E6219F0C34300D177D7 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		521A8E6319F0C34300D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
@@ -966,6 +962,7 @@
 				503AE0FD17EB989F00D1A890 /* Prefix.pch */,
 				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
 				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
+				51213D3C1E10F32900072A9C /* InfoPlist.strings */,
 			);
 			name = ios;
 			path = Classes;
@@ -1741,7 +1738,6 @@
 			isa = PBXGroup;
 			children = (
 				1B3937101D9E602200408A71 /* extra */,
-				1B62F3731D27CB92000D845E /* Localizable.strings */,
 				1B39370C1D9E515500408A71 /* ZYTools.h */,
 				1B39370E1D9E519C00408A71 /* ZYTools-apple.mm */,
 				1B3EC5421DA88EFF0054B466 /* ZYTools-android.cpp */,
@@ -1766,8 +1762,6 @@
 				1B4C90571D7FE5B000D641DA /* ZYGameInfo.m */,
 				1B2CAD1D1D879EBC007C8B21 /* ZYAwardInfo.h */,
 				1B2CAD1E1D879EBC007C8B21 /* ZYAwardInfo.m */,
-				1B22E2541D95250900BABB0B /* ZYAlertView.h */,
-				1B22E2551D95250900BABB0B /* ZYAlertView.m */,
 			);
 			path = ZYLib;
 			sourceTree = "<group>";
@@ -2054,7 +2048,6 @@
 				1B2BFA9C1DBDD6DE00A2235B /* ZYAdStatistics.h in Headers */,
 				1B2BFA9D1DBDD6DE00A2235B /* ZYGameInfo.h in Headers */,
 				1B2BFA9E1DBDD6DF00A2235B /* ZYAwardInfo.h in Headers */,
-				1B2BFA9F1DBDD6DF00A2235B /* ZYAlertView.h in Headers */,
 				1B2BFA9A1DBDD6DE00A2235B /* ZYGameServer.h in Headers */,
 				1B2BFA9B1DBDD6DE00A2235B /* ZYAdGameShow.h in Headers */,
 			);
@@ -2230,9 +2223,14 @@
 					};
 					1B7859521DAC8F250072B429 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 77W2C5W93D;
 					};
 					1B78595E1DAC8F250072B429 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 77W2C5W93D;
+					};
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = 77W2C5W93D;
 					};
 				};
 			};
@@ -2335,8 +2333,8 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				1B3EC73A1DA8BEFE0054B466 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
-				1B62F3A61D27CB92000D845E /* Localizable.strings in Resources */,
 				1B3EC7371DA8BEFE0054B466 /* com.ktplay.plugin.qq.bundle in Resources */,
+				51213D3A1E10F32900072A9C /* InfoPlist.strings in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				1B3EC6E71DA8BAC00054B466 /* ZYSdk.bundle in Resources */,
@@ -2365,7 +2363,6 @@
 				1B1E65EA1D7D1D7C00F7CA8F /* ZYGameServer.m in Sources */,
 				1B6507051D7EA22100761F39 /* ZYAdGameShow.m in Sources */,
 				1B2CAD1F1D879EBC007C8B21 /* ZYAwardInfo.m in Sources */,
-				1B22E2561D95250900BABB0B /* ZYAlertView.m in Sources */,
 				1B80300A1D9A25460060C56A /* ZYAdStatistics.m in Sources */,
 				1B1E65EC1D7D1D7C00F7CA8F /* ZYParamOnline.m in Sources */,
 			);
@@ -2485,15 +2482,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1B62F3731D27CB92000D845E /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1B62F3741D27CB92000D845E /* en */,
-				1B62F3A01D27CB92000D845E /* zh-Hans */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		1B7859551DAC8F250072B429 /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2501,6 +2489,16 @@
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
+		};
+		51213D3C1E10F32900072A9C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51213D3B1E10F32900072A9C /* en */,
+				51213D3D1E10F32E00072A9C /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			path = ios;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 
@@ -2791,6 +2789,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 77W2C5W93D;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2813,7 +2812,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
 			};
 			name = Debug;
 		};
@@ -2838,6 +2837,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 77W2C5W93D;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2855,7 +2855,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
 			};
 			name = Release;
 		};
@@ -2877,6 +2877,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 77W2C5W93D;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2922,6 +2923,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 77W2C5W93D;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2949,6 +2951,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = 77W2C5W93D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3043,6 +3046,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = 77W2C5W93D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

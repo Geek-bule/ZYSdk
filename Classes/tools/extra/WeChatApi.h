@@ -14,47 +14,36 @@
 #pragma mark - 需要配置的参数
 
 // 开放平台登录https://open.weixin.qq.com的开发者中心获取APPID
-#define WX_APPID @"wxa467f86b4d427b77"
+#define WX_APPID                @"wx459b15288a0c688e"
 // 开放平台登录https://open.weixin.qq.com的开发者中心获取AppSecret。
-#define WX_APPSecret @"c43ec03a72699816c79026d96d53f441"
+#define WX_APPSecret            @"710880027b36585ec00c0c4cef91d875"
 // 微信支付商户号
-#define MCH_ID  @"1402915602"
+#define MCH_ID                  @"1402915602"
 // 安全校验码（MD5）密钥，商户平台登录账户和密码登录http://pay.weixin.qq.com
 // 平台设置的“API密钥”，为了安全，请设置为以数字和字母组成的32字符串。
-#define WX_PartnerKey @"1d54fdfo9SA85dzyi52484htasfkjlKJ"
-
-
-
-#pragma mark - 统一下单请求参数键值
-
-// 应用id
-#define WXAPPID @"appid"
-// 商户号
-#define WXMCHID @"mch_id"
-// 随机字符串
-#define WXNONCESTR @"nonce_str"
-// 签名
-#define WXSIGN @"sign"
-// 商品描述
-#define WXBODY @"body"
-// 总金额
-#define WXTOTALFEE @"total_fee"
+#define WX_PartnerKey           @"1d54fdfo9SA85dzyi52484htasfkjlKJ"
+//  zysdk后台生成唯一性id
+#define ZY_APPID                @"acba1f83d703422daacfc9615492abad"
 
 
 #import <Foundation/Foundation.h>
 #import "WXApi.h"
 #import "WXApiObject.h"
+#import <sqlite3.h>
 
-typedef void (^WxPayBack)(PayResp* payResp);
+
+@class WXTradeBody;
+typedef void (^WxPayBack)(WXTradeBody* payResp);
 
 
-@interface WXApiManager : NSObject<WXApiDelegate>
+@interface ZYWXApiManager : NSObject<WXApiDelegate>
 {
     WxPayBack _wxPayBack;
+    sqlite3 *db;
 }
 
 @property (nonatomic,strong) NSMutableDictionary* outTradeNoDic;
-@property (nonatomic,strong) NSString* outTradeNo;
+@property (nonatomic,strong) NSMutableArray* verifyPayArray;
 
 
 + (instancetype)sharedManager;
@@ -65,9 +54,28 @@ typedef void (^WxPayBack)(PayResp* payResp);
  * @param price     订单总金额，单位为分
  * @param payBack   微信支付成功后的回调
  */
-- (void)sendWxPay:(NSString*)payBody price:(int)price back:(WxPayBack)payBack;
-//- (void)sendQueryPay:(NSString*)outTradeNo;
+- (void)setCallBack:(WxPayBack)payBack;
+- (void)sendWxPay:(NSString*)payBody body:(WXTradeBody*)tradeBody;
+- (void)sendQueryPay:(NSString*)outTradeNo;
+- (NSString *)fetchIPAddress;
+- (NSString *)idfaString;
 @end
+
+
+@interface WXTradeBody : NSObject
+
+@property (nonatomic,retain) NSString* tradeNo;
+@property (nonatomic,retain) NSNumber* price;
+@property (nonatomic,retain) NSString* productId;
+@property (nonatomic,retain) NSNumber* productNum;
+@property (nonatomic,retain) NSString* idfa;
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+@end
+
+
 
 
 #endif /* WeChatApi_hpp */

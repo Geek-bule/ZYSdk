@@ -1,1 +1,6 @@
+#ignore sdk floder
 /proj.ios_mac/sdkLibs/
+/proj.ios_mac/build
+/exportLib
+#ignore files on mac
+.DS_Store

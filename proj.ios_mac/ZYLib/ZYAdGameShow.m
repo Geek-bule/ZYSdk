@@ -44,7 +44,7 @@
     int _trianglePage;
 }
 @property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UITableView *tableView;
+//@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIView *view;
 @property (strong, nonatomic) UIView *buttonView;
 @property (strong, nonatomic) UIButton *triButton;
@@ -116,11 +116,9 @@
             }
         }
         
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, _winWidth, _winHeight)];
-        self.scrollView.pagingEnabled = YES;
-        self.scrollView.clipsToBounds = NO;
-        self.scrollView.delegate = self;
-        self.scrollView.contentSize = CGSizeMake(_winWidth, _winHeight);
+        
+        self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _winWidth, _winHeight)];
+        self.view.userInteractionEnabled = YES;
         
         //设置回调
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -148,9 +146,9 @@
 
 - (void)showAdGame:(UIView*)mainView
 {
-    self.view = mainView;
+//    self.view = mainView;
+    [mainView addSubview:self.view];
 }
-
 
 - (void)showDirect
 {
@@ -247,10 +245,9 @@
         self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(_winWidth*_btnViewPos.x-imageWidth/2, _winHeight*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
         [self.view addSubview:self.buttonView];
         
-        
-        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCircleClickOpen)];
-        [self.buttonView addGestureRecognizer:singleTap];
-        self.buttonView.userInteractionEnabled=YES;
+//        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCircleClickOpen)];
+//        [self.buttonView addGestureRecognizer:singleTap];
+//        self.buttonView.userInteractionEnabled=YES;
         
         
         CGFloat disWidth = image.size.width*adImageRate*0.15/2;
@@ -272,10 +269,18 @@
                              imageView1.frame = CGRectMake(image.size.width*adImageRate-imageFlash.size.width*adImageRate-disWidth, image.size.height*adImageRate-imageFlash.size.height*adImageRate-disHeight, imageFlash.size.width*adImageRate, imageFlash.size.height*adImageRate);
                          }];
         
-        UIImageView*buttonImage = [[UIImageView alloc] initWithImage:image];
+//        UIImageView *buttonImage = [[UIImageView alloc] initWithImage:image];
+//        buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
+//        buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
+//        [self.buttonView addSubview:buttonImage];
+        
+        UIButton* buttonImage = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
+        [buttonImage setBackgroundImage:image forState:UIControlStateNormal];
+        [buttonImage addTarget:self action:@selector(onCircleClickOpen) forControlEvents:UIControlEventTouchUpInside];
+        [self.buttonView addSubview:buttonImage];
         buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
         buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
-        [self.buttonView addSubview:buttonImage];
+        
         
         [self shakeToShow:self.buttonView];
         
@@ -296,17 +301,20 @@
         UIImage*image = [self imagesNamedFromCustomBundle:@"zyadmore"];
         CGFloat imageWidth = image.size.width*adImageRate;
         CGFloat imageHeight = image.size.height*adImageRate;
+        
         self.buttonView = [[UIView alloc] initWithFrame:CGRectMake(_winWidth*_btnViewPos.x-imageWidth/2, _winHeight*_btnViewPos.y-imageHeight/2, imageWidth, imageHeight)];
         [self.view addSubview:self.buttonView];
         
-        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCircleClickOpen)];
-        [self.buttonView addGestureRecognizer:singleTap];
-        self.buttonView.userInteractionEnabled=YES;
-        
-        UIImageView*buttonImage = [[UIImageView alloc] initWithImage:image];
+//        UIImageView*buttonImage = [[UIImageView alloc] initWithImage:image];
+//        buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
+//        buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
+//        [self.buttonView addSubview:buttonImage];
+        UIButton* buttonImage = [UIButton buttonWithType:UIButtonTypeCustom];//button的类型
+        [buttonImage setBackgroundImage:image forState:UIControlStateNormal];
+        [buttonImage addTarget:self action:@selector(onCircleClickOpen) forControlEvents:UIControlEventTouchUpInside];
+        [self.buttonView addSubview:buttonImage];
         buttonImage.frame = CGRectMake(0, 0, image.size.width*adImageRate, image.size.height*adImageRate);
         buttonImage.layer.transform = CATransform3DMakeScale(_btnScale, _btnScale, 1.0);
-        [self.buttonView addSubview:buttonImage];
         
         [self shakeToShow:self.buttonView];
     }
@@ -380,9 +388,9 @@
             return;
         }
     }
-    NSLog(@"进入循环模式");
+//    NSLog(@"进入循环模式");
     //如果一直没有就间隔时间再进行
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addTriangleButton:) userInfo:nil repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(addTriangleButton:) userInfo:nil repeats:NO];
 }
 
 - (void)addMoreTriangleButton:(CGFloat)scale
@@ -413,6 +421,13 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [_adZynoArray removeAllObjects];
     int count = 0;
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, _winWidth, _winHeight)];
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.clipsToBounds = NO;
+    self.scrollView.delegate = self;
+    self.scrollView.contentSize = CGSizeMake(_winWidth, _winHeight);
+    
     //add scroll view
     NSArray*list = [[ZYGameServer shareServer] getGameZynoArray];
     if (list && [list count] > 0) {
@@ -474,7 +489,7 @@
                     
                     //添加提示文字
                     UILabel *labelTip = [[UILabel alloc] initWithFrame:CGRectMake(-(_winWidth-adImageWidth)/2+15, adImageHeight-40, _winWidth-30, 100)];
-                    labelTip.text = @"下载并体验我们的其他应用可以获得奖励哦！\n注意：点击本页跳转App Store下载，并联网进入该应用。之后返回当前应用即可领取奖励。";
+                    labelTip.text = @"下载并体验此应用可以获得奖励哦！\n注意：点击本页跳转App Store下载，并联网进入该应用。之后返回当前应用即可领取奖励。";
                     labelTip.shadowColor = [UIColor blackColor];//默认没有阴影
                     labelTip.shadowOffset = CGSizeMake(1,1);
                     labelTip.numberOfLines = 0;
@@ -539,13 +554,13 @@
             UIImage* imageList = [UIImage imageWithContentsOfFile:imgPath];//[self imagesNamedFromCustomBundle:@"t1"];
             int imageWidth = imageList.size.width*adImageRate;
             int imageHeigh = imageList.size.height*adImageRate;
-            self.tableView = [[UITableView alloc] initWithFrame:CGRectMake((imageMoreWidth-imageWidth)/2, imageMoreWidth*0.18, imageWidth, (imageHeigh+cellDistance)*3.3) style:UITableViewStylePlain];
-            self.tableView.delegate = self;
-            self.tableView.dataSource = self;
-            [self.tableView setSeparatorColor:[UIColor clearColor]];
-            self.tableView.backgroundColor=[UIColor clearColor];
-            self.tableView.userInteractionEnabled=YES;
-            [buttonMoreBG addSubview:self.tableView];
+            UITableView *_tableView = [[UITableView alloc] initWithFrame:CGRectMake((imageMoreWidth-imageWidth)/2, imageMoreWidth*0.18, imageWidth, (imageHeigh+cellDistance)*3.3) style:UITableViewStylePlain];
+            _tableView.delegate = self;
+            _tableView.dataSource = self;
+            [_tableView setSeparatorColor:[UIColor clearColor]];
+            _tableView.backgroundColor=[UIColor clearColor];
+            _tableView.userInteractionEnabled=YES;
+            [buttonMoreBG addSubview:_tableView];
             self.scrollView.contentSize = CGSizeMake(x + width, height);
         }
     }
@@ -719,14 +734,14 @@
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
-    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
-        return NO;
-    }
-    return  YES;
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+//{
+//    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+//    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+//        return NO;
+//    }
+//    return  YES;
+//}
 
 #pragma mark scrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sView
@@ -849,7 +864,7 @@
     
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
     
-    NSString *img_path = [bundle pathForResource:imgName ofType:@"png"];
+    NSString *img_path = [bundle pathForResource:[NSString stringWithFormat:@"img/%@",imgName] ofType:@"png"];
     
     return [UIImage imageWithContentsOfFile:img_path];
     

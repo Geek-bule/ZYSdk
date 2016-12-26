@@ -84,20 +84,20 @@ void ShareHelper::shareWithMsg(const char *title,const char *message,int award, 
     
     //1、创建分享参数
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-    UIImage* imageArray = [UIImage imageNamed:NSLocalizedString(@"share image", nil)];
+    UIImage* imageArray = [UIImage imageNamed:@"shareImage/shareImage.png"];
     
     if (imageArray) {
         
         [shareParams SSDKSetupShareParamsByText:[NSString stringWithUTF8String:message]
                                          images:imageArray
-                                            url:[NSURL URLWithString:NSLocalizedString(@"share url", nil)]
+                                            url:[NSURL URLWithString:@"http://a.app.qq.com/o/simple.jsp?pkgname=com.zongyi.cookie"]
                                           title:[NSString stringWithUTF8String:title]
                                            type:SSDKContentTypeImage];
         
         [shareParams SSDKSetupWeChatParamsByText:[NSString stringWithUTF8String:message]
                                            title:[NSString stringWithUTF8String:title]
-                                             url:[NSURL URLWithString:NSLocalizedString(@"share url", nil)]
-                                      thumbImage:[UIImage imageNamed:NSLocalizedString(@"small image", nil)]
+                                             url:[NSURL URLWithString:@"http://a.app.qq.com/o/simple.jsp?pkgname=com.zongyi.cookie"]
+                                      thumbImage:[UIImage imageNamed:@"shareImage/smallImage.png"]
                                            image:imageArray
                                     musicFileURL:nil
                                          extInfo:nil
@@ -108,9 +108,9 @@ void ShareHelper::shareWithMsg(const char *title,const char *message,int award, 
         
         [shareParams SSDKSetupWeChatParamsByText:[NSString stringWithUTF8String:message]
                                            title:[NSString stringWithUTF8String:title]
-                                             url:[NSURL URLWithString:NSLocalizedString(@"share url", nil)]
+                                             url:[NSURL URLWithString:@"http://a.app.qq.com/o/simple.jsp?pkgname=com.zongyi.cookie"]
                                       thumbImage:nil
-                                           image:[UIImage imageNamed:NSLocalizedString(@"small image", nil)]
+                                           image:[UIImage imageNamed:@"shareImage/smallImage.png"]
                                     musicFileURL:nil
                                          extInfo:nil
                                         fileData:nil
@@ -213,20 +213,20 @@ void ShareHelper::shareToWechat(const char *msg, int award)
     //创建分享参数
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
     
-    UIImage* imageArray = [UIImage imageNamed:NSLocalizedString(@"share image", nil)];
+    UIImage* imageArray = [UIImage imageNamed:@"shareImage/shareImage.png"];
     
     if (imageArray) {
         
         [shareParams SSDKSetupShareParamsByText:nil
                                          images:imageArray
-                                            url:[NSURL URLWithString:NSLocalizedString(@"share url", nil)]
+                                            url:[NSURL URLWithString:@"http://a.app.qq.com/o/simple.jsp?pkgname=com.zongyi.cookie"]
                                           title:[NSString stringWithUTF8String:msg]
                                            type:SSDKContentTypeAuto];
         
         [shareParams SSDKSetupWeChatParamsByText:[NSString stringWithUTF8String:msg]
                                            title:[NSString stringWithUTF8String:msg]
-                                             url:[NSURL URLWithString:NSLocalizedString(@"share url", nil)]
-                                      thumbImage:[UIImage imageNamed:NSLocalizedString(@"small image", nil)]
+                                             url:[NSURL URLWithString:@"http://a.app.qq.com/o/simple.jsp?pkgname=com.zongyi.cookie"]
+                                      thumbImage:[UIImage imageNamed:@"shareImage/smallImage.png"]
                                            image:imageArray
                                     musicFileURL:nil
                                          extInfo:nil
@@ -282,7 +282,7 @@ void ShareHelper::shareDeviceInfo()
     //创建分享参数
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
     //设备信息
-    NSString *deviceInfo = [NSString stringWithFormat:@"IDFA:%@\nIDFV:%@\nOPENID:%@\nUUID:%@",[ZYParamOnline idfaString],[ZYParamOnline idfvString],[OpenUDID value],[ZYParamOnline UUIDString]];
+    NSString *deviceInfo = [NSString stringWithFormat:@"IDFA:%@\nIDFV:%@\nOPENID:%@\n",[ZYParamOnline idfaString],[ZYParamOnline idfvString],[OpenUDID value]];
     [shareParams SSDKSetupShareParamsByText:deviceInfo
                                      images:nil
                                         url:nil

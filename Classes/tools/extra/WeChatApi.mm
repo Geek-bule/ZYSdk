@@ -7,8 +7,6 @@
 //
 
 #include "WeChatApi.h"
-
-
 #import "AFNetworking.h"
 #import "OpenUDID.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -18,22 +16,36 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
-
-#define ZY_HOST                 @"http://121.42.183.124:6601"
+//地址
+#define ZY_HOST                 @"https://www.zongyimobile.com:6602"
 #define ZY_URL_QUERY            @"/ZYPay/app/v1/queryorder/"
 #define ZY_URL_UNIFIED          @"/ZYPay/app/v1/unifiedorder/"
-#define ZY_APPID                @"zyp1477734954832"
+
+#pragma mark - 统一下单请求参数键值
+
+// 应用id
+#define WXAPPID @"appid"
+// 商户号
+#define WXMCHID @"mch_id"
+// 随机字符串
+#define WXNONCESTR @"nonce_str"
+// 签名
+#define WXSIGN @"sign"
+// 商品描述
+#define WXBODY @"body"
+// 总金额
+#define WXTOTALFEE @"total_fee"
 
 
-@implementation WXApiManager
+@implementation ZYWXApiManager
 
 #pragma mark - 单粒
 
 +(instancetype)sharedManager {
     static dispatch_once_t onceToken;
-    static WXApiManager *instance;
+    static ZYWXApiManager *instance;
     dispatch_once(&onceToken, ^{
-        instance = [[WXApiManager alloc] init];
+        instance = [[ZYWXApiManager alloc] init];
     });
     return instance;
 }
@@ -42,7 +54,21 @@
 {
     self = [super init];
     if (self) {
+        
+        [self creteProductDB];
+        
         _outTradeNoDic = [[NSMutableDictionary alloc] init];
+        _verifyPayArray = [[NSMutableArray alloc] init];
+        
+        [self loadProductInfo];
+        
+        //设置回调
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(verifyPay)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+        
+        
     }
     return self;
 }
@@ -54,18 +80,12 @@
     if([resp isKindOfClass:[PayResp class]]){
         
         //支付返回结果，实际支付结果需要去微信服务器端查询
-        PayResp *payResp = (PayResp *)resp;
-        if (_wxPayBack) {
-            _wxPayBack(payResp);
-        }
         
     }else if ([resp isKindOfClass:[SendAuthResp class]]) {
         NSString *strMsg;
         switch (resp.errCode) {
             case WXSuccess:
             {
-//                SendAuthResp *authResp = (SendAuthResp *)resp;
-                
                 break;
             }
             default:
@@ -277,11 +297,15 @@
     [WXApi sendReq:req];
 }
 
-- (void)sendWxPay:(NSString*)payBody price:(int)price back:(WxPayBack)payBack
+- (void)setCallBack:(WxPayBack)payBack
 {
     _wxPayBack = payBack;
+}
+
+- (void)sendWxPay:(NSString*)payBody body:(WXTradeBody*)tradeBody {
+    
     NSString *url = [NSString stringWithFormat:@"%@%@%@",ZY_HOST,ZY_URL_UNIFIED,ZY_APPID];
-    NSNumber *payFee = [NSNumber numberWithInteger:price];
+    NSNumber *payFee = tradeBody.price;
     NSString *nonceStr = [self generateTradeNO];
     
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc] init];
@@ -309,9 +333,14 @@
             [parameter setObject:dic[@"outTradeNo"] forKey:@"outTradeNo"];
             NSString *sign = [self createMD5SingForPay:parameter];
             if ([sign isEqualToString:dic[@"sign"]]) {
-                _outTradeNo = dic[@"outTradeNo"];
-                NSLog(@"微信支付：创建订单－跳转微信");
-                [self jumpToWxPay:dic[@"prepayId"]];
+                NSString* outTradeNo = dic[@"outTradeNo"];
+                if (tradeBody) {
+                    tradeBody.tradeNo = outTradeNo;
+                    [_outTradeNoDic setObject:tradeBody forKey:outTradeNo];
+                    [self storeProductInfo:outTradeNo];
+                    [self jumpToWxPay:dic[@"prepayId"]];
+                }
+                NSLog(@"微信支付：创建订单－跳转微信 %@",dic);
             }else{
                 NSLog(@"微信支付：创建订单－签名错误");
             }
@@ -341,9 +370,11 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.requestSerializer.timeoutInterval = 30;
+    manager.requestSerializer.timeoutInterval = 40;
     
     [self addHeader:manager];
+    
+    NSLog(@"微信支付：sendQueryPay=>%@?%@",url,parameter);
     
     [manager POST:url parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
@@ -367,27 +398,189 @@
                  PAYERROR--支付失败
                  */
                 if ([dic[@"tradeState"] isEqualToString:@"SUCCESS"]) {
-                    //
-                    NSLog(@"微信支付：查询订单－校验订单成功");
+                    //给玩家商品
+                    NSLog(@"微信支付：查询订单－校验订单成功%@",dic);
+                    WXTradeBody *body = [[WXTradeBody alloc] init];
+                    body = _outTradeNoDic[dic[@"outTradeNo"]];
+                    //支付返回结果，实际支付结果需要去微信服务器端查询
+                    if (_wxPayBack) {
+                        body.idfa = [self idfaString];
+                        
+                        _wxPayBack(body);
+                    }
+                    [self deleteProductInfo:dic[@"outTradeNo"]];
+                }else if ([dic[@"tradeState"] isEqualToString:@"CLOSED"]) {
+                    //已关闭的删除掉
+                    [self deleteProductInfo:dic[@"outTradeNo"]];
                 }else{
                     //其他支付状态
                     NSLog(@"微信支付：查询订单－校验订单%@",dic[@"tradeState"]);
                 }
+                
             }else{
                 NSLog(@"微信支付：查询订单－签名错误");
             }
         }else{
             NSString *message = dic[@"message"];
             NSLog(@"微信支付：查询订单－%@",message);
+            [self deleteProductInfo:outTradeNo];
         }
-        
+        [self startVerify];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"微信支付：网络异常 查询订单-%@", error);
     }];
 }
 
+//遍历本地数组
+- (void)verifyPay
+{
+    for (NSString *key in _outTradeNoDic) {
+        [_verifyPayArray addObject:_outTradeNoDic[key]];
+    }
+    [self startVerify];
+}
+
+- (void)startVerify
+{
+    if ([_verifyPayArray count] > 0) {
+        WXTradeBody *body = _verifyPayArray[0];
+        [self sendQueryPay:body.tradeNo];
+        [_verifyPayArray removeObjectAtIndex:0];
+    }
+}
+
+//- (WXTradeBody*)tradeBodyFor:(NSNumber*)price tradeNo:(NSString*)tradeNo
+//{
+//    WXTradeBody* body = [[WXTradeBody alloc] init];
+//    if (price.intValue == 1) {
+//        body.tradeNo = tradeNo;
+//        body.price = price;
+//        body.productId = @"jinbi";
+//        body.productNum = [NSNumber numberWithInt:30];
+//        return body;
+//    }
+//    return nil;
+//}
+
+//订单表创建
+- (void)creteProductDB
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    //先读取本地的sql文件数据
+    NSString *path = [NSString stringWithFormat:@"%@",[paths lastObject]];
+    NSString *databasePath = [path stringByAppendingPathComponent:@"zyproduct"];
+    
+    //判断有没有db文件，没有就创建
+    if (sqlite3_open([databasePath UTF8String], &db) != SQLITE_OK) {
+        NSLog(@"微信支付：创建数据库文件");
+    }
+    
+    //创建微信支付table
+    NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS zyproduct (tradeno varchar(130) not null,price int not null,productid varchar(100) not null,productnum int not null);";
+    [self execSql:sqlCreateTable isClose:YES];
+}
+//订单表存储
+- (void) storeProductInfo:(NSString*)tradeNo
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //inser data from db
+        NSString *paramVec = [[NSString alloc] init];
+        WXTradeBody *body = _outTradeNoDic[tradeNo];
+        if (body) {
+            paramVec = [NSString stringWithFormat:@"('%@','%@','%@','%@')",tradeNo,body.price,body.productId,body.productNum];
+            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO zyproduct (tradeno,price,productid,productnum) VALUES %@",paramVec];
+            [self execSql:insertTabel isClose:YES];
+        }
+    });
+}
+
+//订单表删除
+- (void) deleteProductInfo:(NSString*)tradeNo
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //inser data from db
+        [_outTradeNoDic removeObjectForKey:tradeNo];
+        NSString *deleteTable = [NSString stringWithFormat:@"delete from zyproduct where tradeno = %@",tradeNo];
+        [self execSql:deleteTable isClose:YES];
+    });
+}
+
+//订单表读取
+- (void) loadProductInfo
+{
+    NSString *sqlQuery = @"SELECT * FROM zyproduct";
+    sqlite3_stmt * statement;
+    [_outTradeNoDic removeAllObjects];
+    if (sqlite3_prepare_v2(db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            WXTradeBody *body = [[WXTradeBody alloc] init];
+            char *strTradeNo = (char*)sqlite3_column_text(statement, 0);
+            NSString *TradeNo = [[NSString alloc]initWithUTF8String:strTradeNo];
+            body.tradeNo = TradeNo;
+            
+            int nPrice = sqlite3_column_int(statement, 1);
+            NSNumber* price = [NSNumber numberWithInt:nPrice];
+            body.price = price;
+            
+            char *strProductID = (char*)sqlite3_column_text(statement, 2);
+            NSString *productId = [[NSString alloc]initWithUTF8String:strProductID];
+            body.productId = productId;
+            
+            int nProductNum = sqlite3_column_int(statement, 3);
+            NSNumber* productNum = [NSNumber numberWithInt:nProductNum];
+            body.productNum = productNum;
+            
+            [_outTradeNoDic setObject:body forKey:TradeNo];
+        }
+        NSLog(@"微信支付：本地数据库读取成功");
+    }
+}
+
+-(void)execSql:(NSString *)sql isClose:(BOOL)close
+{
+    char *err;
+    if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
+        NSLog(@"微信支付：数据库操作数据失败!sql:%s",[sql UTF8String]);
+        NSLog(@"微信支付：数据库操作数据失败!error:%s",err);
+    }
+}
 
 @end
 
+@implementation WXTradeBody
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    
+}
+
+- (void)setValue:(id)value forKey:(NSString *)key {
+    
+    if ([value isKindOfClass:[NSNull class]]) {
+        
+        return;
+    }
+    
+    [super setValue:value forKey:key];
+}
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+    
+    if ([dictionary isKindOfClass:[NSDictionary class]]) {
+        
+        self = [super init];
+        
+        if (self) {
+            
+            [self setValuesForKeysWithDictionary:dictionary];
+        }
+        
+        return self;
+        
+    } else {
+        
+        return nil;
+    }
+}
+
+@end
 

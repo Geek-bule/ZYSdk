@@ -118,11 +118,11 @@ static AppDelegate s_sharedApplication;
          annotation:(id)annotation
 {
     [KTPlay handleOpenURL:url];
-    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+    return [WXApi handleOpenURL:url delegate:[ZYWXApiManager sharedManager]];
 }
 /////////////////////////////////
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+    return  [WXApi handleOpenURL:url delegate:[ZYWXApiManager sharedManager]];
 }
 
 

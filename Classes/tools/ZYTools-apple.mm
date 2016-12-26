@@ -62,6 +62,11 @@ void ZYTools::init()
     //umeng的初始化
     uMeng::initUmeng();
     
+    //wxpay;
+    [[ZYWXApiManager sharedManager] setCallBack:^(WXTradeBody *Recharge) {
+        //微信支付充值成功回调
+    }];
+    
 #ifdef ZYTOOLS_ADVIEW
     //初始化adviewConfig
     ZYTools::initConfig();
@@ -101,11 +106,11 @@ std::string ZYTools::getParamOf(std::string key)
 void ZYTools::showLog()
 {
     //需要显示的日志打开即可
-    [[ZYParamOnline shareParam] showLog];
-    [[ZYGameServer shareServer] showLog];
+//    [[ZYParamOnline shareParam] showLog];
+//    [[ZYGameServer shareServer] showLog];
 //    [[ZYIosRateApp shareRate] showLog];
-//    [[ZYAdview shareAdview] showBannerLog];
-//    [[ZYAdview shareAdview] showInterlLog];
+    [[ZYAdview shareAdview] showBannerLog];
+    [[ZYAdview shareAdview] showInterlLog];
 //    [[ZYVideoManager sharedManager] showLog];
 }
 
@@ -189,22 +194,19 @@ bool ZYTools::isReviewStatus()
 
 void ZYTools::startWxPay()
 {
-    [[WXApiManager sharedManager] sendWxPay:@"天天爱消除-游戏充值" price:1 back:^(PayResp* resp){
-        switch (resp.errCode) {
-            case WXSuccess:
-                //支付成功，给玩家物品
-                NSLog(@"微信支付：支付成功－PaySuccess，retcode = %d", resp.errCode);
-                break;
-                
-            default:
-                NSLog(@"微信支付：支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr);
-                break;
-        }
-    }];
+    //设置消费结构体
+    WXTradeBody* body = [[WXTradeBody alloc] init];
+    if (true) {
+        body.price = [NSNumber numberWithFloat:6];
+        body.productId = @"jinbi";
+        body.productNum = [NSNumber numberWithInt:30];
+    }
+    //调用微信支付
+    [[ZYWXApiManager sharedManager] sendWxPay:@"天天爱消除-游戏充值" body:body];
 }
 void ZYTools::queryWxpay()
 {
-//    [[WXApiManager sharedManager] sendQueryPay:@"20161102174100097363708"];
+//    [[ZYWXApiManager sharedManager] sendQueryPay:@"20161102174100097363708"];
 }
 
 

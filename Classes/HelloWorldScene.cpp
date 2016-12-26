@@ -284,7 +284,9 @@ void HelloWorld::friendsCallback(cocos2d::Ref *pSender)
     pItemWxPay->setEnabled(true);
     
     
-    
+    std::string value1 = ZYTools::getParamOf("ZYIrate");
+    std::string value2 = ZYTools::getParamOf("Delay");
+    MessageBox(value2.c_str(), value1.c_str());
 }
 
 void HelloWorld::rateGameCallback(cocos2d::Ref *pSender)
@@ -342,10 +344,12 @@ void HelloWorld::iapCallback(cocos2d::Ref *pSender)
         std::vector<std::string> productids;
         productids.push_back(IAP_GOLD1);
         productids.push_back(IAP_GOLD2);
+        productids.push_back(IAP_GOLD3);
+        productids.push_back(IAP_GOLD4);
         InIAPHelper::shareIAP()->loadIAPProducts(productids,true);
     }else{
         //加载成功内购id后，根据id来进行购买
-        InIAPHelper::shareIAP()->orderIdentifier(IAP_GOLD1);
+        InIAPHelper::shareIAP()->orderIdentifier(IAP_GOLD2);
     }
 }
 

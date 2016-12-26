@@ -11,7 +11,7 @@
 #import "OpenUDID.h"
 #import "ZYGameInfo.h"
 #import "ZYAwardInfo.h"
-#import "ZYAlertView.h"
+//#import "ZYAlertView.h"
 #import "ZYAdStatistics.h"
 
 
@@ -285,7 +285,6 @@
         }
         if (_isShowLog)NSLog(@"互推：本地数据库defaultlist读取成功");
     }
-    sqlite3_close(db);
 }
 
 
@@ -299,12 +298,17 @@
         if ([_adGameInfoDic count] > 0) {
             for (NSString *key in _adGameInfoDic) {
                 ZYGameInfo *info = _adGameInfoDic[key];
-                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%d','%@','%@','%@','%@','%@','%d','%@','%@'),",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.triButton,info.buttonType.intValue,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward.intValue,info.pushdate,info.defdate];
+//                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%d','%@','%@','%@','%@','%@','%d','%@','%@'),",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.triButton,info.buttonType.intValue,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward.intValue,info.pushdate,info.defdate];
+                
+                paramVec = [NSString stringWithFormat:@"('%@','%@','%@','%@','%@','%@','%@','%@','%d','%@','%@','%@','%@','%@','%d','%@','%@')",info.zyno,info.scheme,info.packageName,info.version,info.url,info.button,info.buttonFlash,info.triButton,info.buttonType.intValue,info.img,info.listImg,info.rewardId,info.rewardName,info.rewardIcon,info.reward.intValue,info.pushdate,info.defdate];
+                //inser data from db
+                NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, triButton, buttonType, img, listImg, rewardid, rewardname, rewardicon, reward, pushdate, defdate) VALUES %@",paramVec];
+                [self execSql:insertTabel and:NO];
             }
-            paramVec = [paramVec substringToIndex:[paramVec length]-1];
-            //inser data from db
-            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, triButton, buttonType, img, listImg, rewardid, rewardname, rewardicon, reward, pushdate, defdate) VALUES %@",paramVec];
-            [self execSql:insertTabel and:NO];
+//            paramVec = [paramVec substringToIndex:[paramVec length]-1];
+//            //inser data from db
+//            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO adgame (zyno, scheme, packageName, version, url, button, buttonFlash, triButton, buttonType, img, listImg, rewardid, rewardname, rewardicon, reward, pushdate, defdate) VALUES %@",paramVec];
+//            [self execSql:insertTabel and:NO];
         }
         
         deleteTabel = [NSString stringWithFormat:@"delete from showlist"];
@@ -313,12 +317,16 @@
         paramVec = @"";
         if ([_adGameZynoArray count] > 0) {
             for (id value in _adGameZynoArray) {
-                paramVec = [paramVec stringByAppendingFormat:@"('%@'),",value];
+//                paramVec = [paramVec stringByAppendingFormat:@"('%@'),",value];
+                paramVec = [NSString stringWithFormat:@"('%@')",value];
+                //inser data from db
+                NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO showlist (zyno) VALUES %@",paramVec];
+                [self execSql:insertTabel and:NO];
             }
-            paramVec = [paramVec substringToIndex:[paramVec length]-1];
-            //inser data from db
-            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO showlist (zyno) VALUES %@",paramVec];
-            [self execSql:insertTabel and:NO];
+//            paramVec = [paramVec substringToIndex:[paramVec length]-1];
+//            //inser data from db
+//            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO showlist (zyno) VALUES %@",paramVec];
+//            [self execSql:insertTabel and:NO];
         }
         
         deleteTabel = [NSString stringWithFormat:@"delete from defaultlist"];
@@ -327,12 +335,16 @@
         paramVec = @"";
         if ([_adDefaultArray count] > 0) {
             for (id value in _adDefaultArray) {
-                paramVec = [paramVec stringByAppendingFormat:@"('%@'),",value];
+//                paramVec = [paramVec stringByAppendingFormat:@"('%@'),",value];
+                paramVec = [NSString stringWithFormat:@"('%@')",value];
+                //inser data from db
+                NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO defaultlist (zyno) VALUES %@",paramVec];
+                [self execSql:insertTabel and:YES];
             }
-            paramVec = [paramVec substringToIndex:[paramVec length]-1];
-            //inser data from db
-            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO defaultlist (zyno) VALUES %@",paramVec];
-            [self execSql:insertTabel and:YES];
+//            paramVec = [paramVec substringToIndex:[paramVec length]-1];
+//            //inser data from db
+//            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO defaultlist (zyno) VALUES %@",paramVec];
+//            [self execSql:insertTabel and:YES];
         }
     });
 }
@@ -343,9 +355,7 @@
     char *err;
     if (sqlite3_exec(_db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
         if (_isShowLog)NSLog(@"互推：数据库操作数据失败!sql:%s",[sql UTF8String]);
-    }
-    if (close) {
-        sqlite3_close(_db);
+        if (_isShowLog)NSLog(@"互推：数据库操作数据失败!error:%s",err);
     }
 }
 
@@ -601,6 +611,24 @@
 
 - (void)downloadImage:(NSString*)urlString
 {
+    //设置下载路径，通过沙盒获取缓存地址，最后返回NSURL对象
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *path = [NSString stringWithFormat:@"%@/zongyi/images",[paths lastObject]];
+    
+    BOOL isDir = FALSE;
+    BOOL isDirExist = [fileManager fileExistsAtPath:path isDirectory:&isDir];
+    if(!(isDirExist && isDir))
+    {
+        NSError *error;
+        BOOL bCreateDir = [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+        if(!bCreateDir){
+            if (_isShowLog)NSLog(@"互推：images文件夹创建失败%@",error);
+        }else{
+            if (_isShowLog)NSLog(@"互推：images文件夹创建成功%@",path);
+        }
+    }
+    
     //1.创建管理者对象
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -611,24 +639,11 @@
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         //下载地址
         if (_isShowLog)NSLog(@"互推：默认下载地址:%@",targetPath);
-        //设置下载路径，通过沙盒获取缓存地址，最后返回NSURL对象
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-        NSString *path = [NSString stringWithFormat:@"%@/zongyi/images",[paths lastObject]];
-        
-        BOOL isDir = FALSE;
-        BOOL isDirExist = [fileManager fileExistsAtPath:path isDirectory:&isDir];
-        if(!(isDirExist && isDir))
-        {
-            BOOL bCreateDir = [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-            if(!bCreateDir){
-                if (_isShowLog)NSLog(@"互推：images文件夹创建失败");
-            }
-        }
         
         NSURL *documentsDirectoryURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        
-        return [documentsDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"zongyi/images/%@",[response suggestedFilename]]];
+        NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"zongyi/images/%@",[response suggestedFilename]]];
+        if (_isShowLog)NSLog(@"互推：下载url：%@",url);
+        return url;
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (_isShowLog)NSLog(@"互推：File downloaded to: %@ \n _%@_", filePath,error);
         [self beginToDownload];

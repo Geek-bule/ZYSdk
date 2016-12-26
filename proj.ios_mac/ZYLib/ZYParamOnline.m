@@ -8,7 +8,7 @@
 
 #import "ZYParamOnline.h"
 #import "ZYGameServer.h"
-#import "ZYAlertView.h"
+//#import "ZYAlertView.h"
 
 
 //for idfa
@@ -53,6 +53,7 @@
 
 @property (nonatomic) BOOL isShowLog;
 @property (nonatomic) BOOL isReviewStatus;
+@property (nonatomic,retain) NSBundle *ZYBundle;
 
 @end
 
@@ -110,8 +111,9 @@
         self.config = tmpDict;
         
         NSString *bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"ZYSdk.bundle"];
-        NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
-        NSString *plistPath = [bundle pathForResource:@"appConfig" ofType:@"plist"];
+        
+        _ZYBundle = [NSBundle bundleWithPath:bundlePath];
+        NSString *plistPath = [_ZYBundle pathForResource:@"appConfig" ofType:@"plist"];
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
 
         if (self.config && [self.config isKindOfClass:[NSMutableDictionary class]]) {
@@ -142,6 +144,7 @@
         if (![fileManager fileExistsAtPath:dbVersionPath]) {
             NSDictionary *versionConfig = @{@"sdkVersion":ZYSDK_VERSION,@"dbVersion":DB_VERSION};
             [versionConfig writeToFile:dbVersionPath atomically:YES];
+            APLog(@"ZYSDK：创建版本文件");
         }else {
             NSMutableDictionary *versionConfig = [[NSMutableDictionary alloc] initWithContentsOfFile:dbVersionPath];
             if (![versionConfig[@"dbVersion"] isEqualToString:DB_VERSION]) {
@@ -266,7 +269,6 @@
         }
         if (_isShowLog)NSLog(@"在线参数：本地数据库读取成功");
     }
-    sqlite3_close(db);
 }
 
 
@@ -280,12 +282,16 @@
         NSString *paramVec = [[NSString alloc] init];
         if ([_paramDict count] > 0) {
             for (NSString *key in _paramDict) {
-                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@'),",key,_paramDict[key]];
+                //inser data from db
+                paramVec = [NSString stringWithFormat:@"('%@','%@')",key,_paramDict[key]];
+                NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO param (name,value) VALUES %@",paramVec];
+                [self execSql:insertTabel and:NO];
+//                paramVec = [paramVec stringByAppendingFormat:@"('%@','%@'),",key,_paramDict[key]];
             }
-            paramVec = [paramVec substringToIndex:[paramVec length]-1];
-            //inser data from db
-            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO param (name,value) VALUES %@",paramVec];
-            [self execSql:insertTabel and:YES];
+//            paramVec = [paramVec substringToIndex:[paramVec length]-1];
+//            //inser data from db
+//            NSString *insertTabel = [NSString stringWithFormat:@"INSERT INTO param (name,value) VALUES %@",paramVec];
+//            [self execSql:insertTabel and:YES];
         }
     });
 }
@@ -297,9 +303,7 @@
     char *err;
     if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
         if (_isShowLog)NSLog(@"在线参数：数据库操作数据失败!sql:%s",[sql UTF8String]);
-    }
-    if (close) {
-        sqlite3_close(db);
+        if (_isShowLog)NSLog(@"在线参数：数据库操作数据失败!error:%s",err);
     }
 }
 
@@ -356,16 +360,11 @@
                     
                     if (newVersion && curVersion && newVersion.floatValue > curVersion.floatValue) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            ZYAlertView *av = [[ZYAlertView alloc] initWithTitle:NSLocalizedString(@"version tip", nil)
-                                                                         message:_versionInfo];
-                            
-                            [av addButton:Button_OK
-                                withTitle:NSLocalizedString(@"version tip", nil)
-                                  handler:^(JKAlertDialogItem *item) {
-                                      NSString *urlStr = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/id%@?l=zh&ls=1&mt=8",_appleID];
-                                      NSURL *url = [NSURL URLWithString:urlStr];
-                                      [[UIApplication sharedApplication] openURL:url];
-                            }];
+                            UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"ZYVersionTitle", @"ZYSdkString", _ZYBundle, nil)
+                                                                         message:_versionInfo
+                                                                        delegate:self           //委托给Self，才会执行上面的调用
+                                                               cancelButtonTitle:NSLocalizedStringFromTableInBundle(@"ZYVersionBtnNO", @"ZYSdkString", _ZYBundle, nil)
+                                                               otherButtonTitles:NSLocalizedStringFromTableInBundle(@"ZYVersionBtnYES", @"ZYSdkString", _ZYBundle, nil),nil];
                             [av show];
                         });
                     }

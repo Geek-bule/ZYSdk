@@ -20,8 +20,9 @@
     long        m_timeCheck;
     rateBack    m_rateCall;
 }
-@property (retain) NSString *strAppID;
-@property(nonatomic)BOOL isShowLog;
+@property (nonatomic,retain) NSString *strAppID;
+@property (nonatomic,assign) BOOL isShowLog;
+@property (nonatomic,retain) NSBundle* ZYBundle;
 @end
 
 
@@ -46,6 +47,9 @@
         m_timeCheck = 0;
         _isShowLog = NO;
         self.strAppID = [[ZYParamOnline shareParam] getConfigValueFromKey:@"app_id"];
+        NSString *bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"ZYSdk.bundle"];
+        
+        _ZYBundle = [NSBundle bundleWithPath:bundlePath];
         //设置回调
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(rateTimeCheck)
@@ -84,20 +88,20 @@
     m_rateCall = rateCall;
     NSString* hide = [[ZYParamOnline shareParam] getParamOf:@"ZYRateHide"];
     if (hide.intValue == 1) {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
-                                                     message:NSLocalizedString(@"rate hide", nil)
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"亲"
+                                                     message:NSLocalizedStringFromTableInBundle(@"ZYRateTitle2", @"ZYSdkString", _ZYBundle, nil)
                                                     delegate:self       //委托给Self，才会执行上面的调用
                                            cancelButtonTitle:nil
-                                           otherButtonTitles:NSLocalizedString(@"i know", nil),
-                           NSLocalizedString(@"i rate", nil),nil];
+                                           otherButtonTitles:NSLocalizedStringFromTableInBundle(@"ZYRateBtnNO", @"ZYSdkString", _ZYBundle, nil),
+                           NSLocalizedStringFromTableInBundle(@"ZYRateBtnYES", @"ZYSdkString", _ZYBundle, nil),nil];
         [av show];
     }else{
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
-                                                     message:NSLocalizedString(@"rate tip", nil)
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"亲"
+                                                     message:NSLocalizedStringFromTableInBundle(@"ZYRateTitle", @"ZYSdkString", _ZYBundle, nil)
                                                     delegate:self       //委托给Self，才会执行上面的调用
                                            cancelButtonTitle:nil
-                                           otherButtonTitles:NSLocalizedString(@"i know", nil),
-                           NSLocalizedString(@"i rate", nil),nil];
+                                           otherButtonTitles:NSLocalizedStringFromTableInBundle(@"ZYRateBtnNO", @"ZYSdkString", _ZYBundle, nil),
+                           NSLocalizedStringFromTableInBundle(@"ZYRateBtnYES", @"ZYSdkString", _ZYBundle, nil),nil];
         [av show];
     }
 }
