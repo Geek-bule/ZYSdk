@@ -356,9 +356,7 @@
                     _versionInfo = app[@"releaseNotes"];
                     
                     NSString *newVersion = app[@"version"];
-                    NSString *curVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-                    
-                    if (newVersion && curVersion && newVersion.floatValue > curVersion.floatValue) {
+                    if ([self isHigher:newVersion]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"ZYVersionTitle", @"ZYSdkString", _ZYBundle, nil)
                                                                          message:_versionInfo
@@ -381,6 +379,18 @@
         NSURL *url = [NSURL URLWithString:urlStr];
         [[UIApplication sharedApplication] openURL:url];
     }
+}
+
+//版本比较
+- (bool)isHigher:(NSString*)onlineVer
+{
+    NSString *curVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    if ([curVersion compare:onlineVer options:NSNumericSearch] == NSOrderedAscending) {
+        return true;
+    }else{
+        return false;
+    }
+    return false;
 }
 
 

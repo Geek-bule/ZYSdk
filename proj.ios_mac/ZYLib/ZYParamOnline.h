@@ -50,7 +50,7 @@
         1.删除sqlite3_close函数
         2.调整bundle文件结构，图片放入文件夹
         3.调整localizable.strings文件的内容到bundle文件中
-        4.
+        4.调整版本对比方法，使其更加准确
  */
 
 typedef void (^paramBack)(NSDictionary *dict);
