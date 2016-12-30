@@ -230,7 +230,7 @@
         [_successDict setObject:adapter forKey:key];
     }
     if(self.isShowLog)NSLog(@"视频聚合:视频缓存数组:%@",_successDict);
-    _isLock = NO;
+    
     [self.Indicator stopAnimating];
     [self.Indicator removeFromSuperview];
     
@@ -266,6 +266,7 @@
         //隐藏按钮
         if (_isHasCall)_isHasCall(NO);
     }
+    _isLock = NO;
 }
 
 - (void)pause:(ZYVideoAdapter*)adapter withType:(ZYVideoType)type
@@ -277,6 +278,8 @@
 
 - (void)finish:(ZYVideoAdapter*)adapter withType:(ZYVideoType)type
 {
+    [self.Indicator stopAnimating];
+    [self.Indicator removeFromSuperview];
     if (_finishPlay) {
         _finishPlay();
     }

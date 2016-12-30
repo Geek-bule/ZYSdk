@@ -162,7 +162,7 @@
 {
     NSString *sqlQuery;
     if (date) {
-        sqlQuery = [NSString stringWithFormat:@"SELECT * FROM statistics WHERE date = %@",date];
+        sqlQuery = [NSString stringWithFormat:@"SELECT * FROM statistics WHERE date = '%@'",date];
     }else{
         sqlQuery = @"SELECT * FROM statistics";
     }

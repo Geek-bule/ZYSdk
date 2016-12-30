@@ -89,9 +89,6 @@
 		1B3EC6C51DA8B9BD0054B466 /* libMobClickGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC61A1DA8B9BC0054B466 /* libMobClickGameLibrary.a */; };
 		1B3EC6C61DA8B9BD0054B466 /* libAppLovinSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC63C1DA8B9BC0054B466 /* libAppLovinSdk.a */; };
 		1B3EC6C71DA8B9BD0054B466 /* ZYVideoAdapterApplovin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EC63E1DA8B9BC0054B466 /* ZYVideoAdapterApplovin.m */; };
-		1B3EC6C81DA8B9BD0054B466 /* JYMobSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC6431DA8B9BC0054B466 /* JYMobSDK.a */; };
-		1B3EC6C91DA8B9BD0054B466 /* JyVideo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC6441DA8B9BC0054B466 /* JyVideo.bundle */; };
-		1B3EC6CA1DA8B9BD0054B466 /* ZYVideoAdapterJoying.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EC6461DA8B9BC0054B466 /* ZYVideoAdapterJoying.m */; };
 		1B3EC6CB1DA8B9BD0054B466 /* __vungle.db in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC64A1DA8B9BC0054B466 /* __vungle.db */; };
 		1B3EC6CC1DA8B9BD0054B466 /* vg_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC64B1DA8B9BC0054B466 /* vg_close.png */; };
 		1B3EC6CD1DA8B9BD0054B466 /* vg_cta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC64C1DA8B9BC0054B466 /* vg_cta.png */; };
@@ -109,28 +106,7 @@
 		1B3EC6DD1DA8B9BD0054B466 /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC6761DA8B9BD0054B466 /* ShareSDKUI.bundle */; };
 		1B3EC6DE1DA8B9BD0054B466 /* ShareSDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC6771DA8B9BD0054B466 /* ShareSDKUI.framework */; };
 		1B3EC6E71DA8BAC00054B466 /* ZYSdk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC6E61DA8BAC00054B466 /* ZYSdk.bundle */; };
-		1B3EC6EA1DA8BDE90054B466 /* toolsKt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EC6E81DA8BDE90054B466 /* toolsKt.cpp */; };
 		1B3EC6ED1DA8BEEA0054B466 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EC6EC1DA8BEEA0054B466 /* MBProgressHUD.m */; };
-		1B3EC7281DA8BEFE0054B466 /* ktplay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC6FF1DA8BEFE0054B466 /* ktplay.bundle */; };
-		1B3EC7291DA8BEFE0054B466 /* libKtplay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7031DA8BEFE0054B466 /* libKtplay.a */; };
-		1B3EC72A1DA8BEFE0054B466 /* libCAEAGLLayerCategory.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7061DA8BEFE0054B466 /* libCAEAGLLayerCategory.a */; };
-		1B3EC72B1DA8BEFE0054B466 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7081DA8BEFE0054B466 /* libFMDB.a */; };
-		1B3EC72C1DA8BEFE0054B466 /* libMasonry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC70A1DA8BEFE0054B466 /* libMasonry.a */; };
-		1B3EC72E1DA8BEFE0054B466 /* libUnityPatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC70E1DA8BEFE0054B466 /* libUnityPatch.a */; };
-		1B3EC72F1DA8BEFE0054B466 /* com.ktplay.plugin.facebook.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC7111DA8BEFE0054B466 /* com.ktplay.plugin.facebook.bundle */; };
-		1B3EC7301DA8BEFE0054B466 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7131DA8BEFE0054B466 /* Bolts.framework */; };
-		1B3EC7311DA8BEFE0054B466 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC7141DA8BEFE0054B466 /* FacebookSDKStrings.bundle */; };
-		1B3EC7321DA8BEFE0054B466 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7151DA8BEFE0054B466 /* FBSDKCoreKit.framework */; };
-		1B3EC7331DA8BEFE0054B466 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7161DA8BEFE0054B466 /* FBSDKLoginKit.framework */; };
-		1B3EC7341DA8BEFE0054B466 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7171DA8BEFE0054B466 /* FBSDKMessengerShareKit.framework */; };
-		1B3EC7351DA8BEFE0054B466 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7181DA8BEFE0054B466 /* FBSDKShareKit.framework */; };
-		1B3EC7361DA8BEFE0054B466 /* libKtplayPluginFacebook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7191DA8BEFE0054B466 /* libKtplayPluginFacebook.a */; };
-		1B3EC7371DA8BEFE0054B466 /* com.ktplay.plugin.qq.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC71B1DA8BEFE0054B466 /* com.ktplay.plugin.qq.bundle */; };
-		1B3EC7381DA8BEFE0054B466 /* libKtplayPluginQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC71C1DA8BEFE0054B466 /* libKtplayPluginQQ.a */; };
-		1B3EC7391DA8BEFE0054B466 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC71E1DA8BEFE0054B466 /* TencentOpenAPI.framework */; };
-		1B3EC73A1DA8BEFE0054B466 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC71F1DA8BEFE0054B466 /* TencentOpenApi_IOS_Bundle.bundle */; };
-		1B3EC73B1DA8BEFE0054B466 /* com.ktplay.plugin.wechat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B3EC7211DA8BEFE0054B466 /* com.ktplay.plugin.wechat.bundle */; };
-		1B3EC73C1DA8BEFE0054B466 /* libKtplayPluginWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B3EC7221DA8BEFE0054B466 /* libKtplayPluginWechat.a */; };
 		1B3EC74B1DA8C10F0054B466 /* AdInstlAdapterBaidu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EC7421DA8C10F0054B466 /* AdInstlAdapterBaidu.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1B3EC74C1DA8C10F0054B466 /* AdSplashAdapterBaidu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EC7441DA8C10F0054B466 /* AdSplashAdapterBaidu.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1B3EC74D1DA8C10F0054B466 /* AdViewAdapterBaidu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EC7461DA8C10F0054B466 /* AdViewAdapterBaidu.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -169,8 +145,6 @@
 		1B7859871DAC947B0072B429 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7859861DAC947B0072B429 /* WatchConnectivity.framework */; };
 		1B7A06E21D2A32A900F83A92 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7A06E11D2A32A900F83A92 /* Social.framework */; };
 		1B7F4ECB1DC71CCA00DA3693 /* WeChatApi.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F4ECA1DC71CCA00DA3693 /* WeChatApi.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		1B7F4ED41DC724C600DA3693 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B7F4ECF1DC724C600DA3693 /* libWeChatSDK.a */; };
-		1B7F4ED51DC724C600DA3693 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F4ED01DC724C600DA3693 /* README.txt */; };
 		1B80300A1D9A25460060C56A /* ZYAdStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B8030091D9A25460060C56A /* ZYAdStatistics.m */; };
 		1BC042AC1DE2979900E86C20 /* MD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BC042AA1DE2979800E86C20 /* MD5.cpp */; };
 		1BC042B21DE29AC700E86C20 /* DDZServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1BC042B11DE29AC700E86C20 /* DDZServer.mm */; };
@@ -536,11 +510,6 @@
 		1B3EC63C1DA8B9BC0054B466 /* libAppLovinSdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppLovinSdk.a; sourceTree = "<group>"; };
 		1B3EC63D1DA8B9BC0054B466 /* ZYVideoAdapterApplovin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVideoAdapterApplovin.h; sourceTree = "<group>"; };
 		1B3EC63E1DA8B9BC0054B466 /* ZYVideoAdapterApplovin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVideoAdapterApplovin.m; sourceTree = "<group>"; };
-		1B3EC6421DA8B9BC0054B466 /* JoyingMobiVideoAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoyingMobiVideoAd.h; sourceTree = "<group>"; };
-		1B3EC6431DA8B9BC0054B466 /* JYMobSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = JYMobSDK.a; sourceTree = "<group>"; };
-		1B3EC6441DA8B9BC0054B466 /* JyVideo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JyVideo.bundle; sourceTree = "<group>"; };
-		1B3EC6451DA8B9BC0054B466 /* ZYVideoAdapterJoying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVideoAdapterJoying.h; sourceTree = "<group>"; };
-		1B3EC6461DA8B9BC0054B466 /* ZYVideoAdapterJoying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVideoAdapterJoying.m; sourceTree = "<group>"; };
 		1B3EC64A1DA8B9BC0054B466 /* __vungle.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = __vungle.db; sourceTree = "<group>"; };
 		1B3EC64B1DA8B9BC0054B466 /* vg_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_close.png; sourceTree = "<group>"; };
 		1B3EC64C1DA8B9BC0054B466 /* vg_cta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_cta.png; sourceTree = "<group>"; };
@@ -561,46 +530,8 @@
 		1B3EC6761DA8B9BD0054B466 /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKUI.bundle; sourceTree = "<group>"; };
 		1B3EC6771DA8B9BD0054B466 /* ShareSDKUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKUI.framework; sourceTree = "<group>"; };
 		1B3EC6E61DA8BAC00054B466 /* ZYSdk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYSdk.bundle; sourceTree = "<group>"; };
-		1B3EC6E81DA8BDE90054B466 /* toolsKt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolsKt.cpp; sourceTree = "<group>"; };
-		1B3EC6E91DA8BDE90054B466 /* toolsKt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = toolsKt.hpp; sourceTree = "<group>"; };
 		1B3EC6EB1DA8BEEA0054B466 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		1B3EC6EC1DA8BEEA0054B466 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		1B3EC6F01DA8BEFE0054B466 /* KTAccountManagerC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTAccountManagerC.h; sourceTree = "<group>"; };
-		1B3EC6F11DA8BEFE0054B466 /* KTChatC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTChatC.h; sourceTree = "<group>"; };
-		1B3EC6F21DA8BEFE0054B466 /* KTErrorC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTErrorC.h; sourceTree = "<group>"; };
-		1B3EC6F31DA8BEFE0054B466 /* KTFriendshipC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTFriendshipC.h; sourceTree = "<group>"; };
-		1B3EC6F41DA8BEFE0054B466 /* KTLeaderboardC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTLeaderboardC.h; sourceTree = "<group>"; };
-		1B3EC6F51DA8BEFE0054B466 /* KTLeaderboardPaginatorC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTLeaderboardPaginatorC.h; sourceTree = "<group>"; };
-		1B3EC6F61DA8BEFE0054B466 /* KTPlayC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPlayC.h; sourceTree = "<group>"; };
-		1B3EC6F71DA8BEFE0054B466 /* KTTaggingC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTTaggingC.h; sourceTree = "<group>"; };
-		1B3EC6F81DA8BEFE0054B466 /* KTUserC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTUserC.h; sourceTree = "<group>"; };
-		1B3EC6FB1DA8BEFE0054B466 /* KTAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTAccountManager.h; sourceTree = "<group>"; };
-		1B3EC6FC1DA8BEFE0054B466 /* KTChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTChat.h; sourceTree = "<group>"; };
-		1B3EC6FD1DA8BEFE0054B466 /* KTFriendship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTFriendship.h; sourceTree = "<group>"; };
-		1B3EC6FE1DA8BEFE0054B466 /* KTLeaderboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTLeaderboard.h; sourceTree = "<group>"; };
-		1B3EC6FF1DA8BEFE0054B466 /* ktplay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ktplay.bundle; sourceTree = "<group>"; };
-		1B3EC7001DA8BEFE0054B466 /* KTPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPlay.h; sourceTree = "<group>"; };
-		1B3EC7011DA8BEFE0054B466 /* KTTagging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTTagging.h; sourceTree = "<group>"; };
-		1B3EC7021DA8BEFE0054B466 /* KTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTUser.h; sourceTree = "<group>"; };
-		1B3EC7031DA8BEFE0054B466 /* libKtplay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libKtplay.a; sourceTree = "<group>"; };
-		1B3EC7061DA8BEFE0054B466 /* libCAEAGLLayerCategory.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCAEAGLLayerCategory.a; sourceTree = "<group>"; };
-		1B3EC7081DA8BEFE0054B466 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFMDB.a; sourceTree = "<group>"; };
-		1B3EC70A1DA8BEFE0054B466 /* libMasonry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMasonry.a; sourceTree = "<group>"; };
-		1B3EC70E1DA8BEFE0054B466 /* libUnityPatch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUnityPatch.a; sourceTree = "<group>"; };
-		1B3EC7111DA8BEFE0054B466 /* com.ktplay.plugin.facebook.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = com.ktplay.plugin.facebook.bundle; sourceTree = "<group>"; };
-		1B3EC7131DA8BEFE0054B466 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		1B3EC7141DA8BEFE0054B466 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
-		1B3EC7151DA8BEFE0054B466 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		1B3EC7161DA8BEFE0054B466 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		1B3EC7171DA8BEFE0054B466 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
-		1B3EC7181DA8BEFE0054B466 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		1B3EC7191DA8BEFE0054B466 /* libKtplayPluginFacebook.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libKtplayPluginFacebook.a; sourceTree = "<group>"; };
-		1B3EC71B1DA8BEFE0054B466 /* com.ktplay.plugin.qq.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = com.ktplay.plugin.qq.bundle; sourceTree = "<group>"; };
-		1B3EC71C1DA8BEFE0054B466 /* libKtplayPluginQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libKtplayPluginQQ.a; sourceTree = "<group>"; };
-		1B3EC71E1DA8BEFE0054B466 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
-		1B3EC71F1DA8BEFE0054B466 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
-		1B3EC7211DA8BEFE0054B466 /* com.ktplay.plugin.wechat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = com.ktplay.plugin.wechat.bundle; sourceTree = "<group>"; };
-		1B3EC7221DA8BEFE0054B466 /* libKtplayPluginWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libKtplayPluginWechat.a; sourceTree = "<group>"; };
 		1B3EC7411DA8C10F0054B466 /* AdInstlAdapterBaidu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdInstlAdapterBaidu.h; sourceTree = "<group>"; };
 		1B3EC7421DA8C10F0054B466 /* AdInstlAdapterBaidu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdInstlAdapterBaidu.m; sourceTree = "<group>"; };
 		1B3EC7431DA8C10F0054B466 /* AdSplashAdapterBaidu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdSplashAdapterBaidu.h; sourceTree = "<group>"; };
@@ -670,11 +601,6 @@
 		1B7A06E11D2A32A900F83A92 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Social.framework; sourceTree = DEVELOPER_DIR; };
 		1B7F4EC91DC71CCA00DA3693 /* WeChatApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatApi.h; sourceTree = "<group>"; };
 		1B7F4ECA1DC71CCA00DA3693 /* WeChatApi.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeChatApi.mm; sourceTree = "<group>"; };
-		1B7F4ECF1DC724C600DA3693 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		1B7F4ED01DC724C600DA3693 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		1B7F4ED11DC724C600DA3693 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		1B7F4ED21DC724C600DA3693 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		1B7F4ED31DC724C600DA3693 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		1B8030081D9A25460060C56A /* ZYAdStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYAdStatistics.h; sourceTree = "<group>"; };
 		1B8030091D9A25460060C56A /* ZYAdStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYAdStatistics.m; sourceTree = "<group>"; };
 		1BB74B3C1D2BC92E00D6A080 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -812,7 +738,6 @@
 				1B4C90541D7FC4A200D641DA /* libZYLib.a in Frameworks */,
 				1B4C90531D7FC49E00D641DA /* libZYAdview.a in Frameworks */,
 				1B7A06E21D2A32A900F83A92 /* Social.framework in Frameworks */,
-				1B3EC73C1DA8BEFE0054B466 /* libKtplayPluginWechat.a in Frameworks */,
 				ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
@@ -824,8 +749,6 @@
 				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
 				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
 				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
-				1B3EC72E1DA8BEFE0054B466 /* libUnityPatch.a in Frameworks */,
-				1B3EC7361DA8BEFE0054B466 /* libKtplayPluginFacebook.a in Frameworks */,
 				1B3EC6DB1DA8B9BD0054B466 /* ShareSDKConnector.framework in Frameworks */,
 				1B3EC6DE1DA8B9BD0054B466 /* ShareSDKUI.framework in Frameworks */,
 				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
@@ -836,29 +759,22 @@
 				AA4A44D4B468D2E8C35583EF /* AdSupport.framework in Frameworks */,
 				1B3EC6A21DA8B9BD0054B466 /* libAdViewSDK.a in Frameworks */,
 				AA004AD490EC0C3ADBF0F52A /* EventKit.framework in Frameworks */,
-				1B3EC7321DA8BEFE0054B466 /* FBSDKCoreKit.framework in Frameworks */,
 				CFCC4B1389F3E7804F514BD8 /* EventKitUI.framework in Frameworks */,
 				E95A40F3A81FB606CF5D2CF0 /* CoreData.framework in Frameworks */,
 				01C54579B31EFA6538195F3A /* Photos.framework in Frameworks */,
 				020D4E22B039C8A7B87539F4 /* SystemConfiguration.framework in Frameworks */,
 				9B474A1B905C97AC9A6F3697 /* MobileCoreServices.framework in Frameworks */,
-				1B7F4ED41DC724C600DA3693 /* libWeChatSDK.a in Frameworks */,
-				1B3EC7301DA8BEFE0054B466 /* Bolts.framework in Frameworks */,
 				1B3EC6DA1DA8B9BD0054B466 /* ShareSDK.framework in Frameworks */,
 				0B794DD192C9449C4164CA13 /* ImageIO.framework in Frameworks */,
 				F77642188C34F496330E5FCC /* CFNetwork.framework in Frameworks */,
-				1B3EC7381DA8BEFE0054B466 /* libKtplayPluginQQ.a in Frameworks */,
 				1B3EC6D81DA8B9BD0054B466 /* MOBFoundation.framework in Frameworks */,
 				1B3EC6C51DA8B9BD0054B466 /* libMobClickGameLibrary.a in Frameworks */,
 				A4F549F5934CBBAFE69EECAF /* AssetsLibrary.framework in Frameworks */,
-				1B3EC7291DA8BEFE0054B466 /* libKtplay.a in Frameworks */,
 				09094A28B9CADEE5B01759CC /* StoreKit.framework in Frameworks */,
 				10364A3794913F72F2B61E0C /* CoreTelephony.framework in Frameworks */,
 				165245FBB03EE04FB29302A8 /* CoreText.framework in Frameworks */,
 				901048CE81A784F91C135D7F /* MessageUI.framework in Frameworks */,
 				EBC947B6930EBC94AFB877B5 /* CoreLocation.framework in Frameworks */,
-				1B3EC6C81DA8B9BD0054B466 /* JYMobSDK.a in Frameworks */,
-				1B3EC7341DA8BEFE0054B466 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				1B3EC6D71DA8B9BD0054B466 /* libWeChatSDK.a in Frameworks */,
 				E34D421CB0DF321CF6F63870 /* AddressBook.framework in Frameworks */,
 				281A41789F113D043778442C /* Accounts.framework in Frameworks */,
@@ -868,25 +784,19 @@
 				877541209E946B4355D214EB /* CoreMedia.framework in Frameworks */,
 				509D4A438053C0AA9F43DEA2 /* JavaScriptCore.framework in Frameworks */,
 				70C74C288AE59525FF59B75D /* GameKit.framework in Frameworks */,
-				1B3EC72B1DA8BEFE0054B466 /* libFMDB.a in Frameworks */,
 				BF134EF89D5BE9FBC42E0FF9 /* GameController.framework in Frameworks */,
 				1B3EC6981DA8B9BD0054B466 /* libChanceAd.a in Frameworks */,
-				1B3EC7331DA8BEFE0054B466 /* FBSDKLoginKit.framework in Frameworks */,
 				F3914A239947691EB77422F7 /* MapKit.framework in Frameworks */,
 				346840AAA2AE151010D5B3C0 /* WebKit.framework in Frameworks */,
 				510B4E479F09E5521F975D77 /* WatchConnectivity.framework in Frameworks */,
 				877B4F0EBDC495FACBE5CA36 /* Twitter.framework in Frameworks */,
 				6C594196927C41824D523080 /* CoreVideo.framework in Frameworks */,
-				1B3EC72A1DA8BEFE0054B466 /* libCAEAGLLayerCategory.a in Frameworks */,
 				928D4659BEFC6A4D96B634FB /* Metal.framework in Frameworks */,
-				1B3EC72C1DA8BEFE0054B466 /* libMasonry.a in Frameworks */,
-				1B3EC7391DA8BEFE0054B466 /* TencentOpenAPI.framework in Frameworks */,
 				1BF343F0952DDDCB56141ECA /* libsqlite3.dylib in Frameworks */,
 				EF2D42799D8DD01A92695690 /* libz.1.2.5.dylib in Frameworks */,
 				AE004338A9DF0F324D135D2F /* libstdc++.6.0.9.dylib in Frameworks */,
 				7B6A45E0B8FC8F4A884F7B58 /* libresolv.dylib in Frameworks */,
 				1B3EC6A11DA8B9BD0054B466 /* libInMobi-5.3.0.a in Frameworks */,
-				1B3EC7351DA8BEFE0054B466 /* FBSDKShareKit.framework in Frameworks */,
 				DD8D4012B4167568AF981956 /* libicucore.dylib in Frameworks */,
 				55C54B7B938D69004EE2557F /* libstdc++.dylib in Frameworks */,
 				739B43EC8805780DFC9300BF /* libc++.dylib in Frameworks */,
@@ -997,8 +907,6 @@
 				1B7859841DAC923A0072B429 /* appleWatch.mm */,
 				1B3EC6EB1DA8BEEA0054B466 /* MBProgressHUD.h */,
 				1B3EC6EC1DA8BEEA0054B466 /* MBProgressHUD.m */,
-				1B3EC6E81DA8BDE90054B466 /* toolsKt.cpp */,
-				1B3EC6E91DA8BDE90054B466 /* toolsKt.hpp */,
 				1B3EC5461DA8B7DD0054B466 /* IAPHelper.h */,
 				1B3EC5471DA8B7DD0054B466 /* IAPHelper.mm */,
 				1B3937111D9E602200408A71 /* ShareHelper.h */,
@@ -1323,7 +1231,6 @@
 			isa = PBXGroup;
 			children = (
 				1B3EC61F1DA8B9BC0054B466 /* applovinAdapter */,
-				1B3EC63F1DA8B9BC0054B466 /* joyingAdapter */,
 				1B3EC6471DA8B9BC0054B466 /* vungleAdapter */,
 			);
 			path = videoAdapter;
@@ -1381,34 +1288,6 @@
 			path = headers;
 			sourceTree = "<group>";
 		};
-		1B3EC63F1DA8B9BC0054B466 /* joyingAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC6401DA8B9BC0054B466 /* joyinglib */,
-				1B3EC6451DA8B9BC0054B466 /* ZYVideoAdapterJoying.h */,
-				1B3EC6461DA8B9BC0054B466 /* ZYVideoAdapterJoying.m */,
-			);
-			path = joyingAdapter;
-			sourceTree = "<group>";
-		};
-		1B3EC6401DA8B9BC0054B466 /* joyinglib */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC6411DA8B9BC0054B466 /* include */,
-				1B3EC6431DA8B9BC0054B466 /* JYMobSDK.a */,
-				1B3EC6441DA8B9BC0054B466 /* JyVideo.bundle */,
-			);
-			path = joyinglib;
-			sourceTree = "<group>";
-		};
-		1B3EC6411DA8B9BC0054B466 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC6421DA8B9BC0054B466 /* JoyingMobiVideoAd.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
 		1B3EC6471DA8B9BC0054B466 /* vungleAdapter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1444,7 +1323,6 @@
 		1B3EC6531DA8B9BC0054B466 /* ZYExtra */ = {
 			isa = PBXGroup;
 			children = (
-				1B3EC6EE1DA8BEFE0054B466 /* ktplay */,
 				1B3EC6661DA8B9BD0054B466 /* shareSDK3 */,
 			);
 			path = ZYExtra;
@@ -1489,162 +1367,6 @@
 				1B3EC6701DA8B9BD0054B466 /* WXApiObject.h */,
 			);
 			path = WeChatSDK;
-			sourceTree = "<group>";
-		};
-		1B3EC6EE1DA8BEFE0054B466 /* ktplay */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC6EF1DA8BEFE0054B466 /* Include */,
-				1B3EC6F91DA8BEFE0054B466 /* KTPlaySDK */,
-				1B3EC70F1DA8BEFE0054B466 /* SNSPlugins */,
-			);
-			path = ktplay;
-			sourceTree = "<group>";
-		};
-		1B3EC6EF1DA8BEFE0054B466 /* Include */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC6F01DA8BEFE0054B466 /* KTAccountManagerC.h */,
-				1B3EC6F11DA8BEFE0054B466 /* KTChatC.h */,
-				1B3EC6F21DA8BEFE0054B466 /* KTErrorC.h */,
-				1B3EC6F31DA8BEFE0054B466 /* KTFriendshipC.h */,
-				1B3EC6F41DA8BEFE0054B466 /* KTLeaderboardC.h */,
-				1B3EC6F51DA8BEFE0054B466 /* KTLeaderboardPaginatorC.h */,
-				1B3EC6F61DA8BEFE0054B466 /* KTPlayC.h */,
-				1B3EC6F71DA8BEFE0054B466 /* KTTaggingC.h */,
-				1B3EC6F81DA8BEFE0054B466 /* KTUserC.h */,
-			);
-			path = Include;
-			sourceTree = "<group>";
-		};
-		1B3EC6F91DA8BEFE0054B466 /* KTPlaySDK */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC6FA1DA8BEFE0054B466 /* KTPlay */,
-				1B3EC7041DA8BEFE0054B466 /* Libraries */,
-			);
-			path = KTPlaySDK;
-			sourceTree = "<group>";
-		};
-		1B3EC6FA1DA8BEFE0054B466 /* KTPlay */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC6FB1DA8BEFE0054B466 /* KTAccountManager.h */,
-				1B3EC6FC1DA8BEFE0054B466 /* KTChat.h */,
-				1B3EC6FD1DA8BEFE0054B466 /* KTFriendship.h */,
-				1B3EC6FE1DA8BEFE0054B466 /* KTLeaderboard.h */,
-				1B3EC6FF1DA8BEFE0054B466 /* ktplay.bundle */,
-				1B3EC7001DA8BEFE0054B466 /* KTPlay.h */,
-				1B3EC7011DA8BEFE0054B466 /* KTTagging.h */,
-				1B3EC7021DA8BEFE0054B466 /* KTUser.h */,
-				1B3EC7031DA8BEFE0054B466 /* libKtplay.a */,
-			);
-			path = KTPlay;
-			sourceTree = "<group>";
-		};
-		1B3EC7041DA8BEFE0054B466 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC7051DA8BEFE0054B466 /* CAEAGLLayerCategory */,
-				1B3EC7071DA8BEFE0054B466 /* FMDB_2.5 */,
-				1B3EC7091DA8BEFE0054B466 /* Masonry_0.6.3 */,
-				1B3EC70D1DA8BEFE0054B466 /* UnityPatch */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		1B3EC7051DA8BEFE0054B466 /* CAEAGLLayerCategory */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC7061DA8BEFE0054B466 /* libCAEAGLLayerCategory.a */,
-			);
-			path = CAEAGLLayerCategory;
-			sourceTree = "<group>";
-		};
-		1B3EC7071DA8BEFE0054B466 /* FMDB_2.5 */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC7081DA8BEFE0054B466 /* libFMDB.a */,
-			);
-			path = FMDB_2.5;
-			sourceTree = "<group>";
-		};
-		1B3EC7091DA8BEFE0054B466 /* Masonry_0.6.3 */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC70A1DA8BEFE0054B466 /* libMasonry.a */,
-			);
-			path = Masonry_0.6.3;
-			sourceTree = "<group>";
-		};
-		1B3EC70D1DA8BEFE0054B466 /* UnityPatch */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC70E1DA8BEFE0054B466 /* libUnityPatch.a */,
-			);
-			path = UnityPatch;
-			sourceTree = "<group>";
-		};
-		1B3EC70F1DA8BEFE0054B466 /* SNSPlugins */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC7101DA8BEFE0054B466 /* ktplayPluginFacebook */,
-				1B3EC71A1DA8BEFE0054B466 /* ktplayPluginQQ */,
-				1B3EC7201DA8BEFE0054B466 /* ktplayPluginWeChat */,
-			);
-			path = SNSPlugins;
-			sourceTree = "<group>";
-		};
-		1B3EC7101DA8BEFE0054B466 /* ktplayPluginFacebook */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC7111DA8BEFE0054B466 /* com.ktplay.plugin.facebook.bundle */,
-				1B3EC7121DA8BEFE0054B466 /* FacebookSDKs_4.6.0 */,
-				1B3EC7191DA8BEFE0054B466 /* libKtplayPluginFacebook.a */,
-			);
-			path = ktplayPluginFacebook;
-			sourceTree = "<group>";
-		};
-		1B3EC7121DA8BEFE0054B466 /* FacebookSDKs_4.6.0 */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC7131DA8BEFE0054B466 /* Bolts.framework */,
-				1B3EC7141DA8BEFE0054B466 /* FacebookSDKStrings.bundle */,
-				1B3EC7151DA8BEFE0054B466 /* FBSDKCoreKit.framework */,
-				1B3EC7161DA8BEFE0054B466 /* FBSDKLoginKit.framework */,
-				1B3EC7171DA8BEFE0054B466 /* FBSDKMessengerShareKit.framework */,
-				1B3EC7181DA8BEFE0054B466 /* FBSDKShareKit.framework */,
-			);
-			path = FacebookSDKs_4.6.0;
-			sourceTree = "<group>";
-		};
-		1B3EC71A1DA8BEFE0054B466 /* ktplayPluginQQ */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC71B1DA8BEFE0054B466 /* com.ktplay.plugin.qq.bundle */,
-				1B3EC71C1DA8BEFE0054B466 /* libKtplayPluginQQ.a */,
-				1B3EC71D1DA8BEFE0054B466 /* TencentOpenApi_2.9.0 */,
-			);
-			path = ktplayPluginQQ;
-			sourceTree = "<group>";
-		};
-		1B3EC71D1DA8BEFE0054B466 /* TencentOpenApi_2.9.0 */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EC71E1DA8BEFE0054B466 /* TencentOpenAPI.framework */,
-				1B3EC71F1DA8BEFE0054B466 /* TencentOpenApi_IOS_Bundle.bundle */,
-			);
-			path = TencentOpenApi_2.9.0;
-			sourceTree = "<group>";
-		};
-		1B3EC7201DA8BEFE0054B466 /* ktplayPluginWeChat */ = {
-			isa = PBXGroup;
-			children = (
-				1B7F4ECE1DC724C600DA3693 /* WeChatSDK_1.7 */,
-				1B3EC7211DA8BEFE0054B466 /* com.ktplay.plugin.wechat.bundle */,
-				1B3EC7221DA8BEFE0054B466 /* libKtplayPluginWechat.a */,
-			);
-			path = ktplayPluginWeChat;
 			sourceTree = "<group>";
 		};
 		1B3EC73F1DA8C10F0054B466 /* Baidu */ = {
@@ -1847,18 +1569,6 @@
 				1B7859651DAC8F260072B429 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1B7F4ECE1DC724C600DA3693 /* WeChatSDK_1.7 */ = {
-			isa = PBXGroup;
-			children = (
-				1B7F4ECF1DC724C600DA3693 /* libWeChatSDK.a */,
-				1B7F4ED01DC724C600DA3693 /* README.txt */,
-				1B7F4ED11DC724C600DA3693 /* WechatAuthSDK.h */,
-				1B7F4ED21DC724C600DA3693 /* WXApi.h */,
-				1B7F4ED31DC724C600DA3693 /* WXApiObject.h */,
-			);
-			path = WeChatSDK_1.7;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -2292,14 +2002,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B3EC6A91DA8B9BD0054B466 /* icon_video.png in Resources */,
-				1B7F4ED51DC724C600DA3693 /* README.txt in Resources */,
 				1B3EC6D01DA8B9BD0054B466 /* vg_privacy.png in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				1B3EC6A31DA8B9BD0054B466 /* AdInStLClOsE.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				1B3EC6991DA8B9BD0054B466 /* ChanceAdRes.bundle in Resources */,
-				1B3EC72F1DA8BEFE0054B466 /* com.ktplay.plugin.facebook.bundle in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
@@ -2309,31 +2017,25 @@
 				1B3EC6CB1DA8B9BD0054B466 /* __vungle.db in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
-				1B3EC7311DA8BEFE0054B466 /* FacebookSDKStrings.bundle in Resources */,
 				1B3EC6CF1DA8B9BD0054B466 /* vg_mute_on.png in Resources */,
-				1B3EC73B1DA8BEFE0054B466 /* com.ktplay.plugin.wechat.bundle in Resources */,
 				1B3EC6CE1DA8B9BD0054B466 /* vg_mute_off.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				1B3EC6DD1DA8B9BD0054B466 /* ShareSDKUI.bundle in Resources */,
 				1B3EC69D1DA8B9BD0054B466 /* README.txt in Resources */,
 				1B3EC6A71DA8B9BD0054B466 /* icon_ems.png in Resources */,
 				1B3EC6CD1DA8B9BD0054B466 /* vg_cta.png in Resources */,
-				1B3EC7281DA8BEFE0054B466 /* ktplay.bundle in Resources */,
 				1B3EC6A51DA8B9BD0054B466 /* icon_down.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				1B3EC6D91DA8B9BD0054B466 /* ShareSDK.bundle in Resources */,
 				1B3EC6A41DA8B9BD0054B466 /* icon_call.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				1B3EC74F1DA8C10F0054B466 /* baidumobadsdk.bundle in Resources */,
-				1B3EC6C91DA8B9BD0054B466 /* JyVideo.bundle in Resources */,
 				1B3EC6AA1DA8B9BD0054B466 /* icon_web.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				1BD92C741D2A44DE006F729C /* shareImage in Resources */,
 				1B3EC6A81DA8B9BD0054B466 /* icon_map.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
-				1B3EC73A1DA8BEFE0054B466 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
-				1B3EC7371DA8BEFE0054B466 /* com.ktplay.plugin.qq.bundle in Resources */,
 				51213D3A1E10F32900072A9C /* InfoPlist.strings in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
@@ -2434,7 +2136,6 @@
 				1B3EC6C71DA8B9BD0054B466 /* ZYVideoAdapterApplovin.m in Sources */,
 				1B3EC74B1DA8C10F0054B466 /* AdInstlAdapterBaidu.m in Sources */,
 				1B3EC76B1DA8DD370054B466 /* AFSecurityPolicy.m in Sources */,
-				1B3EC6CA1DA8B9BD0054B466 /* ZYVideoAdapterJoying.m in Sources */,
 				1B3EC6ED1DA8BEEA0054B466 /* MBProgressHUD.m in Sources */,
 				1B3EC76A1DA8DD370054B466 /* AFNetworkReachabilityManager.m in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
@@ -2446,7 +2147,6 @@
 				1B3EC6AD1DA8B9BD0054B466 /* Reachability.m in Sources */,
 				1B3EC6A01DA8B9BD0054B466 /* AdViewAdapterInMobi.m in Sources */,
 				1B3EC6B71DA8B9BD0054B466 /* CJSONSerializer.m in Sources */,
-				1B3EC6EA1DA8BDE90054B466 /* toolsKt.cpp in Sources */,
 				1B3EC6D21DA8B9BD0054B466 /* ZYVideoAdapterVungle.m in Sources */,
 				1B3EC6AC1DA8B9BD0054B466 /* JSONKit.m in Sources */,
 				1BC042B21DE29AC700E86C20 /* DDZServer.mm in Sources */,

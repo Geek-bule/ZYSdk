@@ -31,10 +31,6 @@
 #import "ZYTools.h"
 #import "WXApi.h"
 #import "WeChatApi.h"
-//KT
-#import "KTPlay.h"
-#define KTPLAY_APPID                @"1SqfDl"
-#define KTPLAY_SECRET               @"3c63c0f2c8a3c6a0c6a582a5409da04d85920b13"
 
 @implementation AppController
 
@@ -94,11 +90,6 @@ static AppDelegate s_sharedApplication;
     
     //开屏显示设置,一定要在 [window makeKeyAndVisible]; 这一句之后才可以
     ZYTools::showSplash();
-    
-    //ktplay
-    [KTPlay startWithAppKey:KTPLAY_APPID appSecret:KTPLAY_SECRET];
-    
-    
 
     [[UIApplication sharedApplication] setStatusBarHidden:true];
 
@@ -117,7 +108,6 @@ static AppDelegate s_sharedApplication;
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    [KTPlay handleOpenURL:url];
     return [WXApi handleOpenURL:url delegate:[ZYWXApiManager sharedManager]];
 }
 /////////////////////////////////

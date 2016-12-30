@@ -14,16 +14,16 @@
 #pragma mark - 需要配置的参数
 
 // 开放平台登录https://open.weixin.qq.com的开发者中心获取APPID
-#define WX_APPID                @"wx459b15288a0c688e"
+#define WX_APPID                @"wxa467f86b4d427b77"
 // 开放平台登录https://open.weixin.qq.com的开发者中心获取AppSecret。
-#define WX_APPSecret            @"710880027b36585ec00c0c4cef91d875"
+#define WX_APPSecret            @"c43ec03a72699816c79026d96d53f441"
 // 微信支付商户号
 #define MCH_ID                  @"1402915602"
 // 安全校验码（MD5）密钥，商户平台登录账户和密码登录http://pay.weixin.qq.com
 // 平台设置的“API密钥”，为了安全，请设置为以数字和字母组成的32字符串。
 #define WX_PartnerKey           @"1d54fdfo9SA85dzyi52484htasfkjlKJ"
 //  zysdk后台生成唯一性id
-#define ZY_APPID                @"acba1f83d703422daacfc9615492abad"
+#define ZY_APPID                @"zyp1477734954832"
 
 
 #import <Foundation/Foundation.h>

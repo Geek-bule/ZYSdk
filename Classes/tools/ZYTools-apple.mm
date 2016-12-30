@@ -106,12 +106,12 @@ std::string ZYTools::getParamOf(std::string key)
 void ZYTools::showLog()
 {
     //需要显示的日志打开即可
-//    [[ZYParamOnline shareParam] showLog];
-//    [[ZYGameServer shareServer] showLog];
-//    [[ZYIosRateApp shareRate] showLog];
-    [[ZYAdview shareAdview] showBannerLog];
-    [[ZYAdview shareAdview] showInterlLog];
-//    [[ZYVideoManager sharedManager] showLog];
+//    [[ZYParamOnline shareParam] showLog];   // 在线参数
+//    [[ZYGameServer shareServer] showLog]; //互推
+//    [[ZYIosRateApp shareRate] showLog];     //评论
+//    [[ZYAdview shareAdview] showBannerLog];   //横幅
+//    [[ZYAdview shareAdview] showInterlLog];   //插屏
+//    [[ZYVideoManager sharedManager] showLog]; //视频
 }
 
 bool ZYTools::isCanRate()

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>marks</key>
+	<string>说明：app_id:苹果后台id，zongyi_key:在线参数key，</string>
+	<key>app_id</key>
+	<string>698597073</string>
+	<key>zongyi_key</key>
+	<string>710ebc1a8f5b4eecbac3fd606b411d88</string>
+	<key>zongyi_channel</key>
+	<string>iOS</string>
+	<key>adview_key</key>
+	<string>SDK20161422020120j8n20g8wpgt837m</string>
+	<key>umeng_key</key>
+	<string>57ca783267e58efa9e003073</string>
+	<key>umeng_channel</key>
+	<string>appstore</string>
+</dict>
+</plist>

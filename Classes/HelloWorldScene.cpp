@@ -3,11 +3,11 @@
 #include "ui/CocosGUI.h"
 #include "ZYTools.h"
 //extra
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IAPHelper.h"
 #include "ShareHelper.h"
-#include "toolsKt.hpp"
 #include "appleWatch.h"
-#include "DDZServer.h"
+#endif
 USING_NS_CC;
 
 
@@ -142,7 +142,7 @@ bool HelloWorld::init()
     pShareTip->setEnabled(false);
     
     // ktplay
-    auto pVersionTip = MenuItemFont::create("KTPlay(游戏社区)", CC_CALLBACK_1(HelloWorld::ktplayCallback, this));
+    auto pVersionTip = MenuItemFont::create("KTPlay(舍弃)", CC_CALLBACK_1(HelloWorld::ktplayCallback, this));
     pVersionTip->setPosition(Vec2(winSize.width*0.5, winSize.height*0.4));
     menu->addChild(pVersionTip,1,enBtnKTplay);
     pVersionTip->setEnabled(false);
@@ -219,7 +219,9 @@ void HelloWorld::ktLogoutCallback(cocos2d::Ref *pSender)
 
 void HelloWorld::ktplayCallback(cocos2d::Ref *pSender)
 {
-    toolsKtPlay::getInstance().showKtPlayView();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+//    toolsKtPlay::getInstance().showKtPlayView();
+#endif
 }
 
 void shareSdkCallBack(int award)
@@ -240,15 +242,25 @@ void RestoreSuccess(std::string identifier)
     cocos2d::MessageBox("在这个函数里面给玩家恢复内购！！（如果不需要可以屏蔽）", "恢复内购成功回调");
 }
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 void LoadSuccess(std::vector<tagIAPINFO> identifier)
 {
     HelloWorld::getInstance()->iapLoadSuccess();
 }
+#endif
 
 void HelloWorld::friendsCallback(cocos2d::Ref *pSender)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     auto pItem = (MenuItemFont*)pSender;
     pItem->setEnabled(false);
+    
+    if (ZYTools::isReviewStatus())
+    {
+        log("在审核状态");
+    }else{
+        log("不在审核状态");
+    }
     
     //share sdk 初始化
     ShareHelper::shareHelper()->init();
@@ -267,12 +279,12 @@ void HelloWorld::friendsCallback(cocos2d::Ref *pSender)
     pItemShare->setEnabled(true);
 
     //ktplay 初始化
-    toolsKtAccount::getInstance().setLoginStatus();
-    toolsKtPlay::getInstance().setDidDispatchRewards();
-    toolsKtPlay::getInstance().setActivityStatus();
-    toolsKtPlay::getInstance().setKTAvailabilityStatus();
-    auto pItemKT = (MenuItemFont*)getChildByTag(enBtnMenu)->getChildByTag(enBtnKTplay);
-    pItemKT->setEnabled(true);
+//    toolsKtAccount::getInstance().setLoginStatus();
+//    toolsKtPlay::getInstance().setDidDispatchRewards();
+//    toolsKtPlay::getInstance().setActivityStatus();
+//    toolsKtPlay::getInstance().setKTAvailabilityStatus();
+//    auto pItemKT = (MenuItemFont*)getChildByTag(enBtnMenu)->getChildByTag(enBtnKTplay);
+//    pItemKT->setEnabled(true);
     
     //appleWatch 初始化
     appleWatchCpp::init();
@@ -284,9 +296,7 @@ void HelloWorld::friendsCallback(cocos2d::Ref *pSender)
     pItemWxPay->setEnabled(true);
     
     
-    std::string value1 = ZYTools::getParamOf("ZYIrate");
-    std::string value2 = ZYTools::getParamOf("Delay");
-    MessageBox(value2.c_str(), value1.c_str());
+#endif
 }
 
 void HelloWorld::rateGameCallback(cocos2d::Ref *pSender)
@@ -296,7 +306,9 @@ void HelloWorld::rateGameCallback(cocos2d::Ref *pSender)
 
 void HelloWorld::shareSdkCallback(cocos2d::Ref *pSender)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     ShareHelper::shareHelper()->shareWithMsg("", "", 0, Vec2(0, 0));
+#endif
 }
 
 void HelloWorld::mogoBannerCallback(cocos2d::Ref *pSender)
@@ -334,30 +346,34 @@ void HelloWorld::videoPlayFinish()
 
 void HelloWorld::gameCenterCallback(cocos2d::Ref *pSender)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     ShareHelper::shareHelper()->shareDeviceInfo();
+#endif
 }
 
 void HelloWorld::iapCallback(cocos2d::Ref *pSender)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     if (!m_isLoadIap) {
         //先加载要进行内购的id
         std::vector<std::string> productids;
         productids.push_back(IAP_GOLD1);
         productids.push_back(IAP_GOLD2);
-        productids.push_back(IAP_GOLD3);
-        productids.push_back(IAP_GOLD4);
         InIAPHelper::shareIAP()->loadIAPProducts(productids,true);
     }else{
         //加载成功内购id后，根据id来进行购买
-        InIAPHelper::shareIAP()->orderIdentifier(IAP_GOLD2);
+        InIAPHelper::shareIAP()->orderIdentifier(IAP_GOLD1);
     }
+#endif
 }
 
 void HelloWorld::notificateCallback(cocos2d::Ref *pSender)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     appleWatchCpp::startWatch();
     //在手表段查看数据变化
     MessageBox("在手表段查看数据变化", "");
+#endif
 }
 
 void HelloWorld::MoreGameCallback(cocos2d::Ref *pSender)

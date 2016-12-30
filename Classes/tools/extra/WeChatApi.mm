@@ -405,7 +405,6 @@
                     //支付返回结果，实际支付结果需要去微信服务器端查询
                     if (_wxPayBack) {
                         body.idfa = [self idfaString];
-                        
                         _wxPayBack(body);
                     }
                     [self deleteProductInfo:dic[@"outTradeNo"]];
@@ -500,7 +499,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //inser data from db
         [_outTradeNoDic removeObjectForKey:tradeNo];
-        NSString *deleteTable = [NSString stringWithFormat:@"delete from zyproduct where tradeno = %@",tradeNo];
+        NSString *deleteTable = [NSString stringWithFormat:@"delete from zyproduct where tradeno = '%@'",tradeNo];
         [self execSql:deleteTable isClose:YES];
     });
 }

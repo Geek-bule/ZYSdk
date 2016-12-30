@@ -12,9 +12,29 @@
 #import "AFNetworking.h"
 
 
-#define ZYSDK_VERSION       @"v1.2.2"
+#define ZYSDK_VERSION       @"v1.2.3"
 
 /**
+ 
+ 1.2.3  
+        1.修改applovin的配置文件bug
+        2.修改防连点设置的bug
+        3.修改sql没有单引号造成错误的bug
+ 1.2.2
+        1.删除sqlite3_close函数
+        2.调整bundle文件结构，图片放入文件夹
+        3.调整localizable.strings文件的内容到bundle文件中
+        4.调整版本对比方法，使其更加准确
+ 
+ 1.2.1
+        1.修改圆形按钮ImageView为UIButton，解决碰到的影响使用问题
+        2.修改创建images文件夹代码的位置，之前会造成创建失败
+ 
+ 1.2.0
+        1.修正奖励提醒文字位置
+        2.给予奖励之后的游戏图片删除，但是信息没有删除,造成bug
+        3.修改服务器只能获取到信息不能下载到图片时出现的bug
+ 
  1.1.4  1.增加互推图片的超时时间，超过15天的图片就从本地删除
         2.增加本地数据库参数  pushdate defdate
  
@@ -39,18 +59,9 @@
         2.添加礼包跳动动画，添加提示文字
         3.修复更多游戏界面的滑动错乱的bug
         4.修复下载奖励造成的bug
- 1.2.0
-        1.修正奖励提醒文字位置
-        2.给予奖励之后的游戏图片删除，但是信息没有删除,造成bug
-        3.修改服务器只能获取到信息不能下载到图片时出现的bug
- 1.2.1
-        1.修改圆形按钮ImageView为UIButton，解决碰到的影响使用问题
-        2.修改创建images文件夹代码的位置，之前会造成创建失败
- 1.2.2  
-        1.删除sqlite3_close函数
-        2.调整bundle文件结构，图片放入文件夹
-        3.调整localizable.strings文件的内容到bundle文件中
-        4.
+ 
+ 
+ 
  */
 
 typedef void (^paramBack)(NSDictionary *dict);

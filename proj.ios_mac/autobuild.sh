@@ -1,15 +1,12 @@
 #!/bin/bash
 #build .app
 projectDir=$(cd `dirname $0`; pwd)
-exprotDir=$projectDir/expDir
 buildDir=$projectDir/build
-infoplist=$projectDir/ios
 sign="iPhone Developer: yang chao (F4PC9SL3M9)"
 
 if [ -d $projectDir ]
 then
 cd $projectDir
-
 fi
 
 if [ -e $buildDir ]
@@ -59,24 +56,24 @@ ZYSdk=libZYLib.a
 ZYAdview=libZYAdview.a
 ZYVideo=libZYVideo.a
 
-exportZYDir=$projectDir/../exportLib/
+exportZYDir=$projectDir/../ZYSdk
 
 
 if [ $? = 0 ]
 then
-lipo -create $libraryPath/$ZYSdk $libraryImuPath/$ZYSdk -output $exportZYDir
+lipo -create $libraryPath/$ZYSdk $libraryImuPath/$ZYSdk -output $exportZYDir/$ZYSdk
 fi
 
 
 if [ $? = 0 ]
 then
-lipo -create $libraryPath/$ZYSdk $libraryImuPath/$ZYSdk -output $exportZYDir
+lipo -create $libraryPath/$ZYAdview $libraryImuPath/$ZYAdview -output $exportZYDir/$ZYAdview
 fi
 
 
 if [ $? = 0 ]
 then
-lipo -create $libraryPath/$ZYSdk $libraryImuPath/$ZYSdk -output $exportZYDir
+lipo -create $libraryPath/$ZYVideo $libraryImuPath/$ZYVideo -output $exportZYDir/$ZYVideo
 fi
 
 
@@ -92,7 +89,22 @@ cp -r $projectDir/ZYSdk.bundle $exportZYDir
 fi
 
 
+if [ $? = 0 ]
+then
+lipo -info $exportZYDir/$ZYSdk
+fi
 
+
+if [ $? = 0 ]
+then
+lipo -info $exportZYDir/$ZYAdview
+fi
+
+
+if [ $? = 0 ]
+then
+lipo -info $exportZYDir/$ZYVideo
+fi
 
 
 
